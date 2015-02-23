@@ -1,0 +1,91 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+
+Plugin 'StanAngeloff/php.vim.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'bling/vim-airline'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'nanotech/jellybeans.vim.git'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'fholgado/minibufexpl.vim.git'
+Plugin 'jiangmiao/auto-pairs'
+"Plugin 'vim-scripts/simple-pairs.git'
+Plugin 'chase/vim-ansible-yaml.git'
+"Plugin 'vim-scripts/closetag.vim.git'
+"Plugin 'vim-scripts/mru.vim.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'EvanDotPro/php_getset.vim.git'
+Plugin 'evidens/vim-twig.git'
+Plugin 'mbbill/undotree.git'
+Plugin 'tpope/vim-surround'
+Plugin 'Shougo/neocomplcache.vim.git'
+"Plugin 'ap/vim-buftabline'
+"Plugin 'spf13/vim-autoclose.git'
+"Plugin 'spf13/PIV.git'
+call vundle#end()
+filetype plugin indent on
+
+let mapleader=" "
+
+
+nmap j gj
+nmap k gk
+
+nmap <silent> <F3> :NERDTreeFocus<CR>
+nmap <silent> <F4> :MBEFocus<CR>
+nnoremap <F5> :UndotreeToggle<cr>
+
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+
+
+let g:vim_markdown_folding_disabled=1
+set nofoldenable
+
+nmap ; :
+set noswapfile
+hi Directory guifg=#FF0000 ctermfg=red
+:syntax on
+set incsearch
+set t_Co=256  " Set terminal to display 256 colors.
+set nu
+set background=dark
+colorscheme jellybeans
+set softtabstop=4
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartcase
+set hidden
+map <C-h> :MBEbp<cr>
+
+noremap <leader>h ^
+noremap <leader>l $
+nnoremap <leader>w :w<CR>
+
+map <C-j> 10j
+map <S-j> 50j
+map <C-k> 10k
+map <S-k> 50k
+
+map <C-l> :MBEbn<cr>
+map <C-w> :MBEbw<cr>
+
+cmap w!! w !sudo tee > /dev/null %
+
+"let g:nerdtree_tabs_open_on_console_startup=1
+let g:miniBufExplorerAutoStart = 1
+let g:miniBufExplBuffersNeeded = 1
+"set noequalalways
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+
+vmap r "_dP

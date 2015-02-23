@@ -1,0 +1,35 @@
+# personal .bashrc file
+
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=2000
+HISTFILESIZE=4000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# resize lines if too long for actual width
+for (( i=1; i<=$LINES; i++ )); do echo; done; clear
+
+
+source ~/bin/dotfiles/bash/alias
+source ~/bin/dotfiles/bash/env
+source ~/bin/dotfiles/bash/prompt
