@@ -1,0 +1,5 @@
+URxvt.background: [100]#111111
+URxvt.scrollBar: false
+URxvt*foreground: [100]#dddddd
+URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
+
