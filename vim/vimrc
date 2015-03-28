@@ -78,7 +78,7 @@ map <C-w> :MBEbw<cr>
 
 cmap w!! w !sudo tee > /dev/null %
 
-"let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_open_on_console_startup=1
 let g:miniBufExplorerAutoStart = 1
 let g:miniBufExplBuffersNeeded = 1
 "set noequalalways
@@ -87,5 +87,8 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+set clipboard=unnamedplus
+set smartcase
+set ic
 
 vmap r "_dP
