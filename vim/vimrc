@@ -7,18 +7,18 @@ call vundle#begin()
 
 Plugin 'StanAngeloff/php.vim.git'
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'bling/vim-airline'
+"Plugin 'scrooloose/nerdtree.git'
+"Plugin 'bling/vim-airline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'nanotech/jellybeans.vim.git'
 Plugin 'kien/ctrlp.vim.git'
-Plugin 'fholgado/minibufexpl.vim.git'
+"Plugin 'fholgado/minibufexpl.vim.git'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-scripts/simple-pairs.git'
 Plugin 'chase/vim-ansible-yaml.git'
 "Plugin 'vim-scripts/closetag.vim.git'
 "Plugin 'vim-scripts/mru.vim.git'
-Plugin 'scrooloose/nerdcommenter.git'
+"Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
 Plugin 'mbbill/undotree.git'
@@ -27,6 +27,23 @@ Plugin 'Shougo/neocomplcache.vim.git'
 "Plugin 'ap/vim-buftabline'
 "Plugin 'spf13/vim-autoclose.git'
 "Plugin 'spf13/PIV.git'
+"Plugin 'm2mdas/phpcomplete-extended'
+Plugin 'ervandew/supertab'
+Plugin 'paulyg/Vim-PHP-Stuff'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'rking/ag.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'HTML-AutoCloseTag'
+"Plugin 'edkolev/tmuxline.vim'
+Plugin 'itchyny/lightline.vim'
+
+
+
+
 call vundle#end()
 filetype plugin indent on
 
@@ -36,7 +53,7 @@ let mapleader=" "
 nmap j gj
 nmap k gk
 
-nmap <silent> <F3> :NERDTreeFocus<CR>
+"nmap <silent> <F3> :NERDTreeFocus<CR>
 nmap <silent> <F4> :MBEFocus<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
@@ -78,7 +95,7 @@ map <C-w> :MBEbw<cr>
 
 cmap w!! w !sudo tee > /dev/null %
 
-let g:nerdtree_tabs_open_on_console_startup=1
+"let g:nerdtree_tabs_open_on_console_startup=1
 let g:miniBufExplorerAutoStart = 1
 let g:miniBufExplBuffersNeeded = 1
 "set noequalalways
@@ -87,8 +104,155 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+let g:phpcomplete_index_composer_command="/usr/bin/composer"
+
 set clipboard=unnamedplus
 set smartcase
 set ic
 
 vmap r "_dP
+
+
+let g:unite_source_history_yank_enable = 1
+try
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
+" search a file in the filetree
+nnoremap <leader>e :<C-u>Unite -start-insert file_rec/async<cr>
+nnoremap <leader>f :<C-u>Unite buffer<cr>
+" reset not it is <C-l> normally
+:nnoremap <leader>r <Plug>(unite_restart)
+
+
+" --- type ° to search the word in all files in the current dir
+nmap <leader>? :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <leader>/ :Ag
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+set laststatus=2
+
+let g:lightline = {
+            \ 'colorscheme': 'jellybeans',
+            \ 'active': {
+            \     'left': [
+            \         ['mode', 'paste'],
+            \         ['readonly', 'fugitive'],
+            \         ['ctrlpmark', 'bufferline']
+            \     ],
+            \     'right': [
+            \         ['lineinfo'],
+            \         ['percent'],
+            \         ['fileformat', 'fileencoding', 'filetype']
+            \     ]
+            \ },
+            \ 'component': {
+            \     'paste': '%{&paste?"!":""}'
+            \ },
+            \ 'component_function': {
+            \     'mode'         : 'MyMode',
+            \     'fugitive'     : 'MyFugitive',
+            \     'readonly'     : 'MyReadonly',
+            \     'fileformat'   : 'MyFileformat',
+            \     'fileencoding' : 'MyFileencoding',
+            \     'filetype'     : 'MyFiletype'
+            \ },
+            \ 'subseparator': {
+            \     'left': '|', 'right': '|'
+            \ }
+            \ }
+
+let g:lightline.mode_map = {
+            \ 'n'      : ' N ',
+            \ 'i'      : ' I ',
+            \ 'R'      : ' R ',
+            \ 'v'      : ' V ',
+            \ 'V'      : 'V-L',
+            \ 'c'      : ' C ',
+            \ "\<C-v>" : 'V-B',
+            \ 's'      : ' S ',
+            \ 'S'      : 'S-L',
+            \ "\<C-s>" : 'S-B',
+            \ '?'      : '      ' }
+
+function! MyMode()
+    let fname = expand('%:t')
+    return fname == '__Tagbar__' ? 'Tagbar' :
+                \ fname == 'ControlP' ? 'CtrlP' :
+                \ winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+
+function! MyFugitive()
+    try
+        if expand('%:t') !~? 'Tagbar' && exists('*fugitive#head')
+            let mark = '± '
+            let _ = fugitive#head()
+            return strlen(_) ? mark._ : ''
+        endif
+    catch
+    endtry
+    return ''
+endfunction
+
+function! MyReadonly()
+    return &ft !~? 'help' && &readonly ? '≠' : '' " or ⭤
+endfunction
+
+function! CtrlPMark()
+    if expand('%:t') =~ 'ControlP'
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+                    \ , g:lightline.ctrlp_next], 0)
+    else
+        return ''
+    endif
+endfunction
+
+
+function! MyFileformat()
+    return winwidth('.') > 90 ? &fileformat : ''
+endfunction
+
+function! MyFileencoding()
+    return winwidth('.') > 80 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyFiletype()
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+let g:ctrlp_status_func = {
+            \ 'main': 'CtrlPStatusFunc_1',
+            \ 'prog': 'CtrlPStatusFunc_2',
+            \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+    let g:lightline.ctrlp_regex = a:regex
+    let g:lightline.ctrlp_prev = a:prev
+    let g:lightline.ctrlp_item = a:item
+    let g:lightline.ctrlp_next = a:next
+    return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+    return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+    return lightline#statusline(0)
+endfunction
+
+
+if filereadable($HOME."/.vimrc.last")
+    source $HOME/.vimrc.last
+endif
+
+
+
+
+
+
