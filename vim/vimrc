@@ -23,11 +23,11 @@ Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'tpope/vim-surround'
-Plugin 'Shougo/neocomplcache.vim.git'
 "Plugin 'ap/vim-buftabline'
 "Plugin 'spf13/vim-autoclose.git'
 "Plugin 'spf13/PIV.git'
 "Plugin 'm2mdas/phpcomplete-extended'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'paulyg/Vim-PHP-Stuff'
 Plugin '2072/PHP-Indenting-for-VIm'
@@ -36,12 +36,14 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 Plugin 'HTML-AutoCloseTag'
 "Plugin 'edkolev/tmuxline.vim'
 Plugin 'itchyny/lightline.vim'
-
-
+Plugin 'maxbrunsfeld/vim-yankstack'
+"Plugin 'sjbach/lusty'
+Plugin 'bling/vim-bufferline'
+Plugin 'Shougo/vimfiler.vim'
 
 
 call vundle#end()
@@ -113,18 +115,21 @@ set ic
 vmap r "_dP
 
 
-let g:unite_source_history_yank_enable = 1
-try
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
-" search a file in the filetree
-nnoremap <leader>e :<C-u>Unite -start-insert file_rec/async<cr>
-nnoremap <leader>f :<C-u>Unite buffer<cr>
-" reset not it is <C-l> normally
-:nnoremap <leader>r <Plug>(unite_restart)
+"let g:unite_source_history_yank_enable = 1
+"try
+  "let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"catch
+"endtry
+"" search a file in the filetree
+"nnoremap <leader>e :<C-u>Unite -start-insert file_rec/async<cr>
+"nnoremap <leader>f :<C-u>Unite buffer<cr>
+"" reset not it is <C-l> normally
+":nnoremap <leader>r <Plug>(unite_restart)
 
+
+
+nnoremap <leader>f :<C-u>CtrlPBuffer<cr>
 
 " --- type ° to search the word in all files in the current dir
 nmap <leader>? :Ag <c-r>=expand("<cword>")<cr><cr>
@@ -139,6 +144,7 @@ let g:lightline = {
             \     'left': [
             \         ['mode', 'paste'],
             \         ['readonly', 'fugitive'],
+            \         ['filen'],
             \         ['ctrlpmark', 'bufferline']
             \     ],
             \     'right': [
@@ -156,7 +162,8 @@ let g:lightline = {
             \     'readonly'     : 'MyReadonly',
             \     'fileformat'   : 'MyFileformat',
             \     'fileencoding' : 'MyFileencoding',
-            \     'filetype'     : 'MyFiletype'
+            \     'filetype'     : 'MyFiletype',
+            \     'filen'     : 'MyFilename'
             \ },
             \ 'subseparator': {
             \     'left': '|', 'right': '|'
@@ -222,6 +229,10 @@ function! MyFiletype()
     return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
+function! MyFilename()
+    return expand('%')
+endfunction
+
 let g:ctrlp_status_func = {
             \ 'main': 'CtrlPStatusFunc_1',
             \ 'prog': 'CtrlPStatusFunc_2',
@@ -251,8 +262,31 @@ if filereadable($HOME."/.vimrc.last")
     source $HOME/.vimrc.last
 endif
 
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|cache\|cache$\|cache/\|\*/cache/\*',
+  \ 'file': '\.exe$\|\.so$\|\.dat$|\.so$\|\.tpl\.php$'
+  \ }
 
 
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
+let g:yankstack_map_keys = 0
+let g:yankstack_yank_keys = []
 
+let g:ctrlp_max_files=0
 
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings'  }
+
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
+ 
+function! CtrlPMappings()
+  nnoremap <buffer> <silent> <C-w> :call <sid>DeleteBuffer()<cr>
+endfunction
+ 
+function! s:DeleteBuffer()
+  let path = fnamemodify(getline('.')[2:], ':p')
+  let bufn = matchstr(path, '\v\d+\ze\*No Name')
+  exec "bd" bufn ==# "" ? path : bufn
+  exec "norm \<F5>"
+endfunction
