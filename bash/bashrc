@@ -33,3 +33,6 @@ for (( i=1; i<=$LINES; i++ )); do echo; done; clear
 source ~/bin/dotfiles/bash/alias
 source ~/bin/dotfiles/bash/env
 source ~/bin/dotfiles/bash/prompt
+
+
+source /home/awen/.phpbrew/bashrc

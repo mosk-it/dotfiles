@@ -7,18 +7,18 @@ call vundle#begin()
 
 Plugin 'StanAngeloff/php.vim.git'
 Plugin 'scrooloose/syntastic'
-"Plugin 'scrooloose/nerdtree.git'
-"Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'bling/vim-airline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'nanotech/jellybeans.vim.git'
 Plugin 'kien/ctrlp.vim.git'
 "Plugin 'fholgado/minibufexpl.vim.git'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-scripts/simple-pairs.git'
-Plugin 'chase/vim-ansible-yaml.git'
+"Plugin 'chase/vim-ansible-yaml.git'
 "Plugin 'vim-scripts/closetag.vim.git'
-"Plugin 'vim-scripts/mru.vim.git'
-"Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'vim-scripts/mru.vim.git'
+Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
 Plugin 'mbbill/undotree.git'
@@ -26,24 +26,24 @@ Plugin 'tpope/vim-surround'
 "Plugin 'ap/vim-buftabline'
 "Plugin 'spf13/vim-autoclose.git'
 "Plugin 'spf13/PIV.git'
-"Plugin 'm2mdas/phpcomplete-extended'
+Plugin 'm2mdas/phpcomplete-extended'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'paulyg/Vim-PHP-Stuff'
 Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'bronson/vim-trailing-whitespace'
+"Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
+"Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'tpope/vim-fugitive'
+"Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 Plugin 'HTML-AutoCloseTag'
 "Plugin 'edkolev/tmuxline.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'maxbrunsfeld/vim-yankstack'
+"Plugin 'itchyny/lightline.vim'
+"Plugin 'maxbrunsfeld/vim-yankstack'
 "Plugin 'sjbach/lusty'
 Plugin 'bling/vim-bufferline'
-Plugin 'Shougo/vimfiler.vim'
+"Plugin 'Shougo/vimfiler.vim'
 
 
 call vundle#end()
@@ -55,9 +55,8 @@ let mapleader=" "
 nmap j gj
 nmap k gk
 
-"nmap <silent> <F3> :NERDTreeFocus<CR>
-nmap <silent> <F4> :MBEFocus<CR>
-nnoremap <F5> :UndotreeToggle<cr>
+nmap <silent> <F3> :NERDTreeToggle<CR>
+nnoremap <F6> :UndotreeToggle<cr>
 
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 
@@ -81,10 +80,10 @@ set shiftwidth=4
 set expandtab
 set smartcase
 set hidden
-map <C-h> :MBEbp<cr>
 
 noremap <leader>h ^
 noremap <leader>l $
+noremap <leader>H 0
 nnoremap <leader>w :w<CR>
 
 map <C-j> 10j
@@ -92,14 +91,11 @@ map <S-j> 50j
 map <C-k> 10k
 map <S-k> 50k
 
-map <C-l> :MBEbn<cr>
-map <C-w> :MBEbw<cr>
-
-cmap w!! w !sudo tee > /dev/null %
+cmap w! w !sudo tee > /dev/null %
 
 "let g:nerdtree_tabs_open_on_console_startup=1
-let g:miniBufExplorerAutoStart = 1
-let g:miniBufExplBuffersNeeded = 1
+"let g:miniBufExplorerAutoStart = 1
+"let g:miniBufExplBuffersNeeded = 1
 "set noequalalways
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -128,8 +124,8 @@ vmap r "_dP
 ":nnoremap <leader>r <Plug>(unite_restart)
 
 
-
 nnoremap <leader>f :<C-u>CtrlPBuffer<cr>
+nnoremap <leader>g :<C-u>CtrlP<cr>
 
 " --- type ° to search the word in all files in the current dir
 nmap <leader>? :Ag <c-r>=expand("<cword>")<cr><cr>
@@ -263,16 +259,16 @@ if filereadable($HOME."/.vimrc.last")
 endif
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|cache\|cache$\|cache/\|\*/cache/\*',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|cache\|cache$\|cache/\|\*/cache/\*\|vendor$',
   \ 'file': '\.exe$\|\.so$\|\.dat$|\.so$\|\.tpl\.php$'
   \ }
 
 
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+"nmap <leader>p <Plug>yankstack_substitute_older_paste
+"nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
-let g:yankstack_map_keys = 0
-let g:yankstack_yank_keys = []
+"let g:yankstack_map_keys = 0
+"let g:yankstack_yank_keys = []
 
 let g:ctrlp_max_files=0
 
@@ -290,3 +286,31 @@ function! s:DeleteBuffer()
   exec "bd" bufn ==# "" ? path : bufn
   exec "norm \<F5>"
 endfunction
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#show_close_button = 0
+
+
+set timeoutlen=1000 
+set ttimeoutlen=0
+
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+function! AirlineInit()
+    let g:airline_left_sep=''
+    let g:airline_right_sep=''
+    let g:airline#extensions#whitespace#checks = [  ]
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+endfunction
+autocmd VimEnter * call AirlineInit()
+
