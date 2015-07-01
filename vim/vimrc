@@ -44,6 +44,7 @@ Plugin 'HTML-AutoCloseTag'
 "Plugin 'sjbach/lusty'
 Plugin 'bling/vim-bufferline'
 "Plugin 'Shougo/vimfiler.vim'
+Plugin 'mhinz/vim-signify'
 
 
 call vundle#end()
