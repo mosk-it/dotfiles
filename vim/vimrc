@@ -42,7 +42,7 @@ Plugin 'HTML-AutoCloseTag'
 "Plugin 'itchyny/lightline.vim'
 "Plugin 'maxbrunsfeld/vim-yankstack'
 "Plugin 'sjbach/lusty'
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 "Plugin 'Shougo/vimfiler.vim'
 Plugin 'mhinz/vim-signify'
 
@@ -85,12 +85,19 @@ set hidden
 noremap <leader>h ^
 noremap <leader>l $
 noremap <leader>H 0
+
+imap <C-a> <C-O>^
+imap <C-e> <C-O>$
+imap <C-f> <C-O>l
+imap <C-b> <C-O>h
+
 nnoremap <leader>w :w<CR>
 
 map <C-j> 10j
 map <S-j> 50j
 map <C-k> 10k
 map <S-k> 50k
+
 
 cmap w! w !sudo tee > /dev/null %
 
@@ -312,6 +319,7 @@ function! AirlineInit()
     let g:airline_right_sep=''
     let g:airline#extensions#whitespace#checks = [  ]
     let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+    let g:airline#extensions#bufferline#enabled = 0
 endfunction
 autocmd VimEnter * call AirlineInit()
 
