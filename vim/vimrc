@@ -61,6 +61,8 @@ nmap k gk
 nmap <silent> <F3> :NERDTreeToggle<CR>
 nnoremap <F6> :UndotreeToggle<cr>
 
+set cursorline
+
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 
 
