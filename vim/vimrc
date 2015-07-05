@@ -45,6 +45,8 @@ Plugin 'HTML-AutoCloseTag'
 "Plugin 'bling/vim-bufferline'
 "Plugin 'Shougo/vimfiler.vim'
 Plugin 'mhinz/vim-signify'
+Plugin 'goldfeld/vim-seek'
+Plugin 'ap/vim-css-color'
 
 
 call vundle#end()
@@ -114,7 +116,13 @@ let g:phpcomplete_index_composer_command="/usr/bin/composer"
 
 set clipboard=unnamedplus
 set smartcase
+set ignorecase
 set ic
+:set hlsearch
+
+
+:nmap <leader>q :nohlsearch<CR>
+
 
 vmap r "_dP
 
@@ -139,132 +147,23 @@ nnoremap <leader>g :<C-u>CtrlP<cr>
 nmap <leader>? :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <leader>/ :Ag
 
+set pastetoggle=<F2>
+
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
+
 let g:SuperTabDefaultCompletionType = "<c-n>"
 set laststatus=2
 
-let g:lightline = {
-            \ 'colorscheme': 'jellybeans',
-            \ 'active': {
-            \     'left': [
-            \         ['mode', 'paste'],
-            \         ['readonly', 'fugitive'],
-            \         ['filen'],
-            \         ['ctrlpmark', 'bufferline']
-            \     ],
-            \     'right': [
-            \         ['lineinfo'],
-            \         ['percent'],
-            \         ['fileformat', 'fileencoding', 'filetype']
-            \     ]
-            \ },
-            \ 'component': {
-            \     'paste': '%{&paste?"!":""}'
-            \ },
-            \ 'component_function': {
-            \     'mode'         : 'MyMode',
-            \     'fugitive'     : 'MyFugitive',
-            \     'readonly'     : 'MyReadonly',
-            \     'fileformat'   : 'MyFileformat',
-            \     'fileencoding' : 'MyFileencoding',
-            \     'filetype'     : 'MyFiletype',
-            \     'filen'     : 'MyFilename'
-            \ },
-            \ 'subseparator': {
-            \     'left': '|', 'right': '|'
-            \ }
-            \ }
-
-let g:lightline.mode_map = {
-            \ 'n'      : ' N ',
-            \ 'i'      : ' I ',
-            \ 'R'      : ' R ',
-            \ 'v'      : ' V ',
-            \ 'V'      : 'V-L',
-            \ 'c'      : ' C ',
-            \ "\<C-v>" : 'V-B',
-            \ 's'      : ' S ',
-            \ 'S'      : 'S-L',
-            \ "\<C-s>" : 'S-B',
-            \ '?'      : '      ' }
-
-function! MyMode()
-    let fname = expand('%:t')
-    return fname == '__Tagbar__' ? 'Tagbar' :
-                \ fname == 'ControlP' ? 'CtrlP' :
-                \ winwidth('.') > 60 ? lightline#mode() : ''
-endfunction
-
-function! MyFugitive()
-    try
-        if expand('%:t') !~? 'Tagbar' && exists('*fugitive#head')
-            let mark = '± '
-            let _ = fugitive#head()
-            return strlen(_) ? mark._ : ''
-        endif
-    catch
-    endtry
-    return ''
-endfunction
-
-function! MyReadonly()
-    return &ft !~? 'help' && &readonly ? '≠' : '' " or ⭤
-endfunction
-
-function! CtrlPMark()
-    if expand('%:t') =~ 'ControlP'
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-                    \ , g:lightline.ctrlp_next], 0)
-    else
-        return ''
-    endif
-endfunction
-
-
-function! MyFileformat()
-    return winwidth('.') > 90 ? &fileformat : ''
-endfunction
-
-function! MyFileencoding()
-    return winwidth('.') > 80 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! MyFilename()
-    return expand('%')
-endfunction
-
-let g:ctrlp_status_func = {
-            \ 'main': 'CtrlPStatusFunc_1',
-            \ 'prog': 'CtrlPStatusFunc_2',
-            \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-    let g:lightline.ctrlp_regex = a:regex
-    let g:lightline.ctrlp_prev = a:prev
-    let g:lightline.ctrlp_item = a:item
-    let g:lightline.ctrlp_next = a:next
-    return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-    return lightline#statusline(0)
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
-    return lightline#statusline(0)
-endfunction
-
-
-if filereadable($HOME."/.vimrc.last")
-    source $HOME/.vimrc.last
-endif
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|cache\|cache$\|cache/\|\*/cache/\*\|vendor$',
@@ -272,18 +171,15 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 
-"nmap <leader>p <Plug>yankstack_substitute_older_paste
-"nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-"let g:yankstack_map_keys = 0
-"let g:yankstack_yank_keys = []
-
 let g:ctrlp_max_files=0
 
 let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings'  }
 
 let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
- 
+
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
+
 function! CtrlPMappings()
   nnoremap <buffer> <silent> <C-w> :call <sid>DeleteBuffer()<cr>
 endfunction
