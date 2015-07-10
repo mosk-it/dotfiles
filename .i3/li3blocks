@@ -1,0 +1,25 @@
+command=~/.i3/i3blocks_scripts/$BLOCK_NAME
+separator_block_width=15
+
+[title]
+command=~/.i3/rxtitle -s
+interval=persist
+color=#ddddbb
+
+[volume]
+label=♪
+instance=Master
+interval=once
+signal=1
+color=#cfd9Cf
+
+
+[temp]
+label=CPU
+command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
+interval=10
+color=#cfd9Cf
+
+[time]
+command=date +"%Y-%m-%d %a, %R"
+interval=60
