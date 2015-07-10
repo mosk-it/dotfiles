@@ -47,6 +47,7 @@ Plugin 'HTML-AutoCloseTag'
 Plugin 'mhinz/vim-signify'
 Plugin 'goldfeld/vim-seek'
 Plugin 'ap/vim-css-color'
+Plugin 'taglist.vim'
 
 
 call vundle#end()
@@ -220,4 +221,16 @@ function! AirlineInit()
     let g:airline#extensions#bufferline#enabled = 0
 endfunction
 autocmd VimEnter * call AirlineInit()
+
+
+"TAGLIST
+
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Highlight_Tag_On_BufEnter = 1
+let Tlist_Use_SingleClick = 1
+let Tlist_Show_One_File = 1
+
+nnoremap <silent> <F8> :TlistToggle<CR>
 
