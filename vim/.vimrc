@@ -26,14 +26,14 @@ Plugin 'tpope/vim-surround'
 "Plugin 'ap/vim-buftabline'
 "Plugin 'spf13/vim-autoclose.git'
 "Plugin 'spf13/PIV.git'
-Plugin 'm2mdas/phpcomplete-extended'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'm2mdas/phpcomplete-extended'
 Plugin 'ervandew/supertab'
 Plugin 'paulyg/Vim-PHP-Stuff'
 Plugin '2072/PHP-Indenting-for-VIm'
 "Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
 "Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -45,9 +45,11 @@ Plugin 'HTML-AutoCloseTag'
 "Plugin 'bling/vim-bufferline'
 "Plugin 'Shougo/vimfiler.vim'
 Plugin 'mhinz/vim-signify'
-Plugin 'goldfeld/vim-seek'
 Plugin 'ap/vim-css-color'
+Plugin 'tommcdo/vim-exchange'
 Plugin 'taglist.vim'
+Plugin 'tpope/vim-vinegar'
+Plugin 'm2mdas/phpcomplete-extended-symfony'
 
 
 call vundle#end()
@@ -116,6 +118,13 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 let g:phpcomplete_index_composer_command="/usr/bin/composer"
+"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+
+autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+set completeopt=menuone,longest,preview
+
 
 set clipboard=unnamedplus
 set smartcase

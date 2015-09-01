@@ -2,7 +2,7 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-setopt appendhistory autocd beep extendedglob nomatch notify correct HIST_IGNORE_DUPS completealiases prompt_subst
+setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst
 
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -51,9 +51,30 @@ alias ll='ls -l --color=auto'
 alias la='ls -la --color=auto'
 alias lr='ls -ltr --color=auto'
 
-bindkey ';5D' emacs-backward-word
-bindkey ';5C' emacs-forward-word
-bindkey '^b' backward-word
-bindkey '^f' forward-word
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
 
+alias sudo='sudo '
+#alias fuck='sudo $(fc -ln -1)'
+alias rmf='rm -rf'
+
+
+useful-enter () {
+  if [[ -z $BUFFER ]]; then
+    echo ""
+    if [[ -d .git ]]; then
+      git status
+    else
+      ls -CFl --color=auto
+    fi
+    zle redisplay
+  else
+    zle accept-line
+  fi
+}
+zle -N useful-enter
+bindkey "^M" useful-enter
+
+
+eval "$(thefuck-alias fuck)"
 eval `dircolors ~/.dircolors`

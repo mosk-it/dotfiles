@@ -1,0 +1,6 @@
+[options]
+font = Inconsolata Bold
+
+[colors]
+foreground = #dcdccc
+background  = #3f3f3f
