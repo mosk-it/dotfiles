@@ -243,3 +243,13 @@ let Tlist_Show_One_File = 1
 
 nnoremap <silent> <F8> :TlistToggle<CR>
 
+
+" Pushing current line up and down
+nnoremap <leader>k ddkP
+nnoremap <leader>j ddp
+
+" pushes word under the cursor to the left & to the right
+nnoremap <leader>mh "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><C-o><C-l>:nohlsearch<CR>
+nnoremap <leader>ml "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><C-o>/\w\+\_W\+<CR><C-l>:nohlsearch<CR>
+
+
