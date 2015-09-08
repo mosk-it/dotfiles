@@ -1,0 +1,16 @@
+command=~/.i3/i3blocks_scripts/$BLOCK_NAME
+separator_block_width=15
+
+[title]
+command=~/.i3/lxtitle -s
+interval=persist
+color=#ddddbb
+
+[bandwidth]
+label=BW
+interval=2
+color=#cfd9Cf
+
+[time]
+command=date +"%Y-%m-%d %a, %R"
+interval=60
