@@ -26,6 +26,13 @@ client.placeholder          #e89393        #e89393         #040404
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font xft:Inconsolata Bold 9
+<<<<<<< HEAD
+=======
+#font -video-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:open sans 8
+
+
+>>>>>>> 51d55a352f974f2639e61768c305d353a0121e0d
 
 
 bindsym $mod+period move workspace to output left
@@ -199,7 +206,11 @@ bar {
     workspace_buttons yes
     status_command i3blocks -c ~/.i3/li3blocks
 
+<<<<<<< HEAD
     output VGA-1
+=======
+    output VGA-0
+>>>>>>> 51d55a352f974f2639e61768c305d353a0121e0d
 
 }
 
