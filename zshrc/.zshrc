@@ -4,7 +4,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst
 
-bindkey -e
+bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/awen/.zshrc'
@@ -26,37 +26,47 @@ cdParentKey() {
   echo
 }
 
-function git_prompt {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "("${ref#refs/heads/}")"
+vim_ins_mode="%{$fg[green]%}[INC]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[N]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+
+function __git_prompt {
+local DIRTY="%{$fg[yellow]%}"
+local CLEAN="%{$fg[green]%}"
+local UNMERGED="%{$fg[red]%}"
+local RESET="%{$terminfo[sgr0]%}"
+git rev-parse --git-dir >& /dev/null
+if [[ $? == 0 ]]
+then
+    echo -n "["
+    if [[ `git ls-files -u >& /dev/null` == '' ]]
+    then
+        git diff --quiet >& /dev/null
+        if [[ $? == 1 ]]
+        then
+            echo -n $DIRTY
+        else
+            git diff --cached --quiet >& /dev/null
+            if [[ $? == 1 ]]
+            then
+                echo -n $DIRTY
+            else
+                echo -n $CLEAN
+            fi
+        fi
+    else
+        echo -n $UNMERGED
+    fi
+    echo -n `git branch | grep '* ' | sed 's/..//'`
+    echo -n $RESET
+    echo -n "]"
+fi
 }
 
-test() {
-    echo $(date +"%s");
-}
+bindkey '^R' history-incremental-search-backward
 
 
-PROMPT="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
-→ %"
-
-
-_lineup=$'\e[1A'
-_linedown=$'\e[1B'
-
-RPROMPT='%{${_lineup}%}$(git_prompt)%{${_linedown}%}'
-
-#aliases
-alias l='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias la='ls -la --color=auto'
-alias lr='ls -ltr --color=auto'
-
-alias ...='cd ../../..'
-alias ....='cd ../../../..'
-
-alias sudo='sudo '
-#alias fuck='sudo $(fc -ln -1)'
-alias rmf='rm -rf'
 
 
 useful-enter () {
@@ -76,5 +86,60 @@ zle -N useful-enter
 bindkey "^M" useful-enter
 
 
-eval "$(thefuck-alias fuck)"
+zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        echo -ne "\033]12;Red\007"
+    else
+        echo -ne "\033]12;Grey\007"
+    fi
+}
+
+
+zle -N zle-keymap-select
+zle-line-init () {
+    zle -K viins
+    echo -ne "\033]12;Grey\007"
+}
+zle -N zle-line-init
+bindkey -v
+
+
+function git_prompt {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "[g:"${ref#refs/heads/}"]"
+}
+
+test() {
+    echo $(date +"%s");
+}
+
+export PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
+→ %"
+
+_lineup=$'\e[1A'
+_linedown=$'\e[1B'
+
+#RPS1='%{${_lineup}%}${vim_mode}$(git_prompt)%{${_linedown}%}'
+#RPROMPT="$(__git_prompt)"
+export RPS1='$(__git_prompt)'
+#aliases
+alias l='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias la='ls -la --color=auto'
+alias lr='ls -ltr --color=auto'
+
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
+
+alias sudo='sudo '
+#alias fuck='sudo $(fc -ln -1)'
+alias rmf='rm -rf'
+
+
+
+
+KEYTIMEOUT=1
+
+
+#eval "$(thefuck-alias fuck)"
 eval `dircolors ~/.dircolors`
