@@ -58,6 +58,7 @@ alias sudo='sudo '
 #alias fuck='sudo $(fc -ln -1)'
 alias rmf='rm -rf'
 
+alias mpv='mpv --sub-scale=0.5 --sub-text-border-color=\#111111  --sub-text-font="FreeSans" --sub-text-bold="yes" --sub-codepage=enca:pl:cp1250'
 
 useful-enter () {
   if [[ -z $BUFFER ]]; then

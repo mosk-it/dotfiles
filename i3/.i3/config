@@ -67,6 +67,7 @@ bindsym $mod+Return exec sakura
 bindsym --release Shift+Insert exec --no-startup-id xsel > ~/.clp && xdotool type --delay 0 --clearmodifiers --file ~/.clp
 
 
+bindsym $mod+Shift+s sticky toggle
 
 
 
