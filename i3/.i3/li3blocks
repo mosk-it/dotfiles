@@ -6,6 +6,8 @@ command=~/.i3/rxtitle -s
 interval=persist
 color=#ddddbb
 
+<<<<<<< HEAD
+=======
 
 [pymodoro]
 command=pymodoro
@@ -17,6 +19,7 @@ command=~/a.sh
 interval=1
 
 
+>>>>>>> 51d55a352f974f2639e61768c305d353a0121e0d
 [volume]
 label=♪
 instance=Master
