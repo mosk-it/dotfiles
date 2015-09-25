@@ -5,6 +5,9 @@ SAVEHIST=10000
 setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst
 
 bindkey -v
+# Kill the lag
+export KEYTIMEOUT=1
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/awen/.zshrc'
@@ -31,38 +34,39 @@ vim_cmd_mode="%{$fg[red]%}[N]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 
-function __git_prompt {
-local DIRTY="%{$fg[yellow]%}"
-local CLEAN="%{$fg[green]%}"
-local UNMERGED="%{$fg[red]%}"
-local RESET="%{$terminfo[sgr0]%}"
-git rev-parse --git-dir >& /dev/null
-if [[ $? == 0 ]]
-then
-    echo -n "["
-    if [[ `git ls-files -u >& /dev/null` == '' ]]
+__git_prompt() {
+    local DIRTY="%{$fg[yellow]%}"
+    local CLEAN="%{$fg[green]%}"
+    local UNMERGED="%{$fg[red]%}"
+    local RESET="%{$terminfo[sgr0]%}"
+    git rev-parse --git-dir >& /dev/null
+    if [[ $? == 0 ]]
     then
-        git diff --quiet >& /dev/null
-        if [[ $? == 1 ]]
+        echo -n "["
+        if [[ `git ls-files -u >& /dev/null` == '' ]]
         then
-            echo -n $DIRTY
-        else
-            git diff --cached --quiet >& /dev/null
+            git diff --quiet >& /dev/null
             if [[ $? == 1 ]]
             then
                 echo -n $DIRTY
             else
-                echo -n $CLEAN
+                git diff --cached --quiet >& /dev/null
+                if [[ $? == 1 ]]
+                then
+                    echo -n $DIRTY
+                else
+                    echo -n $CLEAN
+                fi
             fi
+        else
+            echo -n $UNMERGED
         fi
-    else
-        echo -n $UNMERGED
+        echo -n `git branch | grep '* ' | sed 's/..//'`
+        echo -n $RESET
+        echo -n "]"
     fi
-    echo -n `git branch | grep '* ' | sed 's/..//'`
-    echo -n $RESET
-    echo -n "]"
-fi
 }
+
 
 bindkey '^R' history-incremental-search-backward
 
@@ -109,9 +113,6 @@ function git_prompt {
   echo "[g:"${ref#refs/heads/}"]"
 }
 
-test() {
-    echo $(date +"%s");
-}
 
 export PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
 → %"
@@ -119,7 +120,6 @@ export PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{
 _lineup=$'\e[1A'
 _linedown=$'\e[1B'
 
-#RPS1='%{${_lineup}%}${vim_mode}$(git_prompt)%{${_linedown}%}'
 #RPROMPT="$(__git_prompt)"
 export RPS1='$(__git_prompt)'
 #aliases

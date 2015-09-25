@@ -12,9 +12,12 @@
 
 set $mod Mod1
 
+set $output1 $(OUTPUT1)
+set $output2 $(OUTPUT2)
 
-workspace 1 output VGA-0
-workspace 2 output DVI-0
+
+workspace 1 output $output1
+workspace 2 output $output2
 
 client.focused              #660000        #660000         #DDDDDD       #220000
 client.unfocused            #2c2c2e        #2c2c2e         #6f6f6f       
@@ -26,6 +29,9 @@ client.placeholder          #e89393        #e89393         #040404
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font xft:Inconsolata Bold 9
+#font -video-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango:open sans 8
+
 
 
 bindsym $mod+period move workspace to output left
@@ -63,6 +69,7 @@ bindsym $mod+Return exec sakura
 bindsym --release Shift+Insert exec --no-startup-id xsel > ~/.clp && xdotool type --delay 0 --clearmodifiers --file ~/.clp
 
 
+bindsym $mod+Shift+s sticky toggle
 
 
 
@@ -192,17 +199,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
-
+# right first
 bar {
     #i3bar position
     position top
     workspace_buttons yes
     status_command i3blocks -c ~/.i3/li3blocks
 
-    output VGA-0
+    #output VGA-1
+    output $output1
 
 }
-
 
 bar {
     #i3bar position
@@ -210,10 +217,15 @@ bar {
     workspace_buttons yes
     status_command i3blocks -c ~/.i3/ri3blocks
 
-    output DVI-0
+    #output DVI-1
+    output $output2
 
 
 }
+
+
+
+
 
 
 
