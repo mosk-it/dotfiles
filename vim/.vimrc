@@ -51,6 +51,8 @@ Plugin 'taglist.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'm2mdas/phpcomplete-extended-symfony'
 Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-obsession'
+Plugin 'vim-scripts/Solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -80,6 +82,7 @@ set incsearch
 set t_Co=256  " Set terminal to display 256 colors.
 set nu
 set background=dark
+"colorscheme solarized
 colorscheme jellybeans
 set softtabstop=4
 set autoindent
@@ -258,6 +261,12 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
+" No cursorline while in insert mode
+autocmd InsertEnter * set nocursorline
+autocmd InsertLeave * set cursorline
+
+" do not showstupid popup window 
+map q: :q
+
+" timeout
+set timeoutlen=1000 ttimeoutlen=0

@@ -4,7 +4,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst
 
-bindkey -v
 # Kill the lag
 export KEYTIMEOUT=1
 
@@ -17,6 +16,8 @@ compinit
 # End of lines added by compinstall
 
 autoload -U colors && colors
+
+bindkey -v
 
 autoload -U promptinit
 promptinit
@@ -90,22 +91,30 @@ zle -N useful-enter
 bindkey "^M" useful-enter
 
 
+
+
 zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-        echo -ne "\033]12;Red\007"
+  if [ $KEYMAP = vicmd ]; then
+    if [[ $TMUX = '' ]]; then
+      echo -ne "\033]12;Red\007"
     else
-        echo -ne "\033]12;Grey\007"
+      printf '\033Ptmux;\033\033]12;red\007\033\\'
     fi
+  else
+    if [[ $TMUX = '' ]]; then
+      echo -ne "\033]12;Grey\007"
+    else
+      printf '\033Ptmux;\033\033]12;grey\007\033\\'
+    fi
+  fi
 }
-
-
-zle -N zle-keymap-select
 zle-line-init () {
-    zle -K viins
-    echo -ne "\033]12;Grey\007"
+  zle -K viins
+  echo -ne "\033]12;Grey\007"
 }
+zle -N zle-keymap-select
 zle -N zle-line-init
-bindkey -v
+
 
 
 function git_prompt {
