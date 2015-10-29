@@ -1,5 +1,6 @@
 set nocompatible
-filetype off
+filetype plugin on
+syntax on
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -53,11 +54,17 @@ Plugin 'm2mdas/phpcomplete-extended-symfony'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-obsession'
 Plugin 'vim-scripts/Solarized'
+Plugin 'sjl/badwolf'
+Plugin 'vimwiki/vimwiki'
+"Plugin 'fogine/vim-i3wm-tmux-navigator'
+
 
 call vundle#end()
 filetype plugin indent on
 
 let mapleader=" "
+set wildmenu
+set lazyredraw
 
 
 nmap j gj
@@ -103,9 +110,9 @@ imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
 
-map <C-j> 10j
+"map <C-j> 10j
 map <S-j> 50j
-map <C-k> 10k
+"map <C-k> 10k
 map <S-k> 50k
 
 
@@ -262,11 +269,49 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 
 " No cursorline while in insert mode
-autocmd InsertEnter * set nocursorline
-autocmd InsertLeave * set cursorline
+"autocmd InsertEnter * set nocursorline
+"autocmd InsertLeave * set cursorline
 
 " do not showstupid popup window 
 map q: :q
 
 " timeout
-set timeoutlen=1000 ttimeoutlen=0
+set timeoutlen=300 ttimeoutlen=0
+
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+"let g:tmux_navigator_no_mappings = 1
+
+"noremap <silent> <C-h> :TmuxNavigateLeft<cr>
+"noremap <silent> <C-j> :TmuxNavigateDown<cr>
+"noremap <silent> <C-k> :TmuxNavigateUp<cr>
+"noremap <silent> <C-l> :TmuxNavigateRight<cr>
+"noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+au FocusLost * :set number
+au FocusGained * :set relativenumber
+
+autocmd InsertEnter * :set number
+autocmd InsertEnter * :set norelativenumber
+
+autocmd InsertLeave * :set rnu
+autocmd InsertLeave * :set nu
+
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <leader>n :call NumberToggle()<cr>
+
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'

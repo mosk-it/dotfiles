@@ -70,7 +70,12 @@ __git_prompt() {
 
 
 bindkey '^R' history-incremental-search-backward
-
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 
 
@@ -93,27 +98,27 @@ bindkey "^M" useful-enter
 
 
 
-zle-keymap-select () {
-  if [ $KEYMAP = vicmd ]; then
-    if [[ $TMUX = '' ]]; then
-      echo -ne "\033]12;Red\007"
-    else
-      printf '\033Ptmux;\033\033]12;red\007\033\\'
-    fi
-  else
-    if [[ $TMUX = '' ]]; then
-      echo -ne "\033]12;Grey\007"
-    else
-      printf '\033Ptmux;\033\033]12;grey\007\033\\'
-    fi
-  fi
-}
-zle-line-init () {
-  zle -K viins
-  echo -ne "\033]12;Grey\007"
-}
-zle -N zle-keymap-select
-zle -N zle-line-init
+#zle-keymap-select () {
+  #if [ $KEYMAP = vicmd ]; then
+    #if [[ $TMUX = '' ]]; then
+      #echo -ne "\033]12;Red\007"
+    #else
+      #printf '\033Ptmux;\033\033]12;red\007\033\\'
+    #fi
+  #else
+    #if [[ $TMUX = '' ]]; then
+      #echo -ne "\033]12;Grey\007"
+    #else
+      #printf '\033Ptmux;\033\033]12;grey\007\033\\'
+    #fi
+  #fi
+#}
+#zle-line-init () {
+  #zle -K viins
+  #echo -ne "\033]12;Grey\007"
+#}
+#zle -N zle-keymap-select
+#zle -N zle-line-init
 
 
 
@@ -125,6 +130,15 @@ function git_prompt {
 
 export PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
 → %"
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    PS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
+${$VIM_PROMPT}→ %"
+    zle reset-prompt
+}
+
 
 _lineup=$'\e[1A'
 _linedown=$'\e[1B'
