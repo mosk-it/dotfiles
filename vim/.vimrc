@@ -56,7 +56,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'vim-scripts/Solarized'
 Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
-"Plugin 'fogine/vim-i3wm-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 
 
 call vundle#end()
@@ -111,9 +111,9 @@ imap <C-b> <C-O>h
 nnoremap <leader>w :w<CR>
 
 "map <C-j> 10j
-map <S-j> 50j
+map <S-j> 15j
 "map <C-k> 10k
-map <S-k> 50k
+map <S-k> 15k
 
 
 cmap w! w !sudo tee > /dev/null %
