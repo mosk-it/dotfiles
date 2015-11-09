@@ -56,8 +56,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'vim-scripts/Solarized'
 Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
-Plugin 'christoomey/vim-tmux-navigator'
-
+Plugin 'tpope/vim-sleuth'
 
 call vundle#end()
 filetype plugin indent on
@@ -109,12 +108,8 @@ imap <C-f> <C-O>l
 imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
-
-"map <C-j> 10j
-map <S-j> 15j
-"map <C-k> 10k
-map <S-k> 15k
-
+nmap <S-k> :bprevious<CR>
+nmap <S-j> :bnext<CR>
 
 cmap w! w !sudo tee > /dev/null %
 
@@ -280,14 +275,6 @@ set timeoutlen=300 ttimeoutlen=0
 
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-"let g:tmux_navigator_no_mappings = 1
-
-"noremap <silent> <C-h> :TmuxNavigateLeft<cr>
-"noremap <silent> <C-j> :TmuxNavigateDown<cr>
-"noremap <silent> <C-k> :TmuxNavigateUp<cr>
-"noremap <silent> <C-l> :TmuxNavigateRight<cr>
-"noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
-
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 
@@ -315,3 +302,15 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ -g ""'
+
+
+map <C-J> <C-W>j<C-W>_
+map <C-k> <C-W>k<C-W>_
+map <C-h> <C-W>h<C-W>_
+map <C-l> <C-W>l<C-W>_
+
+
+"splits
+set splitbelow
+set splitright
+
