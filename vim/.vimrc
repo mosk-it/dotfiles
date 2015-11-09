@@ -57,6 +57,7 @@ Plugin 'vim-scripts/Solarized'
 Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-sleuth'
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -102,16 +103,22 @@ noremap <leader>h ^
 noremap <leader>l $
 noremap <leader>H 0
 
+
 imap <C-a> <C-O>^
 imap <C-e> <C-O>$
 imap <C-f> <C-O>l
 imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
-nmap <S-k> :bprevious<CR>
-nmap <S-j> :bnext<CR>
+
+nnoremap <S-k> :bprev<CR>
+nnoremap <S-j> :bnext<CR>
 
 cmap w! w !sudo tee > /dev/null %
+
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
 
 "let g:nerdtree_tabs_open_on_console_startup=1
 "let g:miniBufExplorerAutoStart = 1
@@ -125,7 +132,7 @@ set guioptions-=L  "remove left-hand scroll bar
 let g:phpcomplete_index_composer_command="/usr/bin/composer"
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
-autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 set completeopt=menuone,longest,preview
@@ -178,7 +185,7 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
-let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
 set laststatus=2
 
 
@@ -313,4 +320,7 @@ map <C-l> <C-W>l<C-W>_
 "splits
 set splitbelow
 set splitright
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:jedi#popup_on_dot = 0
 
