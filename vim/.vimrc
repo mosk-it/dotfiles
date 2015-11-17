@@ -58,7 +58,8 @@ Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-sleuth'
 Plugin 'davidhalter/jedi-vim'
-
+"Plugin 'yonchu/accelerated-smooth-scroll'
+"Plugin 'Kazark/vim-SimpleSmoothScroll'
 call vundle#end()
 filetype plugin indent on
 
@@ -111,8 +112,8 @@ imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
 
-nnoremap <S-k> :bprev<CR>
-nnoremap <S-j> :bnext<CR>
+nmap <S-k> :bprev<CR>
+nmap <S-j> :bnext<CR>
 
 cmap w! w !sudo tee > /dev/null %
 
@@ -323,4 +324,42 @@ set splitright
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:jedi#popup_on_dot = 0
+
+let s:save_cpo = &cpo
+
+set cpo&vim
+function! ScrollUp()
+    call ScrollWithAction("")
+endfunction
+
+function! ScrollDown()
+    call ScrollWithAction("")
+endfunction
+
+function! ScrollWithAction(scrollaction)
+    execute "norm " . a:scrollaction
+    redraw
+    let counter=1
+    while counter<&scroll
+        let counter+=1
+        sleep 3m
+        redraw
+        execute "norm " . a:scrollaction
+    endwhile
+endfunction
+
+nnoremap <C-U> :call ScrollUp()<Enter>
+nnoremap <C-D> :call ScrollDown()<Enter>
+
+nnoremap <C-B> :call ScrollUp()<Enter>
+nnoremap <C-F> :call ScrollDown()<Enter>
+
+
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
+let &cpo = s:save_cpo
+
+
+
 
