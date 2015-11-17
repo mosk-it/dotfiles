@@ -5,7 +5,7 @@ syntax on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-
+Plugin 'gmarik/Vundle.vim'
 Plugin 'StanAngeloff/php.vim.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree.git'
@@ -19,7 +19,8 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'chase/vim-ansible-yaml.git'
 "Plugin 'vim-scripts/closetag.vim.git'
 Plugin 'vim-scripts/mru.vim.git'
-Plugin 'scrooloose/nerdcommenter.git'
+"Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
 Plugin 'mbbill/undotree.git'
@@ -58,6 +59,9 @@ Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-sleuth'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-repeat'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
 call vundle#end()
 filetype plugin indent on
