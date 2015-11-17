@@ -58,8 +58,6 @@ Plugin 'sjl/badwolf'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-sleuth'
 Plugin 'davidhalter/jedi-vim'
-"Plugin 'yonchu/accelerated-smooth-scroll'
-"Plugin 'Kazark/vim-SimpleSmoothScroll'
 call vundle#end()
 filetype plugin indent on
 
@@ -89,6 +87,7 @@ hi Directory guifg=#FF0000 ctermfg=red
 set incsearch
 set t_Co=256  " Set terminal to display 256 colors.
 set nu
+set rnu
 set background=dark
 "colorscheme solarized
 colorscheme jellybeans
@@ -143,10 +142,10 @@ set clipboard=unnamedplus
 set smartcase
 set ignorecase
 set ic
-:set hlsearch
+set hlsearch
 
 
-:nmap <leader>q :nohlsearch<CR>
+nmap <leader>q :nohlsearch<CR>
 
 
 vmap r "_dP
