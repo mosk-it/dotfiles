@@ -94,6 +94,7 @@ hi Directory guifg=#FF0000 ctermfg=red
 set incsearch
 set t_Co=256  " Set terminal to display 256 colors.
 set nu
+set rnu
 set background=dark
 "colorscheme solarized
 colorscheme jellybeans
@@ -117,8 +118,8 @@ imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
 
-nnoremap <S-k> :bprev<CR>
-nnoremap <S-j> :bnext<CR>
+nmap <S-k> :bprev<CR>
+nmap <S-j> :bnext<CR>
 
 cmap w! w !sudo tee > /dev/null %
 
@@ -148,10 +149,10 @@ set clipboard=unnamedplus
 set smartcase
 set ignorecase
 set ic
-:set hlsearch
+set hlsearch
 
 
-:nmap <leader>q :nohlsearch<CR>
+nmap <leader>q :nohlsearch<CR>
 
 
 vmap r "_dP
@@ -395,20 +396,51 @@ set splitright
 let g:SuperTabDefaultCompletionType = "context"
 let g:jedi#popup_on_dot = 0
 
+let s:save_cpo = &cpo
+
+set cpo&vim
+function! ScrollUp()
+    call ScrollWithAction("")
+endfunction
+
+function! ScrollDown()
+    call ScrollWithAction("")
+endfunction
+
+function! ScrollWithAction(scrollaction)
+    execute "norm " . a:scrollaction
+    redraw
+    let counter=1
+    while counter<&scroll
+        let counter+=1
+        sleep 3m
+        redraw
+        execute "norm " . a:scrollaction
+    endwhile
+endfunction
+
+nnoremap <C-U> :call ScrollUp()<Enter>
+nnoremap <C-D> :call ScrollDown()<Enter>
+
+nnoremap <C-B> :call ScrollUp()<Enter>
+nnoremap <C-F> :call ScrollDown()<Enter>
+
+
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
 
 set viewoptions=cursor,folds,slash,unix
 
-
-
-"function RangerExplorer()
-    "exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    "if filereadable('/tmp/vim_ranger_current_file')
-        "exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        "call system('rm /tmp/vim_ranger_current_file')
-    "endif
-    "redraw!
-"endfun
-"map <Leader>x :call RangerExplorer()<CR>
+function! RangerExplorer()
+    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+    if filereadable('/tmp/vim_ranger_current_file')
+        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+        call system('rm /tmp/vim_ranger_current_file')
+    endif
+    redraw!
+endfun
+map <Leader>r :call RangerExplorer()<CR>
 
 
 nmap <leader>p <Plug>yankstack_substitute_older_paste
