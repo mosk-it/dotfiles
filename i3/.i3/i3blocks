@@ -13,7 +13,7 @@ interval=once
 signal=1
 
 [temp]
-label=CPU
+label=
 command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
 interval=10
 

@@ -6,26 +6,34 @@ command=~/.i3/rxtitle -s
 interval=persist
 color=#ddddbb
 
+[bandwidth]
+label=bw
+interval=2
+color=#cfd9Cf
+
+
+
 
 #[pymodoro]
 #command=pymodoro
 #interval=persist
 
 
+[temp]
+label= 
+command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
+interval=10
+
+
 [volume]
-label=♪
+label= 
 instance=Master
 interval=once
 signal=1
-color=#cfd9Cf
+color=#CADDFF
 
-
-[temp]
-label=CPU
-command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
-interval=10
-color=#cfd9Cf
 
 [time]
 command=date +"%Y-%m-%d %a, %R"
+color=#FFFFFF
 interval=60

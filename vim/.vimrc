@@ -5,15 +5,17 @@ syntax on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+
+
 Plugin 'gmarik/Vundle.vim'
-Plugin 'StanAngeloff/php.vim.git'
+"Plugin 'StanAngeloff/php.vim.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'bling/vim-airline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'nanotech/jellybeans.vim.git'
 Plugin 'kien/ctrlp.vim.git'
 "Plugin 'fholgado/minibufexpl.vim.git'
+"Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-scripts/simple-pairs.git'
 "Plugin 'chase/vim-ansible-yaml.git'
@@ -25,11 +27,10 @@ Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'tpope/vim-surround'
-"Plugin 'ap/vim-buftabline'
 "Plugin 'spf13/vim-autoclose.git'
 "Plugin 'spf13/PIV.git'
 Plugin 'Shougo/neocomplete.vim'
-Plugin 'm2mdas/phpcomplete-extended'
+"Plugin 'm2mdas/phpcomplete-extended'
 Plugin 'ervandew/supertab'
 Plugin 'paulyg/Vim-PHP-Stuff'
 Plugin '2072/PHP-Indenting-for-VIm'
@@ -40,11 +41,10 @@ Plugin 'rking/ag.vim'
 "Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'HTML-AutoCloseTag'
-"Plugin 'edkolev/tmuxline.vim'
-"Plugin 'itchyny/lightline.vim'
-"Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'maxbrunsfeld/vim-yankstack'
 "Plugin 'sjbach/lusty'
-"Plugin 'bling/vim-bufferline'
 "Plugin 'Shougo/vimfiler.vim'
 Plugin 'mhinz/vim-signify'
 Plugin 'ap/vim-css-color'
@@ -56,12 +56,14 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-obsession'
 Plugin 'vim-scripts/Solarized'
 Plugin 'sjl/badwolf'
-Plugin 'vimwiki/vimwiki'
+"Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-sleuth'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-repeat'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
+"Plugin 'junegunn/goyo.vim'
+"Plugin 'php.vim'
+Plugin 'kopischke/vim-stay'
+Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 filetype plugin indent on
@@ -219,14 +221,89 @@ function! s:DeleteBuffer()
   exec "norm \<F5>"
 endfunction
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#show_close_button = 0
+
+set timeout
+set timeoutlen=750
+set ttimeoutlen=250
+
+"NeoVim handles ESC keys as alt+key set this to solve the problem
+if has('nvim')
+   set ttimeout
+   set ttimeoutlen=0
+endif
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ [ 'fileformat' ], [ 'syntastic', 'lineinfo' ], ['percent'], ['ctrlpmark'] ]
+      \ },
+      \ 'component_function': {
+      \   'fileformat': 'LightLineFiletype',
+      \   'fugitive': 'LightLineFugitive',
+      \   'readonly': 'LLReadonly',
+      \   'modified': 'LLModified',
+      \   'filename': 'LLFilename',
+      \   'mode': 'LLMode',
+      \ }
+      \ }
+
+function! LightLineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let _ = fugitive#head()
+      return strlen(_) ? mark._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
 
 
-set timeoutlen=1000 
-set ttimeoutlen=0
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+
+
+function! LLModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LLReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "!"
+  else
+    return ""
+  endif
+endfunction
+
+function! LLFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LLFilename()
+  return ('' != LLReadonly() ? LLReadonly() . ' ' : '') .
+       \ ('' != expand('%') ? expand('%') : '[No Name]') .
+       \ ('' != LLModified() ? ' ' . LLModified() : '')
+endfunction
+
+
+
+
+
+
 
 function! NumberToggle()
     if(&relativenumber == 1)
@@ -237,16 +314,6 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-
-function! AirlineInit()
-    let g:airline_left_sep=''
-    let g:airline_right_sep=''
-    let g:airline#extensions#whitespace#checks = [  ]
-    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-    let g:airline#extensions#bufferline#enabled = 0
-endfunction
-autocmd VimEnter * call AirlineInit()
-
 
 "TAGLIST
 
@@ -328,3 +395,21 @@ set splitright
 let g:SuperTabDefaultCompletionType = "context"
 let g:jedi#popup_on_dot = 0
 
+
+set viewoptions=cursor,folds,slash,unix
+
+
+
+"function RangerExplorer()
+    "exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+    "if filereadable('/tmp/vim_ranger_current_file')
+        "exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+        "call system('rm /tmp/vim_ranger_current_file')
+    "endif
+    "redraw!
+"endfun
+"map <Leader>x :call RangerExplorer()<CR>
+
+
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>b <Plug>yankstack_substitute_newer_paste
