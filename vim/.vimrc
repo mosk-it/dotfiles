@@ -43,7 +43,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'HTML-AutoCloseTag'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'itchyny/lightline.vim'
-Plugin 'maxbrunsfeld/vim-yankstack'
 "Plugin 'sjbach/lusty'
 "Plugin 'Shougo/vimfiler.vim'
 Plugin 'mhinz/vim-signify'
@@ -64,9 +63,10 @@ Plugin 'tpope/vim-repeat'
 "Plugin 'php.vim'
 Plugin 'kopischke/vim-stay'
 Plugin 'ap/vim-buftabline'
-
+Plugin 'nathanaelkane/vim-indent-guides'
 call vundle#end()
 filetype plugin indent on
+
 
 let mapleader=" "
 set wildmenu
@@ -121,26 +121,20 @@ nnoremap <leader>w :w<CR>
 nmap <S-k> :bprev<CR>
 nmap <S-j> :bnext<CR>
 
-cmap w! w !sudo tee > /dev/null %
-
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
-"let g:nerdtree_tabs_open_on_console_startup=1
-"let g:miniBufExplorerAutoStart = 1
-"let g:miniBufExplBuffersNeeded = 1
-"set noequalalways
+" gvim
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-let g:phpcomplete_index_composer_command="/usr/bin/composer"
+"let g:phpcomplete_index_composer_command="/usr/bin/composer"
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 set completeopt=menuone,longest,preview
 
@@ -152,23 +146,11 @@ set ic
 set hlsearch
 
 
-nmap <leader>q :nohlsearch<CR>
+nmap <leader>a :nohlsearch<CR>
+nmap <leader>q :bd<CR>
 
 
 vmap r "_dP
-
-
-"let g:unite_source_history_yank_enable = 1
-"try
-  "let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-  "call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"catch
-"endtry
-"" search a file in the filetree
-"nnoremap <leader>e :<C-u>Unite -start-insert file_rec/async<cr>
-"nnoremap <leader>f :<C-u>Unite buffer<cr>
-"" reset not it is <C-l> normally
-":nnoremap <leader>r <Plug>(unite_restart)
 
 
 nnoremap <leader>f :<C-u>CtrlPBuffer<cr>
@@ -222,10 +204,9 @@ function! s:DeleteBuffer()
   exec "norm \<F5>"
 endfunction
 
-
-set timeout
-set timeoutlen=750
-set ttimeoutlen=250
+"set timeout
+"set timeoutlen=750
+"set ttimeoutlen=250
 
 "NeoVim handles ESC keys as alt+key set this to solve the problem
 if has('nvim')
@@ -443,5 +424,7 @@ endfun
 map <Leader>r :call RangerExplorer()<CR>
 
 
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>b <Plug>yankstack_substitute_newer_paste
+noremap <leader>; :%s:::g<Left><Left><Left>
+noremap <leader>' :%s:::cg<Left><Left><Left><Left>
+
+vnoremap // y/<C-R>"<CR>
