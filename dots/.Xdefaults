@@ -3,6 +3,9 @@ URxvt.scrollBar: false
 URxvt*foreground: [100]#dddddd
 URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
 
+URxvt*iso14755: False
+
+
 *color0:  #2E3436
 *color1:  #a40000
 *color2:  #4E9A06
@@ -19,4 +22,5 @@ URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu
 *color13: #AD7FA8
 *color14: #fcaf3e
 *color15: #EEEEEC
+
 

@@ -1,0 +1,51 @@
+# right first
+bar {
+    #i3bar position
+    position top
+    workspace_buttons yes
+    status_command i3blocks -c ~/.i3/li3blocks
+
+    font pango:Cousine, FontAwesome 8
+    output $output1
+    strip_workspace_numbers yes
+    separator_symbol "|"
+
+
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+}
+
+# left
+bar {
+    #i3bar position
+    position top
+    workspace_buttons yes
+    status_command i3blocks -c ~/.i3/ri3blocks
+
+    output $output2
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+
+}

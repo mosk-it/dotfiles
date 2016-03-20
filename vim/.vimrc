@@ -21,7 +21,6 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'chase/vim-ansible-yaml.git'
 "Plugin 'vim-scripts/closetag.vim.git'
 Plugin 'vim-scripts/mru.vim.git'
-"Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'EvanDotPro/php_getset.vim.git'
 Plugin 'evidens/vim-twig.git'
@@ -123,6 +122,8 @@ nmap <S-j> :bnext<CR>
 
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
+:map Q <Nop>
+
 
 " gvim
 set guioptions-=m  "remove menu bar
@@ -151,6 +152,10 @@ nmap <leader>q :bd<CR>
 
 
 vmap r "_dP
+
+
+noremap ,, ;
+noremap ,> ,
 
 
 nnoremap <leader>f :<C-u>CtrlPBuffer<cr>

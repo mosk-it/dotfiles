@@ -1,0 +1,32 @@
+
+mode "resize" {
+
+
+    bindsym l resize grow right 10 px or 10 ppt, resize shrink left 10 px or 10 ppt
+        bindsym h resize shrink right 10 px or 10 ppt, resize grow left 10 px or 10 ppt
+
+        bindsym j resize grow down 10 px or 10 ppt, resize shrink up 10 px or 10 ppt
+        bindsym k resize grow up 10 px or 10 ppt, resize shrink down 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+
+set $mode_system System [l]ock, [r]eboot, [s]shutdown
+
+
+mode "$mode_system" {
+
+    bindsym l exec --no-startup-id ~/.i3/autolock, mode "default"
+    bindsym r exec --no-startup-id sudo shutdown -r now, mode "default"
+    bindsym s exec --no-startup-id sudo shutdown -h now, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "$mode_system"

@@ -23,20 +23,22 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
 
+bindkey '^F' forward-char
+bindkey '^B' backward-char
+
+
 autoload -U promptinit
 promptinit
 
 cdParentKey() {
-  pushd .. > /dev/null
-  zle      reset-prompt
-  echo
-  ls
-  echo
+    pushd .. > /dev/null
+    zle      reset-prompt
+    echo
+    ls
+    echo
 }
 
-vim_ins_mode="%{$fg[green]%}[INC]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[N]%{$reset_color%}"
-vim_mode=$vim_ins_mode
+alias vim=nvim
 
 
 __git_prompt() {
@@ -84,17 +86,17 @@ bindkey '^r' history-incremental-search-backward
 
 
 useful-enter () {
-  if [[ -z $BUFFER ]]; then
-    echo ""
-    if [[ -d .git ]]; then
-      git status
+    if [[ -z $BUFFER ]]; then
+        echo ""
+        if [[ -d .git ]]; then
+            git status
+        else
+            ls -CFl --color=auto
+        fi
+        zle redisplay
     else
-      ls -CFl --color=auto
+        zle accept-line
     fi
-    zle redisplay
-  else
-    zle accept-line
-  fi
 }
 zle -N useful-enter
 bindkey "^M" useful-enter
@@ -102,33 +104,9 @@ bindkey "^M" useful-enter
 
 
 
-#zle-keymap-select () {
-  #if [ $KEYMAP = vicmd ]; then
-    #if [[ $TMUX = '' ]]; then
-      #echo -ne "\033]12;Red\007"
-    #else
-      #printf '\033Ptmux;\033\033]12;red\007\033\\'
-    #fi
-  #else
-    #if [[ $TMUX = '' ]]; then
-      #echo -ne "\033]12;Grey\007"
-    #else
-      #printf '\033Ptmux;\033\033]12;grey\007\033\\'
-    #fi
-  #fi
-#}
-#zle-line-init () {
-  #zle -K viins
-  #echo -ne "\033]12;Grey\007"
-#}
-#zle -N zle-keymap-select
-#zle -N zle-line-init
-
-
-
 function git_prompt {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "[g:"${ref#refs/heads/}"]"
+ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+echo "[g:"${ref#refs/heads/}"]"
 }
 
 
@@ -136,11 +114,11 @@ export PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{
 → %"
 
 function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-    PS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
-    PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
+VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+PS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
 ${$VIM_PROMPT}→ %"
-    zle reset-prompt
+zle reset-prompt
 }
 
 
@@ -178,3 +156,41 @@ zstyle -s ':completion:*:hosts' hosts _ssh_config
 zstyle ':completion:*:hosts' hosts $_ssh_config
 
 ZLE_REMOVE_SUFFIX_CHARS=""
+
+
+
+
+# cursor's color based on mode 
+# urxvt (and family) accepts even #RRGGBB
+INSERT_PROMPT="gray"
+COMMAND_PROMPT="red"
+# helper for setting color including all kinds of terminals
+set_prompt_color() {
+    if [[ $TERM = "linux" ]]; then
+        # nothing
+    elif [[ $TMUX != '' ]]; then
+        printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
+    else
+        echo -ne "\033]12;$1\007"
+    fi
+}
+# change cursor color basing on vi mode
+zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        set_prompt_color $COMMAND_PROMPT
+    else
+        set_prompt_color $INSERT_PROMPT
+    fi
+}
+zle-line-finish() {
+    set_prompt_color $INSERT_PROMPT
+}
+zle-line-init () {
+    zle -K viins
+    set_prompt_color $INSERT_PROMPT
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-line-finish
+
+
