@@ -1,4 +1,7 @@
 set $mod Mod1
+ 
+set $output1 VGA-1
+set $output2 DVI-0
 
 workspace 0 output $output1
 workspace 1 output $output1
@@ -87,9 +90,9 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-bindsym $mod+F1 exec amixer -q set Master 2dB- unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F2 exec amixer -q set Master 2dB+ unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F3 exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
+bindsym $mod+F1 exec amixer -q set Master 1dB- unmute && pkill -RTMIN+1 i3blocks
+bindsym $mod+F2 exec amixer -q set Master 1dB+ unmute && pkill -RTMIN+1 i3blocks
+#bindsym $mod+F3 exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
 
 # move focused window
 bindsym $mod+Shift+h move left 140px
@@ -208,7 +211,6 @@ bar {
     workspace_buttons yes
     status_command i3blocks -c ~/.i3/li3blocks
 
-    font pango:Cousine, FontAwesome 8
     output $output1
     strip_workspace_numbers yes
     separator_symbol "|"
@@ -252,5 +254,3 @@ bar {
 
 
 }
-set $output1 VGA-0
-set $output2 DVI-0

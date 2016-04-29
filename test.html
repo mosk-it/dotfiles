@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- This file was created with the aha Ansi HTML Adapter. http://ziz.delphigl.com/tool_aha.php -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml; charset=UTF-8" />
+<title>stdin</title>
+</head>
+<body>
+<pre>
+<span style="font-weight:bold;">diff --git a/app/class/controller/orders.class.php b/app/class/controller/orders.class.php</span>
+<span style="font-weight:bold;">index b157ba9..245e263 100644</span>
+<span style="font-weight:bold;">--- a/app/class/controller/orders.class.php</span>
+<span style="font-weight:bold;">+++ b/app/class/controller/orders.class.php</span>
+<span style="color:teal;">@@ -210,6 +210,7 @@</span> class Controller_Orders extends Controller_Front {
+     *
+     * */
+    public function action_first_step() {
+
+        $_SESSION['order_step'] = 1;
+        //XXX koszyk;
+        $this-&gt;View-&gt;Layout = new Opt_View('root_wide.tpl');
+<span style="color:teal;">@@ -350,15 +351,20 @@</span> class Controller_Orders extends Controller_Front {
+
+        } else {
+
+            if (isset($_SESSION['orders']['order_data'])) {
+                $this-&gt;View-&gt;Post = $_SESSION['orders']['order_data'];
+
+                <span style="color:green;">//echo '&lt;pre&gt;';</span>
+<span style="color:green;">                //print_r($this-&gt;View-&gt;Post);</span>
+<span style="color:green;">                //die;</span>
+
+            } else {
+                $this-&gt;View-&gt;Post = null;
+            }
+
+        }
+
+
+        if (isset($_SESSION['orders']['discount_code']) &amp;&amp; !empty($_SESSION['orders']['discount_code'])) {
+            $this-&gt;oDiscountCodes-&gt;setCode($_SESSION['orders']['discount_code']);
+            $this-&gt;View-&gt;DiscountCodes = $this-&gt;oDiscountCodes-&gt;aCodeData;
+<span style="color:teal;">@@ -469,6 +475,25 @@</span> class Controller_Orders extends Controller_Front {
+            $this-&gt;View-&gt;MessageList = array_merge($this-&gt;View-&gt;MessageList, array('cart' =&gt; $this-&gt;translate-&gt;_('Twój koszyk jest pusty')));
+        }
+
+        <span style="color:green;">//if(isset($this-&gt;config-&gt;deliveryWeightAttribute) &amp;&amp; !empty($OrdersProducts)){</span>
+
+<span style="color:green;">            //$iWeightAttributeId = $this-&gt;config-&gt;deliveryWeightAttribute;</span>
+
+<span style="color:green;">            //$sumWeight = 0;</span>
+
+<span style="color:green;">            //foreach($OrdersProducts as $product){</span>
+
+<span style="color:green;">                //$weightTmp = DB::queryToValue('select value </span>
+<span style="color:green;">                    //from www_products_to_kmk_attributes </span>
+<span style="color:green;">                    //where products_id = '.$product['products_id'].' </span>
+<span style="color:green;">                    //and kmk_attributes_id = '.$iWeightAttributeId); </span>
+
+<span style="color:green;">                //$sumWeight += $product['quantity'] * (int)$weightTmp;</span>
+
+<span style="color:green;">            //}</span>
+
+<span style="color:green;">        //}</span>
+
+        $oUsers = new Model_Users();
+        $oConfig = new Model_Config();
+
+<span style="color:teal;">@@ -506,7 +531,9 @@</span> class Controller_Orders extends Controller_Front {
+        if(($_SESSION['order_step'] &lt; 2 || ($_SESSION['mising_cart_value']&gt;0) &amp;&amp; !isset($_SESSION['offer_id']))) {
+            return $this-&gt;request-&gt;redirect(WEB_HOST . String::url('orders', 'first_step'));
+        }
+
+
+
+
+        $this-&gt;View-&gt;Layout = new Opt_View('root_wide.tpl');
+        $this-&gt;View-&gt;Layout-&gt;Content = new Opt_View('orders_second_step.tpl');
+<span style="color:teal;">@@ -594,6 +621,7 @@</span> class Controller_Orders extends Controller_Front {
+     *
+     * */
+    public function action_third_step() {
+        
+        $sUrl=&quot;&quot;;
+        if(isset($_GET['id'])) {
+            $sUrl = ',id,'.$_GET['id'];
+<span style="color:teal;">@@ -611,6 +639,7 @@</span> class Controller_Orders extends Controller_Front {
+        if(isset($_POST['confirmation']) &amp;&amp; $_POST['confirmation'] == 1 &amp;&amp; isset($_POST['confirmation_email'])){
+            $_SESSION['orders']['order_data']['confirmation_email'] = $_POST['confirmation_email'];
+        }
+
+      
+        $oUsers = new Model_Users();
+        
+<span style="color:teal;">@@ -847,7 +876,7 @@</span> class Controller_Orders extends Controller_Front {
+     * */
+    public function action_fourth_step() {
+        
+		
+
+        $sUrl=&quot;&quot;;
+        if(isset($_GET['id'])) {
+<span style="color:teal;">@@ -1238,8 +1267,9 @@</span> class Controller_Orders extends Controller_Front {
+                $aOrder['pay_date'] = !empty($iPayDateDays) ? Order::getPayDate(Date::dateTime(), $iPayDateDays) : null;                                 
+            }
+ 
+            <span style="color:red;">$aDeliveryPayment</span><span style="color:green;">//$aDeliveryPayment</span> = Orders_Providers::getForOrder($aOrder['payment_id'], $aOrder['delivery_id'], $aProductsInPLN, $this-&gt;userId, false);
+
+            <span style="color:green;">$aDeliveryPayment = array();</span>
+
+            // Karol Kawałek
+            // VAT 0% dla klientów z UE
+<span style="color:teal;">@@ -1283,6 +1313,7 @@</span> class Controller_Orders extends Controller_Front {
+
+            $aOrder = array_merge($aOrder, $aDeliveryPayment);
+
+
+            //Dodaj zamowienie
+            $aOrderData = Order::add($aOrder, $aProductsInPLN, $this-&gt;userId);
+
+</pre>
+</body>
+</html>
