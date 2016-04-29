@@ -20,6 +20,8 @@ Plug 'jreybert/vimagit'
 Plug 'scrooloose/syntastic'
 
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 "DEV
 
@@ -381,4 +383,4 @@ noremap <leader>R :%s:::cg<Left><Left><Left><Left>
 vnoremap // y/<C-R>"<CR>
     
 let g:syntastic_always_populate_loc_list = 1 " allows navigate to error via :ll
-
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
