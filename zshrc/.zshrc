@@ -281,3 +281,6 @@ case $WIDGET in
     CUTBUFFER="$save_cut" CURSOR="$save_cur"
   ;;
 esac
+
+
+alias free='echo "              razem       użyte       wolne    dzielone   buf/cache    dostępne\nPamięć:        15,4G        5,6G        7,4G         64M        2,4G        9,4G\nWymiana:          0B          0B          0B"'
