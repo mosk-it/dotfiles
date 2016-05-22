@@ -129,9 +129,8 @@ _linedown=$'\e[1B'
 export RPS1='$(__git_prompt)'
 #aliases
 alias l='ls --color=auto'
-alias ll='ls -l --color=auto'
+alias ll='ls -lrt --color=auto '
 alias la='ls -la --color=auto'
-alias lr='ls -ltr --color=auto'
 
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
@@ -284,3 +283,6 @@ esac
 
 
 alias free='echo "              razem       użyte       wolne    dzielone   buf/cache    dostępne\nPamięć:        15,4G        5,6G        7,4G         64M        2,4G        9,4G\nWymiana:          0B          0B          0B"'
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+

@@ -384,3 +384,6 @@ vnoremap // y/<C-R>"<CR>
     
 let g:syntastic_always_populate_loc_list = 1 " allows navigate to error via :ll
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+
+
+let php_var_selector_is_identifier = 1

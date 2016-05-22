@@ -1,11 +1,13 @@
 set $mod Mod1
  
-set $output1 VGA-1
+set $output1 VGA-0
 set $output2 DVI-0
 
 workspace 0 output $output1
 workspace 1 output $output1
 workspace 2 output $output2
+workspace 3 output $output2
+workspace 4 output $output2
 
 
 
@@ -55,13 +57,17 @@ bindsym $mod+Return exec sakura
 
 bindsym --release Shift+Insert exec --no-startup-id xsel > ~/.clp && xdotool type --delay 0 --clearmodifiers --file ~/.clp
 
-bindsym $mod+s exec --no-startup-id ydpd_toggle
-for_window [class="URxvt"] floating enable
+#for_window [class="ydpdict" instance="scratchpad"] move scratchpad; floating enable
+
+bindsym $mod+Shift+s move scratchpad
+bindsym $mod+s scratchpad show
+
+
 
 bindsym $mod+Shift+r restart
 
-
-bindsym $mod+Shift+s sticky toggle
+#bindsym $mod+Shift+s sticky toggle
+#bindsym $mod+Shift+s ydpd_toggle
 
 
 
@@ -195,15 +201,35 @@ gaps outer 0
 # AUTOSTART
 
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-exec --no-startup-id numlockx on
+
 
 
 # BIND CAPSLOCK TO CTRL/ESC
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
 exec_always --no-startup-id xcape -e 'Control_L=Escape'
 
+#exec_always --no-startup-id ydpd_toggle
+
+#exec_always --no-startup-id st -c ydpdict -e ydpdict  && move scratchpad
+
+
+
+####DEV
+#for_window [instance="ydpdict"] move window to scratchpad
+#exec_always --no-startup-id st -c ydpdict -e ydpdict, move scratchpad
+
+for_window [instance="__scratchpad"] move scratchpad 
+exec --no-startup-id urxvt -name __scratchpad -e ydpdict
+
+
+
+
+
+
+
 # LOCKER
 exec --no-startup-id xautolock -time 10 -locker autolock -nowlocker autolock -detectsleep -corners 000+ -cornerdelay 3 &
+
 # right first
 bar {
     #i3bar position

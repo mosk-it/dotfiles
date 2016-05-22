@@ -1,4 +1,4 @@
-URxvt.background: [100]#111111
+URxvt.background: [100]#0D1114
 URxvt.scrollBar: false
 URxvt*foreground: [100]#dddddd
 URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
@@ -6,7 +6,7 @@ URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu
 URxvt*iso14755: False
 
 
-*color0:  #2E3436
+*color0:  #0D1114
 *color1:  #a40000
 *color2:  #4E9A06
 *color3:  #C4A000
@@ -24,3 +24,12 @@ URxvt*iso14755: False
 *color15: #EEEEEC
 
 
+
+
+
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  chromium
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
