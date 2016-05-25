@@ -53,7 +53,7 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # BIND KEYS
-bindsym $mod+Return exec sakura
+bindsym $mod+Return exec urxvt
 
 bindsym --release Shift+Insert exec --no-startup-id xsel > ~/.clp && xdotool type --delay 0 --clearmodifiers --file ~/.clp
 

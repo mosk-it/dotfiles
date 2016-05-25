@@ -1,0 +1,103 @@
+URxvt.termName:    rxvt-256color
+
+URxvt.background: [100]#0D1114
+URxvt.scrollBar: false
+URxvt*foreground: [100]#dddddd
+
+URxvt.font: xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
+URxvt*iso14755: False
+
+Xft.antialias: 1
+Xft.rgba: rgb
+
+URxvt*skipBuiltinGlyphs: true
+URxvt.saveLines: 65536
+URxvt.colorUL: 160
+URxvt*scrollTtyOutput: false
+
+URxvt.perl-ext-common:  default,tabbedex,keyboard-select
+
+! DEV
+URxvt.shading:     20
+URxvt.fading:      15
+
+
+
+URxvt.keysym.C-space:   perl:keyboard-select:activate
+
+
+URxvt.tabbed.tabbar-fg: 254
+URxvt.tabbed.tabbar-bg: 8
+URxvt.tabbed.tab-fg: 235
+URxvt.tabbed.tab-bg: 254
+URxvt.tabbed.title-fg: 196
+URxvt.tabbed.title-bg: 8
+
+! URxvt.tabbed.tabbar-fg:   8
+! URxvt.tabbed.tabbar-bg:   0
+! URxvt.tabbed.tab-fg:      50
+! URxvt.tabbed.tab-bg:      52
+! URxvt.tabbed.bell-tab-fg: 25
+! URxvt.tabbed.bell-tab-bg: 160
+! URxvt.tabbed.bell-fg:     244
+! URxvt.tabbed.bell-bg:     17
+! URxvt.tabbed.title-fg:    28
+! URxvt.tabbed.title-bg:    16
+
+
+
+! Clipboard
+! URxvt.keysym.Control-c: perl:clipboard:copy
+! URxvt.keysym.Control-v: perl:clipboard:paste
+! URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+
+
+
+
+
+URxvt.tabbed.autohide: true
+URxvt.tabbed.no-tabbedex-keys: yes
+
+
+URxvt.keysym.Control-t: perl:tabbedex:new_tab
+URxvt.keysym.Control-j: perl:tabbedex:next_tab
+URxvt.keysym.Control-k: perl:tabbedex:prev_tab
+
+
+
+! special
+*.foreground:   #FF0000
+*.background:   #0a0f14
+*.cursorColor:  #98d1ce
+
+! black
+*.color0:       #0a0f14
+*.color8:       #10151b
+
+! red
+*.color1:       #c33027
+*.color9:       #d26939
+
+! green
+*.color2:       #26a98b
+*.color10:      #379cd9
+
+! yellow
+*.color3:       #edb54b
+*.color11:      #245361
+
+! blue
+*.color4:       #195465
+*.color12:      #7d2580
+
+! magenta
+*.color5:       #4e5165
+*.color13:      #888ba5
+
+! cyan
+*.color6:       #33859d
+*.color14:      #599caa
+
+! white
+*.color7:       #98d1ce
+*.color15:      #d3ebe9

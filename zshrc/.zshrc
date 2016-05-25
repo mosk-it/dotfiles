@@ -1,11 +1,13 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst
+HISTSIZE=50000
+SAVEHIST=50000
+setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst 
+
 
 # Kill the lag
 export KEYTIMEOUT=1
+
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -13,18 +15,52 @@ zstyle :compinstall filename '/home/awen/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+autoload -Uz compinit select-word-style promptinit colors
+
 
 autoload -U colors && colors
 
+
 bindkey -v
 
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
 
 
-bindkey '^F' forward-char
-bindkey '^B' backward-char
+backward-kill-word () {
+  local WORDCHARS="${WORDCHARS:s#/#}"
+  zle backward-delete-word
+}
+
+
+autoload -Uz colors && colors
+
+bindkey "^P" up-history
+# bindkey '^P' 
+
+bindkey '^R' history-incremental-search-backward
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-delete-word
+bindkey '^r' history-incremental-search-backward
+bindkey '^R' history-incremental-search-backward
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+
+
+
+
+
+
+zle -N backward-kill-word
+
+
+
+
+
 
 
 autoload -U promptinit
@@ -38,7 +74,15 @@ cdParentKey() {
     echo
 }
 
-alias vim=nvim
+
+
+
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+
+bindkey '^F' forward-char
+bindkey '^B' backward-char
 
 
 __git_prompt() {
@@ -73,16 +117,6 @@ __git_prompt() {
         echo -n "]"
     fi
 }
-
-
-bindkey '^R' history-incremental-search-backward
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
 
 
 useful-enter () {
@@ -128,9 +162,17 @@ _linedown=$'\e[1B'
 #RPROMPT="$(__git_prompt)"
 export RPS1='$(__git_prompt)'
 #aliases
-alias l='ls --color=auto'
-alias ll='ls -lrt --color=auto '
-alias la='ls -la --color=auto'
+#
+#
+alias l='ls -N --color=always'
+alias ll='ls -N -lrt --group-directories-first --color=always '
+alias la='ls -N -la --color=always'
+alias vim=nvim
+
+
+
+
+
 
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
@@ -151,8 +193,6 @@ take () {
 KEYTIMEOUT=1
 
 
-#eval "$(thefuck-alias fuck)"
-eval `dircolors ~/.dircolors`
 
 
 zstyle -s ':completion:*:hosts' hosts _ssh_config
@@ -160,6 +200,8 @@ zstyle -s ':completion:*:hosts' hosts _ssh_config
 zstyle ':completion:*:hosts' hosts $_ssh_config
 
 ZLE_REMOVE_SUFFIX_CHARS=""
+
+
 
 
 
@@ -282,7 +324,9 @@ case $WIDGET in
 esac
 
 
-alias free='echo "              razem       użyte       wolne    dzielone   buf/cache    dostępne\nPamięć:        15,4G        5,6G        7,4G         64M        2,4G        9,4G\nWymiana:          0B          0B          0B"'
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+
+[[ -f ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
+
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
