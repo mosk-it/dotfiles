@@ -1,4 +1,4 @@
-URxvt.termName:    rxvt-256color
+URxvt.termName:    rxvt-unicode
 
 URxvt.background: [100]#0D1114
 URxvt.scrollBar: false
@@ -15,16 +15,13 @@ URxvt.saveLines: 65536
 URxvt.colorUL: 160
 URxvt*scrollTtyOutput: false
 
-URxvt.perl-ext-common:  default,tabbedex,keyboard-select
-
+URxvt.perl-ext-common:  default,tabbedex,keyboard-select,clipboard,searchable-scrollback
 ! DEV
 URxvt.shading:     20
-URxvt.fading:      15
-
 
 
 URxvt.keysym.C-space:   perl:keyboard-select:activate
-
+URxvt.searchable-scrollback: C-s
 
 URxvt.tabbed.tabbar-fg: 254
 URxvt.tabbed.tabbar-bg: 8
@@ -47,9 +44,9 @@ URxvt.tabbed.title-bg: 8
 
 
 ! Clipboard
-! URxvt.keysym.Control-c: perl:clipboard:copy
-! URxvt.keysym.Control-v: perl:clipboard:paste
-! URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.Control-C: perl:clipboard:copy
+URxvt.keysym.Control-V: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 
 
 
@@ -101,3 +98,8 @@ URxvt.keysym.Control-k: perl:tabbedex:prev_tab
 ! white
 *.color7:       #98d1ce
 *.color15:      #d3ebe9
+
+
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
