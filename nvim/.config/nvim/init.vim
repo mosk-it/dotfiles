@@ -18,6 +18,7 @@ Plug 'tpope/vim-repeat'
 Plug 'ap/vim-buftabline'
 Plug 'jreybert/vimagit'
 Plug 'scrooloose/syntastic'
+Plug 'tmhedberg/matchit'
 
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
