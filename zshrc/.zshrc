@@ -3,7 +3,8 @@ HISTFILE=~/.histfile
 HISTSIZE=50000
 SAVEHIST=50000
 setopt appendhistory autocd beep extendedglob nomatch notify HIST_IGNORE_DUPS completealiases prompt_subst 
-
+# multiple shells history
+setopt inc_append_history share_history
 
 # Kill the lag
 export KEYTIMEOUT=1
@@ -18,10 +19,11 @@ compinit
 autoload -Uz compinit select-word-style promptinit colors
 
 
-autoload -U colors && colors
+autoload -Uz colors && colors
 
 
 bindkey -v
+
 
 
 
@@ -31,31 +33,28 @@ backward-kill-word () {
 }
 
 
-autoload -Uz colors && colors
 
 bindkey "^P" up-history
 # bindkey '^P' 
 
-bindkey '^R' history-incremental-search-backward
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-delete-word
 bindkey '^r' history-incremental-search-backward
-bindkey '^R' history-incremental-search-backward
 bindkey '^N' down-history
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
+bindkey -a G end-of-buffer-or-history
+
+bindkey '^r' history-incremental-search-backward
 
 
-
-
-
+bindkey '^r' history-incremental-search-backward
 
 zle -N backward-kill-word
+
+bindkey -M visual 'U' up-case-word
+bindkey -M visual 'u' down-case-word
 
 
 
@@ -326,7 +325,3 @@ esac
 
 
 
-
-[[ -f ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
-
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
