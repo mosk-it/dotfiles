@@ -12,15 +12,16 @@ Xft.rgba: rgb
 
 URxvt*skipBuiltinGlyphs: true
 URxvt.saveLines: 65536
-URxvt.colorUL: 160
+! URxvt.colorUL: 160
 URxvt*scrollTtyOutput: false
 
-URxvt.perl-ext-common:  default,tabbedex,keyboard-select,clipboard,searchable-scrollback
+! URxvt.perl-ext-common:  default,tabbedex,keyboard-select,clipboard,searchable-scrollback
+URxvt.perl-ext-common:  default,clipboard
 ! DEV
-URxvt.shading:     20
+! URxvt.shading:     20
 
 
-URxvt.keysym.C-space:   perl:keyboard-select:activate
+! URxvt.keysym.C-space:   perl:keyboard-select:activate
 URxvt.searchable-scrollback: C-s
 
 URxvt.tabbed.tabbar-fg: 254
@@ -56,9 +57,9 @@ URxvt.tabbed.autohide: true
 URxvt.tabbed.no-tabbedex-keys: yes
 
 
-URxvt.keysym.Control-t: perl:tabbedex:new_tab
-URxvt.keysym.Control-j: perl:tabbedex:next_tab
-URxvt.keysym.Control-k: perl:tabbedex:prev_tab
+! URxvt.keysym.Control-t: perl:tabbedex:new_tab
+! URxvt.keysym.Control-j: perl:tabbedex:next_tab
+! URxvt.keysym.Control-k: perl:tabbedex:prev_tab
 
 
 
@@ -103,3 +104,24 @@ URxvt.keysym.Control-k: perl:tabbedex:prev_tab
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 
+URxvt.perl-ext: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+
+
+
+! test enter
+URxvt.keysym.Control-Return : \033[25~
+
+URxvt.keysym.C-1: \033[27;5;49~
+URxvt.keysym.C-2: \033[27;5;50~
+URxvt.keysym.C-3: \033[27;5;51~
+URxvt.keysym.C-4: \033[27;5;52~
+URxvt.keysym.C-5: \033[27;5;53~
+URxvt.keysym.C-6: \033[27;5;54~
+URxvt.keysym.C-7: \033[27;5;55~
+URxvt.keysym.C-8: \033[27;5;56~
+URxvt.keysym.C-9: \033[27;5;57~
+URxvt.keysym.C-0: \033[27;5;48~
