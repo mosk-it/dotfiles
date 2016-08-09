@@ -5,6 +5,8 @@ separator_block_width=15
 command=~/.i3/rxtitle -s
 interval=persist
 color=#ddddbb
+min_width="echo 1"
+align="right"
 
 [bandwidth]
 label=bw

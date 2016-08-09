@@ -42,7 +42,7 @@ Plug 'EvanDotPro/php_getset.vim', {'for': 'php'}
 Plug 'm2mdas/phpcomplete-extended-symfony', {'for': 'php'}
 "Plug '2072/PHP-Indenting-for-VIm', {'for': 'php'}
 
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'evidens/vim-twig', {'for': 'twig'}
 Plug 'HTML-AutoCloseTag', {'for': 'html'}

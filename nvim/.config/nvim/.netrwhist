@@ -1,8 +1,8 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/etc/nginx/sites-enabled'
-let g:netrw_dirhist_2='/etc/psiconv'
-let g:netrw_dirhist_3='/usr/share/doc/qt/qtgui'
-let g:netrw_dirhist_4='/etc/php56/fpm.d'
-let g:netrw_dirhist_5='/home/awen/.config/i3'
-let g:netrw_dirhist_6='/home/awen/.urxvt'
+let g:netrw_dirhist_1='/run/resolvconf'
+let g:netrw_dirhist_2='/usr/share/openvpn'
+let g:netrw_dirhist_3='/usr/share/openvpn/examples'
+let g:netrw_dirhist_4='/home/awen/dotfiles'
+let g:netrw_dirhist_5='/home/awen/.config/dunst'
+let g:netrw_dirhist_6='/etc/udisks2'

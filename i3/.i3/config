@@ -1,7 +1,7 @@
 set $mod Mod1
  
-set $output1 DVI-0
-set $output2 VGA-1
+set $output1 VGA-0
+set $output2 DVI-0
 
 workspace 0 output $output1
 workspace 1 output $output1
