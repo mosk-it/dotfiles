@@ -1,12 +1,30 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
-[title]
-command=i3title -o VGA-0
-interval=persist
-color=#ddddbb
-min_width="echo 1"
-align="right"
+
+
+[battery2]
+interval=60
+
+[bandwidth]
+label=
+interval=2
+color=#cfd9Cf
+
+[temp]
+label= 
+command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
+interval=10
+
+
+[volume]
+label=
+instance=Master
+interval=once
+signal=1
+color=#CADDFF
+
+
 
 
 [time]

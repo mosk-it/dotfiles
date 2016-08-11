@@ -8,5 +8,6 @@ ranger/.config/ranger/tagged
 mpv/.config/mpv/watch_later
 i3/.config/i3/config
 nvim/.config/nvim/plug/
+nvim/.config/nvim/.netrwhist
 vim/.vim/plugged
 tmux/.tmux/tmux-yank

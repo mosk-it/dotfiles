@@ -45,10 +45,6 @@ bindsym $mod+k focus up;
 bindsym $mod+l focus right;
 
 
-bindsym $mod+F1 exec amixer -q set Master 1dB- unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F2 exec amixer -q set Master 1dB+ unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F3 exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
-
 # move focused window
 bindsym $mod+Shift+h move left 140px
 bindsym $mod+Shift+j move down 140px

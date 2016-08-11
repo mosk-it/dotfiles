@@ -3,7 +3,6 @@ bar {
     workspace_buttons yes 
     status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks
 
-    output $output1
     separator_symbol "|"
 
 
@@ -21,3 +20,18 @@ bar {
 
 
 }
+
+
+bindsym $mod+F1 exec xvkbd -xsendevent -text "\[XF86Back]"
+bindsym $mod+F2 exec xvkbd -xsendevent -text "\[XF86Forward]"
+
+bindsym $mod+Up exec xvkbd -xsendevent -text '\[Page_Up]'
+bindsym $mod+Down exec xvkbd -xsendevent -text '\[Page_Down]'
+
+
+bindsym $mod+F6 exec xbacklight -dec 2
+bindsym $mod+F7 exec xbacklight -inc 2
+
+bindsym $mod+F8 exec  amixer -q -D pulse  sset Master  toggle && pkill -RTMIN+1 i3blocks
+bindsym $mod+F9 exec amixer -q -D default sset Master  1%- unmute && pkill -RTMIN+1 i3blocks
+bindsym $mod+F10 exec amixer -q -D default sset Master  1%+ unmute && pkill -RTMIN+1 i3blocks
