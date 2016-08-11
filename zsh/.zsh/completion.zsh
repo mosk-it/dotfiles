@@ -8,13 +8,13 @@ zstyle ':vcs_info:*' enable git
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' completer _complete _correct _approximate
-zstyle ':completion:incremental:*' completer _complete _correct
+zstyle ':completion:*' completer _complete _approximate
+zstyle ':completion:incremental:*' completer _complete 
 zstyle ':completion:predict:*' completer _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion::complete:cd:' tag-order local-directories path-directories
 zstyle ':completion:*:hosts' hosts $_ssh_config
-zstyle ':completion:*' max-errors 1 not-numeric
+zstyle ':completion:*' max-errors 0
 zstyle -s ':completion:*:hosts' hosts _ssh_config
 zstyle ':completion:*:warnings' format $'\e[01;31m -- NO MATCHES!! --\e[0m' 
 zstyle ':completion:*' use-cache on

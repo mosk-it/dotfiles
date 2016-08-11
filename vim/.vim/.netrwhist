@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/var/www/gimbaza.dev/public_html/app/cache'
-let g:netrw_dirhist_2='/home/awen/.offlineimap'
-let g:netrw_dirhist_3='/home/awen/.mutt/mailcap'
-let g:netrw_dirhist_4='/home/awen/.offlineimap'
-let g:netrw_dirhist_5='/var/www/rss-mistrzowie.org/public_html/src/Resources/views/JoeMonsterGaleria'
-let g:netrw_dirhist_6='/home/awen/vagrant/Debian-Squeeze-PHP-5.2-Symfony-1.1.6/puphpet/files/php52'

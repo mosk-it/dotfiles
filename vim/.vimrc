@@ -2,68 +2,33 @@ set nocompatible
 filetype plugin on
 syntax on
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+
+call plug#begin('~/.vim/plugged')
 
 
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/unite.vim'
+Plug 'rking/ag.vim'
+Plug 'HTML-AutoCloseTag'
+Plug 'itchyny/lightline.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'terryma/vim-expand-region'
+Plug 'sjl/badwolf'
+Plug 'tpope/vim-sleuth'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-repeat'
+Plug 'ap/vim-buftabline'
+Plug 'nathanaelkane/vim-indent-guides'
 
-Plugin 'gmarik/Vundle.vim'
-"Plugin 'StanAngeloff/php.vim.git'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'nanotech/jellybeans.vim.git'
-Plugin 'kien/ctrlp.vim.git'
-"Plugin 'fholgado/minibufexpl.vim.git'
-"Plugin 'jlanzarotta/bufexplorer'
-Plugin 'jiangmiao/auto-pairs'
-"Plugin 'vim-scripts/simple-pairs.git'
-"Plugin 'chase/vim-ansible-yaml.git'
-"Plugin 'vim-scripts/closetag.vim.git'
-Plugin 'vim-scripts/mru.vim.git'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'EvanDotPro/php_getset.vim.git'
-Plugin 'evidens/vim-twig.git'
-Plugin 'mbbill/undotree.git'
-Plugin 'tpope/vim-surround'
-"Plugin 'spf13/vim-autoclose.git'
-"Plugin 'spf13/PIV.git'
-Plugin 'Shougo/neocomplete.vim'
-"Plugin 'm2mdas/phpcomplete-extended'
-Plugin 'ervandew/supertab'
-Plugin 'paulyg/Vim-PHP-Stuff'
-Plugin '2072/PHP-Indenting-for-VIm'
-"Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'rking/ag.vim'
-"Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'HTML-AutoCloseTag'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'itchyny/lightline.vim'
-"Plugin 'sjbach/lusty'
-"Plugin 'Shougo/vimfiler.vim'
-Plugin 'mhinz/vim-signify'
-Plugin 'ap/vim-css-color'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'taglist.vim'
-Plugin 'tpope/vim-vinegar'
-Plugin 'm2mdas/phpcomplete-extended-symfony'
-Plugin 'terryma/vim-expand-region'
-Plugin 'tpope/vim-obsession'
-Plugin 'vim-scripts/Solarized'
-Plugin 'sjl/badwolf'
-"Plugin 'vimwiki/vimwiki'
-Plugin 'tpope/vim-sleuth'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-repeat'
-"Plugin 'junegunn/goyo.vim'
-"Plugin 'php.vim'
-Plugin 'kopischke/vim-stay'
-Plugin 'ap/vim-buftabline'
-Plugin 'nathanaelkane/vim-indent-guides'
-call vundle#end()
+
+call plug#end()
+
 filetype plugin indent on
 
 
@@ -71,32 +36,30 @@ let mapleader=" "
 set wildmenu
 set lazyredraw
 
-
 nmap j gj
 nmap k gk
 
 nmap <silent> <F3> :NERDTreeToggle<CR>
-nnoremap <F6> :UndotreeToggle<cr>
-
 set cursorline
-
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-
 
 let g:vim_markdown_folding_disabled=1
 set nofoldenable
 
 nmap ; :
-set noswapfile
+
+set backup
+set backupdir=/tmp
+set dir=/tmp
+
 hi Directory guifg=#FF0000 ctermfg=red
-:syntax on
+
+syntax on
 set incsearch
 set t_Co=256  " Set terminal to display 256 colors.
 set nu
 set rnu
 set background=dark
-"colorscheme solarized
-colorscheme jellybeans
 set softtabstop=4
 set autoindent
 set tabstop=4
@@ -104,11 +67,11 @@ set shiftwidth=4
 set expandtab
 set smartcase
 set hidden
+colorscheme jellybeans
 
 noremap <leader>h ^
 noremap <leader>l $
 noremap <leader>H 0
-
 
 imap <C-a> <C-O>^
 imap <C-e> <C-O>$
@@ -171,13 +134,17 @@ cnoremap <C-a>  <Home>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
 cnoremap <C-d>  <Delete>
-cnoremap <M-b>  <S-Left>
-cnoremap <M-f>  <S-Right>
-cnoremap <M-d>  <S-right><Delete>
-cnoremap <Esc>b <S-Left>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+
+
+cnoremap <C-B> <C-O>^
 cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
+
 
 "let g:SuperTabDefaultCompletionType = "<c-n>"
 set laststatus=2
@@ -213,12 +180,6 @@ endfunction
 "set timeoutlen=750
 "set ttimeoutlen=250
 
-"NeoVim handles ESC keys as alt+key set this to solve the problem
-if has('nvim')
-   set ttimeout
-   set ttimeoutlen=0
-endif
-
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -227,7 +188,6 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'fileformat': 'LightLineFiletype',
-      \   'fugitive': 'LightLineFugitive',
       \   'readonly': 'LLReadonly',
       \   'modified': 'LLModified',
       \   'filename': 'LLFilename',
@@ -254,6 +214,10 @@ endfunction
 
 
 
+let g:vitality_fix_focus=0
+
+
+
 function! LLModified()
   if &filetype == "help"
     return ""
@@ -274,10 +238,6 @@ function! LLReadonly()
   else
     return ""
   endif
-endfunction
-
-function! LLFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
 function! LLFilename()
@@ -301,18 +261,6 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-
-"TAGLIST
-
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Highlight_Tag_On_BufEnter = 1
-let Tlist_Use_SingleClick = 1
-let Tlist_Show_One_File = 1
-
-nnoremap <silent> <F8> :TlistToggle<CR>
-
 
 " Pushing current line up and down
 nnoremap <leader>k ddkP
@@ -340,8 +288,8 @@ set timeoutlen=300 ttimeoutlen=0
 
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-au FocusLost * :set number
-au FocusGained * :set relativenumber
+"au FocusLost * :set number
+"au FocusGained * :set relativenumber
 
 autocmd InsertEnter * :set number
 autocmd InsertEnter * :set norelativenumber
@@ -379,55 +327,13 @@ map <C-l> <C-W>l<C-W>_
 set splitbelow
 set splitright
 
-let g:SuperTabDefaultCompletionType = "context"
-let g:jedi#popup_on_dot = 0
-
 let s:save_cpo = &cpo
-
-set cpo&vim
-function! ScrollUp()
-    call ScrollWithAction("")
-endfunction
-
-function! ScrollDown()
-    call ScrollWithAction("")
-endfunction
-
-function! ScrollWithAction(scrollaction)
-    execute "norm " . a:scrollaction
-    redraw
-    let counter=1
-    while counter<&scroll
-        let counter+=1
-        sleep 3m
-        redraw
-        execute "norm " . a:scrollaction
-    endwhile
-endfunction
-
-nnoremap <C-U> :call ScrollUp()<Enter>
-nnoremap <C-D> :call ScrollDown()<Enter>
-
-nnoremap <C-B> :call ScrollUp()<Enter>
-nnoremap <C-F> :call ScrollDown()<Enter>
-
 
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
 
 set viewoptions=cursor,folds,slash,unix
-
-function! RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map <Leader>r :call RangerExplorer()<CR>
-
 
 noremap <leader>; :%s:::g<Left><Left><Left>
 noremap <leader>' :%s:::cg<Left><Left><Left><Left>

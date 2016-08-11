@@ -2,14 +2,13 @@ set nocompatible
 filetype plugin on
 syntax on
 
-call plug#begin('~/.nvim/plugged')
+
+call plug#begin('~/.config/nvim/plug')
 
 "Must have
-Plug 'benekastah/neomake'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-surround'
-Plug 'kien/ctrlp.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'rking/ag.vim'
 Plug 'tommcdo/vim-exchange'
@@ -19,46 +18,53 @@ Plug 'ap/vim-buftabline'
 Plug 'jreybert/vimagit'
 Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
+Plug 'rhysd/clever-f.vim'
 
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+
+"GO
+" Plug 'fatih/vim-go'
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'zchee/deoplete-go', { 'do': 'make'}
+"  Plug 'fatih/vim-go'
+
+
 "DEV
-
 Plug 'itchyny/vim-gitbranch'
-Plug 'tacahiroy/ctrlp-funky'
-
 
 Plug 'rstacruz/vim-closer'
 "Plug 'StanAngeloff/php.vim.git'
 
-Plug 'vim-scripts/mru.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'EvanDotPro/php_getset.vim', {'for': 'php'}
-Plug 'm2mdas/phpcomplete-extended-symfony', {'for': 'php'}
-"Plug '2072/PHP-Indenting-for-VIm', {'for': 'php'}
+Plug 'evidens/vim-twig', {'for': 'twig'}
+"Plug 'm2mdas/phpcomplete-extended-symfony', {'for': 'php'}
 
 "Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'ap/vim-css-color', {'for': 'css'}
-Plug 'evidens/vim-twig', {'for': 'twig'}
-Plug 'HTML-AutoCloseTag', {'for': 'html'}
+Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi'
+"Plug 'HTML-AutoCloseTag', {'for': 'html'}
 
+
+
+"DEV SNIPPETS
+Plug 'Shougo/neocomplcache'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 
 "test
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'wincent/terminus'
-Plug 'junegunn/vim-peekaboo'
 Plug 'jistr/vim-nerdtree-tabs'
 
 
-Plug 'Shougo/unite.vim'
+"Plug 'Shougo/unite.vim'
 Plug 'ervandew/supertab'
-Plug 'Shougo/neocomplete.vim'
 "Plug 'tpope/vim-fugitive'
 
 
@@ -108,10 +114,13 @@ let g:vim_markdown_folding_disabled=1
 set nofoldenable
 
 nmap ; :
+set backup
+set backupdir=/tmp
+set dir=/tmp
 
-set noswapfile
+
 hi Directory guifg=#FF0000 ctermfg=red
-:syntax on
+syntax on
 set incsearch
 set t_Co=256  " Set terminal to display 256 colors.
 set nu
@@ -148,23 +157,21 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 :map Q <Nop>
 
 
+
+
 " gvim
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-"let g:phpcomplete_index_composer_command="/usr/bin/composer"
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
-set completeopt=menuone,longest,preview
+"set completeopt=menuone,longest,preview
 
 
-"set clipboard=unnamedplus
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set smartcase
 set ignorecase
 set ic
@@ -191,6 +198,9 @@ nnoremap <leader>/ :Ag
 
 set pastetoggle=<F2>
 
+" a little bit emacs' readline keybinding
+cnoremap <C-p>  <Up>
+cnoremap <C-n>  <Down>
 cnoremap <C-a>  <Home>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
@@ -342,8 +352,8 @@ set timeoutlen=300 ttimeoutlen=0
 
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-au FocusLost * :set number
-au FocusGained * :set relativenumber
+"au FocusLost * :set number
+"au FocusGained * :set relativenumber
 
 autocmd InsertEnter * :set number
 autocmd InsertEnter * :set norelativenumber
@@ -351,6 +361,9 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set rnu
 autocmd InsertLeave * :set nu
 
+let g:vitality_fix_focus=0
+.
+.
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
       \ --ignore .svn
@@ -370,7 +383,7 @@ map <C-l> <C-W>l<C-W>_
 set splitbelow
 set splitright
 
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 
 map <C-B> 15<C-Y>
 map <C-F> 15<C-E>
@@ -388,3 +401,62 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 
 
 let php_var_selector_is_identifier = 1
+
+
+
+set completeopt=menu,noinsert,noselect
+
+
+"jedi vim
+let g:jedi#show_call_signatures = "0"
+let g:jedi#documentation_command = ''
+let deoplete#sources#jedi#enable_cache = 1
+let g:go_doc_keywordprg_enabled = 0
+nnoremap <buffer> <silent> <C-g><C-d> :GoDoc<cr>
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 0
+
+let g:python3_host_prog  = '/usr/bin/python3'  " Skip the check of neovim module
+let g:python3_host_skip_check = 1
+let g:deoplete#enable_at_startup = 1  " Run deoplete.nvim automatically
+
+" deoplete-go settings
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#use_cache = 1
+let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go'
+let g:go_def_reuse_buffer = 1
+
+" au FileType go nmap <leader>g <Plug>(go-run)
+au FileType go nmap <leader>id <Plug>(go-doc-split)
+let g:go_auto_type_info = 1
+
+
+let g:go_highlight_structs = 0
+let g:go_highlight_interfaces = 0
+let g:go_highlight_operators = 0
+
+imap <C-a>     <Plug>(neosnippet_expand_or_jump)
+smap <C-a>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-a>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+
+
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+
+set shortmess+=A
