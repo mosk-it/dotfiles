@@ -1,0 +1,83 @@
+URxvt.termName:    rxvt-unicode-256color
+URxvt.scrollBar: false
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=11, -*-icons-*-*-*-*-*-*-*-*-*-*-*-*
+
+URxvt*iso14755: False
+
+Xft.antialias: false
+Xft.autohint: false
+Xft.dpi: 96
+Xft.hinting: false
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+URxvt*skipBuiltinGlyphs: true
+
+!tmux handles it
+URxvt*scrollTtyOutput: false
+URxvt.perl-ext-common:  default,clipboard,resize-font
+
+! Clipboard
+URxvt.keysym.Control-C: perl:clipboard:copy
+URxvt.keysym.Control-V: perl:clipboard:paste
+
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+
+
+
+*background: #121212
+*foreground: #c0c0c0
+*cursorColor: #93a1a1
+
+!! black dark/light
+*color0: #121212
+*color8: #2e3436
+
+!! red dark/light
+*color1: #8C3939
+*color9: #BF4E4E
+
+!! green dark/light
+*color2: #4ECE7B
+*color10: #7EDD9F
+
+!! yellow dark/light
+*color3: #E8AB51
+*color11: #FFBC59
+
+!! blue dark/light
+*color4: #3C4266
+*color12: #6C77B7
+
+! magenta dark/light
+*color5: #977381
+*color13: #C29DAB
+
+! cyan dark/light
+*color6: #96B0DD
+*color14: #C8D1E3
+
+!! white dark/light
+*color7: #e0e0e0
+color15: #e5e5e5
+
+! remap C-enter to F13
+URxvt.keysym.Control-Return: \033[25~
+
+! map C-S-F/B to C-Right/Left
+URxvt.keysym.Control-Shift-F: \033[1;5C
+URxvt.keysym.Control-Shift-B: \033[1;5D
+
+
+URxvt.keysym.C-1: \033[27;5;49~
+URxvt.keysym.C-2: \033[27;5;50~
+URxvt.keysym.C-3: \033[27;5;51~
+URxvt.keysym.C-4: \033[27;5;52~
+URxvt.keysym.C-5: \033[27;5;53~
+URxvt.keysym.C-6: \033[27;5;54~
+URxvt.keysym.C-7: \033[27;5;55~
+URxvt.keysym.C-8: \033[27;5;56~
+URxvt.keysym.C-9: \033[27;5;57~
+URxvt.keysym.C-0: \033[27;5;48~
