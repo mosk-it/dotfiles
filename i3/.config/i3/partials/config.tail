@@ -1,40 +1,3 @@
-set $mod Mod1
-
-
-
-workspace 0 output $output1
-workspace 1 output $output1
-workspace 2 output $output2
-
-
-
-# COLORS
-set $gray #e89393
-set $lightgray #dddddd
-set $darkgray #2c2c2e
-set $red #8C3939
-set $darkred #220000
-set $pink #e89393
-set $black #040404
-set $white #FFFFFF
-set $transparent #000000FF
-set $blue #83a598
-
-
-# class                     border         backgr          text         indicator
-client.focused              $red           $red            $lightgray   $darkred
-client.unfocused            $darkgray      $darkgray       $gray
-client.focused_inactive     $darkgray      $darkgray       $white
-client.urgent               $gray          $gray           $black
-client.placeholder          $gray          $pink           $black
-
-
-# FONT
-font xft:Inconsolata Bold 9
-
-
-bindsym $mod+period move workspace to output left
-bindsym $mod+comma move workspace to output right
 
 # window's border
 new_window pixel 4
@@ -50,19 +13,21 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # BIND KEYS
-bindsym $mod+Return exec sakura
+bindsym $mod+Return exec urxvt
 
-bindsym --release Shift+Insert exec --no-startup-id xsel > ~/.clp && xdotool type --delay 0 --clearmodifiers --file ~/.clp
+bindsym --release Shift+Insert exec --no-startup-id xdotool type --delay 0 --clearmodifiers `xclip -o`
 
-bindsym $mod+s exec --no-startup-id ydpd_toggle
-for_window [class="URxvt"] floating enable
+#for_window [class="ydpdict" instance="scratchpad"] move scratchpad; floating enable
+
+bindsym $mod+Shift+s move scratchpad
+bindsym $mod+s scratchpad show
+
+
 
 bindsym $mod+Shift+r restart
 
-
-bindsym $mod+Shift+s sticky toggle
-
-
+#bindsym $mod+Shift+s sticky toggle
+#bindsym $mod+Shift+s ydpd_toggle
 
 
 
@@ -70,27 +35,18 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec dmenu-frecency
+
 
 # change focus
-bindsym $mod+h focus left; exec pkill -RTMIN+2 i3blocks 
-bindsym $mod+j focus down; exec pkill -RTMIN+2 i3blocks
-bindsym $mod+k focus up; exec pkill -RTMIN+2 i3blocks
-bindsym $mod+l focus right; exec pkill -RTMIN+2 i3blocks
+bindsym $mod+h focus left;
+bindsym $mod+j focus down;
+bindsym $mod+k focus up;
+bindsym $mod+l focus right;
 
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-bindsym $mod+F1 exec amixer -q set Master 2dB- unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F2 exec amixer -q set Master 2dB+ unmute && pkill -RTMIN+1 i3blocks
+bindsym $mod+F1 exec amixer -q set Master 1dB- unmute && pkill -RTMIN+1 i3blocks
+bindsym $mod+F2 exec amixer -q set Master 1dB+ unmute && pkill -RTMIN+1 i3blocks
 bindsym $mod+F3 exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
 
 # move focused window
@@ -167,7 +123,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-
 set $mode_system System [l]ock, [r]eboot, [s]shutdown
 
 
@@ -194,12 +149,46 @@ gaps outer 0
 # AUTOSTART
 
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-exec --no-startup-id numlockx on
+
 
 
 # BIND CAPSLOCK TO CTRL/ESC
-exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec_always --no-startup-id xcape -e 'Control_L=Escape'
+
+#exec_always --no-startup-id ydpd_toggle
+
+#exec_always --no-startup-id  -c ydpdict -e ydpdict  && move scratchpad
+
+
+
+####DEV
+#for_window [instance="ydpdict"] move window to scratchpad
+#exec_always --no-startup-id st -c ydpdict -e ydpdict, move scratchpad
+
+
+
+
+
+#for_window [instance="__scratchpad"] move scratchpad 
+#exec_always --no-startup-id urxvt -name __scratchpad -e ydpdict
+
+for_window [class="qnapi|QNapi"] floating enable
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+
+
 
 # LOCKER
-exec --no-startup-id xautolock -time 10 -locker autolock -nowlocker autolock -detectsleep -corners 000+ -cornerdelay 3 &
+exec --no-startup-id $HOME/.autostart

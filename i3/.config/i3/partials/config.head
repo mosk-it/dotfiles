@@ -1,0 +1,26 @@
+set $mod Mod1
+ 
+# COLORS
+set $gray #e89393
+set $lightgray #dddddd
+set $darkgray #2c2c2e
+set $red #8C3939
+set $darkred #220000
+set $pink #e89393
+set $black #040404
+set $white #FFFFFF
+set $transparent #000000FF
+set $blue #83a598
+
+
+# class                     border         backgr          text         indicator
+client.focused              $red           $red            $lightgray   $darkred
+client.unfocused            $darkgray      $darkgray       $gray
+client.focused_inactive     $darkgray      $darkgray       $white
+client.urgent               $gray          $gray           $black
+client.placeholder          $gray          $pink           $black
+
+
+# FONT
+font xft:DejaVu Sans Mono Bold 8
+

@@ -1,0 +1,23 @@
+bar {
+    position top
+    workspace_buttons yes 
+    status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks
+
+    output $output1
+    separator_symbol "|"
+
+
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+}

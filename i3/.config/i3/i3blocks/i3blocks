@@ -1,0 +1,15 @@
+command=$HOME/.config/i3/scripts/$BLOCK_NAME
+separator_block_width=15
+
+[title]
+command=i3title -o VGA-0
+interval=persist
+color=#ddddbb
+min_width="echo 1"
+align="right"
+
+
+[time]
+command=date +"%Y-%m-%d %a, %R"
+color=#FFFFFF
+interval=60

@@ -1,25 +1,16 @@
-command=~/.i3/i3blocks_scripts/$BLOCK_NAME
+command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
 [title]
-command=~/.i3/rxtitle -s
+command=i3title -o DVI-0
 interval=persist
 color=#ddddbb
-min_width="echo 1"
-align="right"
+
 
 [bandwidth]
-label=bw
+label=
 interval=2
 color=#cfd9Cf
-
-
-
-
-#[pymodoro]
-#command=pymodoro
-#interval=persist
-
 
 [temp]
 label= 
@@ -28,14 +19,15 @@ interval=10
 
 
 [volume]
-label= 
+label=
 instance=Master
 interval=once
 signal=1
 color=#CADDFF
 
 
+
+
 [time]
 command=date +"%Y-%m-%d %a, %R"
-color=#FFFFFF
 interval=60
