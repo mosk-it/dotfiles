@@ -9,6 +9,17 @@ min_width="echo 1"
 align="right"
 
 
+
+[volume]
+label=
+instance=Master
+interval=once
+signal=1
+color=#CADDFF
+
+
+
+
 [time]
 command=date +"%Y-%m-%d %a, %R"
 color=#FFFFFF
