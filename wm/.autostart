@@ -6,10 +6,17 @@ if [ "$HOSTNAME" = "arch" ]; then
 fi
 
 if [ "$HOSTNAME" = "chromebook" ]; then
-    xmodmap -e 'keycode 133 = Escape'
+
+    if [ -f $HOME/.Xmodmap ]; then
+        sleep 4 && xmodmap $HOME/.Xmodmap
+    fi
+
+    xcape -e 'Control_L=Escape'
+    syndaemon -i 2 -K -d
 fi
 
 
 
+
 numlockx
-xautolock -time 10 -locker autolock -nowlocker autolock -detectsleep -corners 000+ -cornerdelay 3 &
+#xautolock -time 10 -locker autolock -nowlocker autolock -detectsleep -corners 000+ -cornerdelay 3 &
