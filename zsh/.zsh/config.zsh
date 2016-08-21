@@ -2,11 +2,11 @@ HISTFILE=~/.histfile
 HISTSIZE=50000
 SAVEHIST=50000
 
-setopt autocd extendedglob nomatch notify chaselinks
+setopt auto_cd extended_glob nomatch notify chaselinks
 setopt prompt_subst no_beep no_flowcontrol interactive_comments
 setopt complete_in_word completealiases always_to_end list_types
 setopt appendhistory hist_ignore_space extended_history hist_ignore_dups
-setopt inc_append_history share_history histverify
+setopt inc_append_history share_history
 setopt hash_list_all 
 
 
