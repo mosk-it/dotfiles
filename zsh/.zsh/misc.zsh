@@ -3,42 +3,65 @@ export REPORTTIME=5
 export TIMEFMT="%*Es total, %U user, %S system, %P cpu"
 export KEYTIMEOUT=1
 
-# cursor's color based on zsh's vi mode 
-INSERT_PROMPT="white"
-COMMAND_PROMPT="red"
-# helper for setting color including all kinds of terminals
-set_prompt_color() {
-    if [[ $TERM = "linux" ]]; then
-        # nothing
-    elif [[ $TMUX != '' ]]; then
-        printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
-    else
-        echo -ne "\033]12;$1\007"
-    fi
-}
+
+INS="white" #insert mode color prompt
+COM="red" #command mode color prompt
 zle-keymap-select () {
-    if [ $KEYMAP = vicmd ]; then
-        set_prompt_color $COMMAND_PROMPT
+  if [ $KEYMAP = vicmd ]; then
+    if [[ $TMUX = '' ]]; then
+      echo -ne "\033]12;$COM\007"
     else
-        set_prompt_color $INSERT_PROMPT
+      printf "\033Ptmux;\033\033]12;$COM\007\033\\"
     fi
-}
-zle-line-finish() {
-    set_prompt_color $INSERT_PROMPT
+  else
+    if [[ $TMUX = '' ]]; then
+      echo -ne "\033]12;$INS\007"
+    else
+      printf "\033Ptmux;\033\033]12;$INS\007\033\\"
+    fi
+  fi
 }
 zle-line-init () {
-    zle -K viins
-    set_prompt_color $INSERT_PROMPT
+  zle -K viins
+  echo -ne "\033]12;$INS\007"
 }
 zle -N zle-keymap-select
 zle -N zle-line-init
-zle -N zle-line-finish
 
 
 
-autoload -Uz compinit && compinit
-autoload -Uz compinit select-word-style promptinit
 
+
+
+_tmux-command () {
+    if [[ $TMUX != '' ]]; then
+
+        echo -n "\033Ptmux;\033\033]12;yellow\007\033\\";
+
+        if [[ $1 = 'scrollup' ]] then
+            tmux copy-mode -u -e
+        elif [[ $1 = 'copymode' ]] then
+            tmux copy-mode
+        fi
+    fi
+}
+
+
+tmux-copymode () {
+    _tmux-command copymode
+}
+tmux-scrollup () {
+    _tmux-command scrollup
+}
+
+zle -N tmux-copymode
+zle -N tmux-scrollup
+
+bindkey '^_' tmux-copymode
+bindkey -a '^_' tmux-copymode
+bindkey -M vicmd '^B' tmux-scrollup
+bindkey -M vicmd '^F' tmux-copymode
+bindkey '^ ' tmux-copymode
 
 
 [[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
