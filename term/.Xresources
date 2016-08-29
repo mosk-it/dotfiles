@@ -4,10 +4,11 @@ URxvt*font: xft:DejaVu Sans Mono:pixelsize=11, -*-icons-*-*-*-*-*-*-*-*-*-*-*-*
 
 URxvt*iso14755: False
 
-Xft.antialias: false
-Xft.autohint: false
+
+Xft.antialias: 1
+Xft.autohint: 0
 Xft.dpi: 96
-Xft.hinting: false
+Xft.hinting: 1
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb

@@ -100,6 +100,16 @@ autocmd BufEnter * set mouse=
 nmap j gj
 nmap k gk
 
+
+nmap > >>
+nmap < <<
+
+nmap Y y$
+vmap <CR> y
+
+nmap gp "*p
+vmap gy "*y
+
 nmap <silent> <F3> :NERDTreeToggle<CR>
 
 set cursorline
