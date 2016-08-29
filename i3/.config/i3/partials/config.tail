@@ -19,6 +19,8 @@ bindsym --release Shift+Insert exec --no-startup-id xdotool type --delay 0 --cle
 
 #for_window [class="ydpdict" instance="scratchpad"] move scratchpad; floating enable
 
+for_window [class="mpv"] floating enable
+
 bindsym $mod+Shift+s move scratchpad
 bindsym $mod+s scratchpad show
 
@@ -106,11 +108,18 @@ bindsym $mod+Shift+0 move container to workspace 10
 mode "resize" {
 
 
-    bindsym l resize grow right 10 px or 10 ppt, resize shrink left 10 px or 10 ppt
+        bindsym l resize grow right 10 px or 10 ppt, resize shrink left 10 px or 10 ppt
         bindsym h resize shrink right 10 px or 10 ppt, resize grow left 10 px or 10 ppt
 
         bindsym j resize grow down 10 px or 10 ppt, resize shrink up 10 px or 10 ppt
         bindsym k resize grow up 10 px or 10 ppt, resize shrink down 10 px or 10 ppt
+
+
+        bindsym $mod+h resize shrink right 10 px or 10 ppt
+        bindsym $mod+k resize shrink down 10 px or 10 ppt
+        bindsym $mod+k resize grow right 10 px or 10 ppt
+        bindsym $mod+l resize grow down 10 px or 10 ppt
+
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
