@@ -1,4 +1,5 @@
 #!/bin/sh
+
 if [ -f "./partials/config.$HOSTNAME" ]
 then
     cat "./partials/config.head" "./partials/config.$HOSTNAME" "./partials/config.tail" > config

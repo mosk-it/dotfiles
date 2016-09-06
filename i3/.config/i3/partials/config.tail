@@ -7,7 +7,7 @@ new_float pixel 6
 ##MOUSE
 focus_follows_mouse no
 #mouse_warping output
-
+popup_during_fullscreen leave_fullscreen
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -15,10 +15,14 @@ floating_modifier $mod
 # BIND KEYS
 bindsym $mod+Return exec urxvt
 
+bindsym $mod+Shift+r restart
+
 #make shift+insert work even in X windows
 bindsym --release Shift+Insert exec --no-startup-id xdotool type --delay 1 --clearmodifiers "`xclip -o`" && xdotool key shift
 
-#for_window [class="ydpdict" instance="scratchpad"] move scratchpad; floating enable
+for_window [instance="ydpdict"] floating enable
+#for_window [instance="ydpdict"] resize set 750 800
+for_window [instance="ydpdict"] move position center center
 
 for_window [class="mpv"] floating enable
 
@@ -27,12 +31,7 @@ bindsym $mod+s scratchpad show
 
 
 
-bindsym $mod+Shift+r restart
-
-#bindsym $mod+Shift+s sticky toggle
-#bindsym $mod+Shift+s ydpd_toggle
-
-
+bindsym $mod+x exec --no-startup-id ydpd_run
 
 # kill focused window
 bindsym $mod+q kill
@@ -62,6 +61,8 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Tab workspace back_and_forth
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+w layout tabbed
@@ -127,7 +128,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
 
 set $mode_system System [l]ock, [r]eboot, [s]shutdown
 
