@@ -17,7 +17,7 @@ URxvt*skipBuiltinGlyphs: true
 
 !tmux handles it
 URxvt*scrollTtyOutput: false
-URxvt.perl-ext-common:  default,clipboard,resize-font
+URxvt.perl-ext-common:  clipboard,resize-font
 
 ! Clipboard
 URxvt.keysym.Control-C: perl:clipboard:copy
