@@ -586,9 +586,6 @@ def_key "h"
 def_key "l"
     next_column
 
-def_key "."
-    show_lyrics
-
 def_key "n"
     next_found_item
 def_key "N"
@@ -606,3 +603,10 @@ def_key "g"
 
 def_key "G"
  move_end
+
+
+def_key "v"
+  select_item
+
+def_key "d"
+  remove_selection

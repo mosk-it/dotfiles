@@ -1,11 +1,11 @@
 
 #visualizer
-visualizer_fifo_path                = "/tmp/mpd.fifo"
-visualizer_output_name              = "my_fifo"
-visualizer_sync_interval            = "30" 
-visualizer_in_stereo                = "yes"
-visualizer_type                     = "spectrum" (spectrum/wave)
-visualizer_look                     = "●▮"
+# visualizer_fifo_path                = "/tmp/mpd.fifo"
+# visualizer_output_name              = "my_fifo"
+# visualizer_sync_interval            = "30" 
+# visualizer_in_stereo                = "yes"
+# visualizer_type                     = "spectrum" (spectrum/wave)
+# visualizer_look                     = "●▮"
 
 
 #playlist
@@ -23,7 +23,7 @@ playlist_display_mode               = columns
 
 #misc
 jump_to_now_playing_song_at_start   = yes
-allow_for_physical_item_deletion    = yes
+allow_for_physical_item_deletion    = no
 external_editor                     = nvim
 use_console_editor                  = yes
 
@@ -87,7 +87,7 @@ follow_now_playing_lyrics = "yes"
 
 
 #header_window_color = default
-header_visibility = no
+header_visibility = yes
 
 
 user_interface = classic
