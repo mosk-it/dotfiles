@@ -64,4 +64,6 @@ bindkey -M vicmd '^F' tmux-copymode
 bindkey '^ ' tmux-copymode
 
 
-[[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
+#[[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
+
+

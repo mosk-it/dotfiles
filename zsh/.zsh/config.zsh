@@ -17,6 +17,7 @@ autoload -Uz colors && colors
 
 bindkey -r "^[/"
 bindkey -M vicmd -r "/"
+bindkey -r "^H" backward-delete-char
 
 
 WORDCHARS='*?_~&!#$%^)}]>'
@@ -48,8 +49,8 @@ bindkey '^B' backward-char
 bindkey "^P" up-history
 bindkey '^r' history-incremental-search-backward
 bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
+#bindkey '^?' backward-delete-char
+#bindkey '^h' backward-delete-char
 bindkey '^w' backward-delete-word
 bindkey '^u' backward-kill-line
 bindkey '^[[1;5C' forward-word

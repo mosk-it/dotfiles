@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DATE="`date  +"%F"`"
+DATETIME="`date  +"%F %T"`"
+TORM="$1"
+TORMPATH="`readlink -f $1`"
+
+mkdir -p "$HOME/.Trash/$DATE"
+
+mv -f --backup=numbered "$TORMPATH" "$HOME/.Trash/$DATE/"
+echo "[ $DATETIME ] - $TORMPATH" >> ~/.Trash/info
