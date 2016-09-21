@@ -1,10 +1,10 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
-[title]
-command=i3title -o DVI-0
-interval=persist
-color=#ddddbb
+#[title]
+#command=i3title -o DVI-0
+#interval=persist
+#color=#ddddbb
 
 
 [bandwidth]

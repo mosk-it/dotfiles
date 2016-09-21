@@ -12,4 +12,4 @@ nvim/.config/nvim/.netrwhist
 vim/.vim/plugged
 tmux/.tmux/tmux-yank
 ncmcpp/.ncmpcpp/error.log
-
+bin/.local/bin
