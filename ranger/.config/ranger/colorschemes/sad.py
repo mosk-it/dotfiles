@@ -22,6 +22,7 @@ class Scheme(Default):
                 pass
                 fg = context.good and 47 or 33
             elif context.link:
+                attr = underline
                 fg = cyan
 
 
