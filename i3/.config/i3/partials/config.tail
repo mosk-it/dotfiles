@@ -9,6 +9,7 @@ focus_follows_mouse no
 #mouse_warping output
 popup_during_fullscreen leave_fullscreen
 
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -25,6 +26,7 @@ for_window [instance="ydpdict"] floating enable
 for_window [instance="ydpdict"] move position center center
 
 for_window [class="mpv"] floating enable
+
 
 bindsym $mod+Shift+s move scratchpad
 bindsym $mod+s scratchpad show
@@ -48,10 +50,10 @@ bindsym $mod+l focus right;
 
 
 # move focused window
-bindsym $mod+Shift+h move left 140px
-bindsym $mod+Shift+j move down 140px
-bindsym $mod+Shift+k move up 140px
-bindsym $mod+Shift+l move right 140px
+bindsym $mod+Shift+h move left 120px
+bindsym $mod+Shift+j move down 120px
+bindsym $mod+Shift+k move up 120px
+bindsym $mod+Shift+l move right 120px
 
 # split in horizontal orientation
 bindsym $mod+c split h
@@ -110,21 +112,29 @@ bindsym $mod+Shift+0 move container to workspace 10
 mode "resize" {
 
 
-        bindsym l resize grow right 10 px or 10 ppt, resize shrink left 10 px or 10 ppt
-        bindsym h resize shrink right 10 px or 10 ppt, resize grow left 10 px or 10 ppt
 
-        bindsym j resize grow down 10 px or 10 ppt, resize shrink up 10 px or 10 ppt
-        bindsym k resize grow up 10 px or 10 ppt, resize shrink down 10 px or 10 ppt
+        bindsym l resize grow right 40 px or 4 ppt, resize shrink left 0 px or 4 ppt
+        bindsym h resize shrink right 40 px or 4 ppt, resize grow left 0 px or 4 ppt
+        bindsym j resize grow down 40 px or 4 ppt, resize shrink up 0 px or 4 ppt
+        bindsym k resize grow up 0 px or 4 ppt, resize shrink down 40 px or 4 ppt
 
 
-        bindsym $mod+h resize shrink right 30 px or 30 ppt
-        bindsym $mod+j resize grow down 30 px or 30 ppt
-        bindsym $mod+k resize shrink down 30 px or 30 ppt
-        bindsym $mod+l resize grow right 30 px or 30 ppt
+        bindsym $mod+l resize grow right 200 px or 16 ppt, resize shrink left 0 px or 16 ppt
+        bindsym $mod+h resize shrink right 200 px or 16 ppt, resize grow left 0 px or 16 ppt
+        bindsym $mod+j resize grow down 200 px or 16 ppt, resize shrink up 0 px or 16 ppt
+        bindsym $mod+k resize grow up 0 px or 16 ppt, resize shrink down 200 px or 16 ppt
+
+
+        bindsym $mod+Shift+l resize grow right 400 px or 30 ppt, resize shrink left 0 px or 30 ppt
+        bindsym $mod+Shift+h resize shrink right 400 px or 30 ppt, resize grow left 0 px or 30 ppt
+        bindsym $mod+Shift+j resize grow down 350 px or 30 ppt, resize shrink up 0 px or 30 ppt
+        bindsym $mod+Shift+k resize grow up 0 px or 30 ppt, resize shrink down 350 px or 30 ppt
 
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym Ctrl+c mode "default"
+
 }
 
 bindsym $mod+r mode "resize"
@@ -140,9 +150,30 @@ mode "$mode_system" {
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Ctrl+c mode "default"
 }
 
 bindsym $mod+Shift+e mode "$mode_system"
+
+
+
+set $mode_mpc MPC next (h), prev (l), [p]ause/play, [r]m
+
+
+mode "$mode_mpc" {
+
+    bindsym p exec --no-startup-id mpc toggle
+    bindsym l exec --no-startup-id mpc next
+    bindsym h exec --no-startup-id mpc prev
+    bindsym r exec --no-startup-id mprm
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Ctrl+c mode "default"
+}
+
+bindsym $mod+Shift+m mode "$mode_mpc"
+
 
 
 # gaps
@@ -196,5 +227,7 @@ bindsym $mod+Pause mode "$mode_system"
 
 
 
-# LOCKER
 exec --no-startup-id $HOME/.autostart
+
+
+
