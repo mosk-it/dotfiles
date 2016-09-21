@@ -1,0 +1,48 @@
+#!/bin/sh
+
+
+echo "Usage: mprm"
+
+
+IS_MPD_RUNNING=`ps -e | grep mpd`
+
+if [ "x$IS_MPD_RUNNING" = "x" ]; then
+    notify-send -t 5 -u critical "mpd is not running"
+    exit;
+fi
+
+
+MUSIC_PATH="$HOME/music"
+DMENU_ARGS="-sb #8C3939 -sf #e0e0e0";
+
+SONG="`mpc current -f '%artist% - %title%'`";
+CONFIRM="$(echo -e "no\nyes" | dmenu $DMENU_ARGS -p "remove $SONG?")"
+
+BEET=`which beet 2>/dev/null`
+MPC=`which mpc 2>/dev/null`
+
+if [ "$CONFIRM" = "yes" ]; then
+
+    SONG_PATH="$MUSIC_PATH/`mpc current -f %file%`"
+    SONG_POS="`mpc current -f %position%`"
+
+    if [ "x$BEET" != "x" ]; then
+        $BEET rm -f -d "$SONG_PATH";
+    else
+        RM="`which rm`";
+        $RM "$SONG_PATH";
+    fi
+
+
+    if [ "x$MPC" != "x" ]; then
+        $MPC del $SONG_POS;
+        notify-send -t 5 -u normal "$SONG removed";
+    else
+        notify-send -t 5 -u critical "mpc not installed";
+    fi
+
+    echo "[`date +"Y-m-d"`] $SONG " >> ~/.mpcrm.log
+    $MPC update;
+
+
+fi
