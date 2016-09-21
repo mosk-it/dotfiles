@@ -1,0 +1,9 @@
+#!/bin/sh
+
+YDPDICT_PS=`ps -e | grep -c ydpdict`
+
+if [ $YDPDICT_PS -eq 1 ]; then
+    i3-msg "[instance=ydpdict]" kill
+else
+    urxvt -name ydpdict -e ydpdict
+fi
