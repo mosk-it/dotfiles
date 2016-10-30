@@ -2,12 +2,12 @@ HISTFILE=~/.histfile
 HISTSIZE=50000
 SAVEHIST=50000
 
-setopt auto_cd extended_glob nomatch notify chaselinks
+setopt auto_cd extended_glob nomatch notify chaselinks cdablevars
 setopt prompt_subst no_beep no_flowcontrol interactive_comments
 setopt complete_in_word completealiases always_to_end list_types
-setopt appendhistory hist_ignore_space extended_history hist_ignore_dups
-setopt inc_append_history share_history
-setopt hash_list_all 
+setopt appendhistory hist_ignore_space  hist_ignore_dups
+setopt inc_append_history share_history hist_reduce_blanks
+setopt hash_list_all extended_history
 
 
 # Kill the lag
@@ -29,8 +29,8 @@ export PS1="%{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[red]%}%m%{$reset_colo
 → %"
 
 #ugly fix for right line alignment
-_lineup=$'\e[1A'
-_linedown=$'\e[1B'
+# _lineup=$'\e[1A'
+# _linedown=$'\e[1B'
 
 export RPS1='$(_git_prompt)' #_git_prompt declared in zle.zsh
 
@@ -98,4 +98,5 @@ bindkey -M visual 'u' down-case-word
     zle -N $widget putbuffer
   done
 }
+
 

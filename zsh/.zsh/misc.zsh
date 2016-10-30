@@ -1,69 +1,62 @@
-# show execution time if command takes more than
-export REPORTTIME=5
-export TIMEFMT="%*Es total, %U user, %S system, %P cpu"
-export KEYTIMEOUT=1
+# urxvt (and family) accepts even #RRGGBB
+INSERT_PROMPT=7
+COMMAND_PROMPT=1
 
+# helper for setting color including all kinds of terminals
+set_prompt_color() {
+    if [[ $TERM = "linux" ]]; then
+       # nothing
+    elif [[ $TMUX != '' ]]; then
+        printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
+    else
+        echo -ne "\033]12;$1\007"
+    fi
+}
 
-INS="white" #insert mode color prompt
-COM="red" #command mode color prompt
+# change cursor color basing on vi mode
 zle-keymap-select () {
-  if [ $KEYMAP = vicmd ]; then
-    if [[ $TMUX = '' ]]; then
-      echo -ne "\033]12;$COM\007"
+    if [ $KEYMAP = vicmd ]; then
+        set_prompt_color $COMMAND_PROMPT
     else
-      printf "\033Ptmux;\033\033]12;$COM\007\033\\"
+        set_prompt_color $INSERT_PROMPT
     fi
-  else
-    if [[ $TMUX = '' ]]; then
-      echo -ne "\033]12;$INS\007"
-    else
-      printf "\033Ptmux;\033\033]12;$INS\007\033\\"
-    fi
-  fi
 }
+
+zle-line-finish() {
+    set_prompt_color $INSERT_PROMPT
+
+    zle -K viins
+    set_prompt_color $INSERT_PROMPT
+}
+
 zle-line-init () {
-  zle -K viins
-  echo -ne "\033]12;$INS\007"
+
 }
+
 zle -N zle-keymap-select
 zle -N zle-line-init
+zle -N zle-line-finish
 
 
 
 
 
 
-_tmux-command () {
-    if [[ $TMUX != '' ]]; then
 
-        echo -n "\033Ptmux;\033\033]12;yellow\007\033\\";
 
-        if [[ $1 = 'scrollup' ]] then
-            tmux copy-mode -u -e
-        elif [[ $1 = 'copymode' ]] then
-            tmux copy-mode
-        fi
-    fi
+function 256color () 
+{ 
+    local o= i= x=`tput op` cols=`tput cols` y= oo= yy=;
+    y=`printf %$(($cols-6))s`;
+    yy=${y// /=};
+    for i in {0..256};
+    do
+        o=00${i};
+        oo=`echo -en "setaf ${i}
+setab ${i}
+"|tput -S`;
+        echo -e "${o:${#o}-3:3} ${oo}${yy}${x}";
+    done
 }
 
-
-tmux-copymode () {
-    _tmux-command copymode
-}
-tmux-scrollup () {
-    _tmux-command scrollup
-}
-
-zle -N tmux-copymode
-zle -N tmux-scrollup
-
-bindkey '^_' tmux-copymode
-bindkey -a '^_' tmux-copymode
-bindkey -M vicmd '^B' tmux-scrollup
-bindkey -M vicmd '^F' tmux-copymode
-bindkey '^ ' tmux-copymode
-
-
-#[[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
-
-
+[[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`

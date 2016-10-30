@@ -6,10 +6,10 @@ alias la='ls -N -la --color=always'
 [[ -x `which ranger` ]] && alias r=ranger
 [[ -x `which nvim` ]] && alias vim=nvim
 
-
 alias orm=/usr/bin/rm
 alias frm=/usr/bin/rm
 alias rm="safe-rm"
+
 
 
 alias ...='cd ../../..'
@@ -23,10 +23,6 @@ alias calc='python -i -c "from math import *"'
 
 alias sh="PS1='\u@\h:`pwd`# ' sh"
 
-
-alias "ls -l"=abc
-
-
 alias sortnr='sort -nr'
 
 alias p='|most'
@@ -37,10 +33,21 @@ take () {
   cd "$1"
 }
 
+fmr='%d-%m-%Y'
+
+tt () {
+    date +$fmr;
+}
+
+ww () {
+    date +"$fmr"
+}
+
+jj () { echo `date +"$fmr"` }
 
 
 
-
+ 
 
 
 

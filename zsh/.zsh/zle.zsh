@@ -1,3 +1,4 @@
+
 _useful_enter () {
     if [[ -z $BUFFER ]]; then
         echo ""
@@ -92,4 +93,3 @@ bindkey -M visual S add-surround
 zle -N delete-surround surround
 zle -N add-surround surround
 zle -N change-surround surround
-

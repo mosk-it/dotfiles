@@ -21,11 +21,5 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
 zstyle ':completion:*:*:vi*:*' file-sort modification
 zstyle ':completion:*:*:vi*:*' ignored-patterns '*.(o|class)'
- zstyle ':completion:*' squeeze-slashes true
-
-compdef _gnu_generic sort
-
-
-
-
-
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
