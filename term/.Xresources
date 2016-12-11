@@ -1,98 +1,147 @@
-URxvt.termName:    rxvt-unicode-256color
-URxvt.scrollBar: false
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=11, -*-icons-*-*-*-*-*-*-*-*-*-*-*-*
-
-URxvt*iso14755: False
-
-
-Xft.antialias: 1
+Xft.antialias: 0
 Xft.autohint: 0
-Xft.dpi: 96
-Xft.hinting: 1
+xft.dpi: 96
+Xft.hinting: 0
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-URxvt*skipBuiltinGlyphs: true
-
-!tmux handles it
-URxvt*scrollTtyOutput: false
-URxvt.perl-ext-common:  default,clipboard,resize-font
-!
-
-
-! Clipboard
-URxvt.keysym.Control-C: perl:clipboard:copy
-URxvt.keysym.Control-V: perl:clipboard:paste
-
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
 
 
 
-*background: #121212
-*foreground: #c0c0c0
-*cursorColor: #93a1a1
+URxvt*termName:                     rxvt-256color
+URxvt*utmpInhibit:                  false
+URxvt*scrollstyle:                      plain
+URxvt*jumpScroll:                     true
+URxvt*skipScroll:                     true
+URxvt*pastableTabs:                   false
+URxvt*scrollBar:                      false
+URxvt*scrollTtyOutput:                true
+URxvt*scrollTtyKeypress:              true
+URxvt*scrollWithBuffer:               true
+URxvt*fading:                         1
+URxvt*urgentOnBell:                   false
+URxvt*visualBell:                     false
+URxvt*mapAlert:                       true
+! URxvt*meta8:                          boolean
+URxvt*mouseWheelScrollPage:           false
+URxvt*tripleclickwords:               true
+URxvt*insecure:                       false
+! URxvt*cursorUnderline:                boolean
+! URxvt*cursorBlink:                    boolean
+! URxvt*pointerBlank:                   boolean
+! URxvt*colorBD:                        color
+! URxvt*colorIT:                        color
+! URxvt*colorUL:                        blue
+! URxvt*colorRV:                        color
+! URxvt*underlineColor:                 yellow
+URxvt*scrollColor:                    gray
+URxvt*troughColor:                    red
+! URxvt*highlightColor:                 8
+! URxvt*highlightTextColor:             0
+! URxvt*cursorColor:                    color
+! URxvt*cursorColor2:                   color
+! URxvt*pointerColor:                   color
+! URxvt*pointerColor2:                  color
+! URxvt*borderColor:                    color
+! URxvt*iconFile:                       file
+! URxvt*pointerBlankDelay:              num
 
-!! black dark/light
-*color0: #121212
-*color8: #2e3436
 
-!! red dark/light
-*color1: #8C3939
-*color9: #BF4E4E
+URxvt*letterSpace: -1
+URxvt*lineSpace: 1
+URxvt*xftAntialias: false
 
-!! green dark/light
-*color2: #4ECE7B
-*color10: #7EDD9F
+URxvt*font: xft:liberation mono:size=8:antialias=false:hinting=false
+URxvt*boldFont: xft:liberation mono:style=bold:size=8:antialias=false:hinting=false
+URxvt*italicFont: xft:liberation mono:style=italic:size=8:antialias=false:hinting=false
 
-!! yellow dark/light
-*color3: #E8AB51
-*color11: #FFBC59
 
-!! blue dark/light
-*color4: #3C4266
-*color12: #6C77B7
 
-! magenta dark/light
-*color5: #977381
-*color13: #C29DAB
+! URxvt*boldFont:                       fontname
+! URxvt*italicFont:                     fontname
+! URxvt*boldItalicFont:                 fontname
+! URxvt*intensityStyles:                boolean
+! URxvt*inputMethod:                    name
+! URxvt*preeditType:                    style
+! URxvt*imLocale:                       string
+! URxvt*imFont:                         fontname
+! URxvt*title:                          string
+! URxvt*iconName:                       string
+! URxvt*backspacekey:                   string
+! URxvt*deletekey:                      string
+! URxvt*answerbackString:               string
+! URxvt*modifier:                       modifier
+! URxvt*cutchars:                       string
+! URxvt*perl-lib:                       string
+! URxvt*perl-eval:                      perl-eval
+urxvt*saveLines:                      false
+URxvt*buffered:                       true
+URxvt*depth:                          24
+URxvt*override-redirect:              false
+URxvt*hold:                           false
+URxvt*externalBorder:                 true
+URxvt*internalBorder:                 6
+URxvt*borderLess:                     false
+URxvt*skipBuiltinGlyphs:              true
 
-! cyan dark/light
-*color6: #96B0DD
-*color14: #C8D1E3
+URxvt*cutchars:           ""
+Rxvt*print-pipe:  cat > /dev/null
+URxvt*secondaryScreen:                true
+URxvt*secondaryScroll:                false
+URxvt*iso14755:                       false
+URxvt*iso14755_52:                    false
+URxvt.url-launcher:       sensible-browser
 
-!! white dark/light
-*color7: #e0e0e0
-color15: #e5e5e5
+
+URxvt.perl-ext-common: default
+URxvt.keysym.Control-C: C-M-c
+URxvt.keysym.Control-V: C-M-v
+
+
+! URxvt.selection.pattern-0: ([[:word:]]+)
+! URxvt.resize-font.smaller: C-Down
+! URxvt.resize-font.bigger: C-Up
+! URxvt.selection-autotransform.0: transform
+! URxvt.selection-autotransform.1: transform
+
+
 
 ! remap C-enter to F13
 URxvt.keysym.Control-Return: \033[25~
 
 ! map C-S-F/B to C-Right/Left
-URxvt.keysym.Control-Shift-F: \033[1;5C
-URxvt.keysym.Control-Shift-B: \033[1;5D
-
-
-URxvt.keysym.C-1: \033[27;5;49~
-URxvt.keysym.C-2: \033[27;5;50~
-URxvt.keysym.C-3: \033[27;5;51~
-URxvt.keysym.C-4: \033[27;5;52~
-URxvt.keysym.C-5: \033[27;5;53~
-URxvt.keysym.C-6: \033[27;5;54~
-URxvt.keysym.C-7: \033[27;5;55~
-URxvt.keysym.C-8: \033[27;5;56~
-URxvt.keysym.C-9: \033[27;5;57~
-URxvt.keysym.C-0: \033[27;5;48~
+!! URxvt.keysym.Control-Shift-F: \033[1;5C
+!! URxvt.keysym.Control-Shift-B: \033[1;5D
 
 
 
+*background: #131313
+*foreground: #CECECE
+*cursorColor: #93a1a1
+*cursorColor2: #E0E0E0
 
-! URxvt.colorIT:      #87af5f
-! URxvt.colorBD:      #d7d7d7
-! URxvt.colorUL:      #87afd7
-!
+!! green dark/light
+*color2: #2FBA60
+*color10: #7EDD9F
+!! blue dark/light
+!*color4: #4C5481
+!*color12: #6D78B9
 
-URxvt.internalBorder:  5
-URxvt.lineSpace: -1
-URxvt.letterSpace: -1
+
+*color0:  #101010
+*color1:  #8C3939
+! *color2:  #4ECE7B
+*color3:  #E8AB51
+*color4:  #4C5481
+*color5:  #8D437C
+*color6:  #64A49C
+*color7:  #D0D0D0
+*color8:  #161616
+*color9:  #C46C6C
+! *color10:  #7EDD9F
+*color11:  #FFBC59
+*color12:  #6D78B9
+*color13:  #BA8BAF
+*color14:  #86C1B9
+*color15:  #FEFEFE

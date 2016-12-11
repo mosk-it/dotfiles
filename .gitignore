@@ -13,3 +13,4 @@ vim/.vim/plugged
 tmux/.tmux/tmux-yank
 ncmcpp/.ncmpcpp/error.log
 bin/.local/bin
+quitebrowser/.config/qutebrowser/qsettings
