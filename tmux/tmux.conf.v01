@@ -6,10 +6,10 @@ set -g prefix C-Space
 #-------------settings------------
 
 set -g escape-time 1
-set -g word-separators ' &!#$({[>/ '
+set -g  word-separators '&!#$({[>/ '
 set -g default-terminal "screen-256color"
 
-set -g status-position top
+set -g status-position bottom
 set -g xterm-keys on
 
 set -g mode-keys vi
@@ -27,7 +27,7 @@ set -g bell-action any
 
 #-------------statusbar------------
 
-    set -g status-bg colour0
+    set -g status-bg red
     set -g status-fg white
     set -g window-status-current-fg black
     set -g window-status-current-bg white
@@ -35,8 +35,8 @@ set -g bell-action any
 
     set -g mode-style 'bg=colour16,fg=yellow,none'
 
-    set -g status-right " %d.%m.%Y #[fg=yellow,bright]%H:%M  "
-    set -gw status-left " #[fg=yellow][#S]#[fg=none]  "
+    set -g status-right ""
+    set -g status-left "[#S]: "
 
 
 #-------------keys------------
@@ -44,12 +44,10 @@ set -g bell-action any
 bind-key \; command-prompt
 bind-key C-o rotate-window
 bind-key C-z suspend-client
-#bind-key Space next-layout
+bind-key Space next-layout
 bind-key "#" list-buffers
-
-bind-key v split-window "-h"
-bind-key s split-window "-v"
-
+bind-key b split-window -h
+bind-key v split-window -v
 bind-key & confirm-before -p "kill-window #W? (y/n)" kill-window
 bind-key ( switch-client -p
 bind-key ) switch-client -n
@@ -78,11 +76,7 @@ bind-key d detach-client
 bind-key i display-message
 
 bind-key -r n next-window
-bind-key -r Tab next-window
-bind-key -r C-Tab next-window
 bind-key -r p previous-window
-bind-key -n "^=" set status 
-
 
 
 
@@ -104,6 +98,8 @@ bind-key -r C-L resize-pane -R 16
 bind-key m select-pane -m
 
 
+
+bind-key s choose-session
 bind-key t clock-mode
 bind-key w choose-window
 bind-key x confirm-before -p "kill-pane #P? (y/n)" kill-pane
@@ -114,6 +110,15 @@ bind-key -r Down select-pane -D
 bind-key -r Left select-pane -L
 bind-key -r Right select-pane -R
 
+
+bind-key -r M-1 select-layout even-horizontal
+bind-key -r M-2 select-layout even-vertical
+bind-key -r M-3 select-layout main-horizontal
+bind-key -r M-4 select-layout main-vertical
+bind-key -r M-5 select-layout tiled
+bind-key -r M-n next-window -a
+bind-key -r M-o rotate-window -D
+bind-key -r M-p previous-window -a
 
 #----vcustom keys------
 
@@ -130,7 +135,7 @@ bind-key -r f resize-pane -Z
 bind / command-prompt "split-window 'exec man %%'"
 
 #split horizontal if one pane, vertically otherwise
-#bind-key -n S-F1 if-shell 'test "`tmux list-panes | wc -l`" = 1' 'split-window -h -p 32 \; last-pane \; refresh \; last-pane' 'split-window -v'
+bind-key -n S-F1 if-shell 'test "`tmux list-panes | wc -l`" = 1' 'split-window -h \; last-pane \; refresh \; last-pane' 'split-window -v'
 
 
 #enter copy mode, change cursor's color, move cursor to the bottom of the screen and search up
@@ -154,30 +159,8 @@ set -g pane-border-style fg=white,bg=default
 set -g pane-active-border-style fg=white,bg=default
 
 
-#bind-key -n S-F1 if-shell 'test "`tmux list-panes | wc -l`" = 1' 'split-window -h -p 42 ; refresh-client' 'split-window -v'
-
-
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-bind-key -n C-h if-shell "$is_vim" "send-keys C-h"  "select-pane -L"
-bind-key -n C-j if-shell "$is_vim" "send-keys C-j"  "select-pane -D"
-bind-key -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
-bind-key -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
-bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
-
-bind-key l send-keys C-l
-
-
-set -g message-command-style "fg=yellow,bold,underscore,blink"
-set -g pane-border-style "fg=white,bg=default"
-set -g pane-active-border-style "fg=white,bg=default"
-
-set -gw main-pane-width 158
+bind-key -n S-F1 if-shell 'test "`tmux list-panes | wc -l`" = 1' 'split-window -h' 'split-window -v'
 
 
 run-shell ~/.tmux/tmux-yank/yank.tmux
 run-shell ~/.tmux/tmux-urlview/urlview.tmux
-
-bind-key -n S-F1 split-window "-h" \; refresh-client
-
-set-hook -g after-split-window "selectl main-vertical"
