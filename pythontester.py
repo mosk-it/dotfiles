@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*$py.class
+vim/.vim/view/*
+ranger/.config/ranger/bookmarks
+ranger/.config/ranger/history
+ranger/.config/ranger/tagged
+mpv/.config/mpv/watch_later
+i3/.config/i3/config
+nvim/.config/nvim/plug/
+nvim/.config/nvim/.netrwhist
+vim/.vim/plugged
+tmux/.tmux/tmux-yank
+ncmcpp/.ncmpcpp/error.log
+bin/.local/bin
+quitebrowser/.config/qutebrowser/qsettings
+!. add .*.
+!*/.*
+!*/*/*/.*

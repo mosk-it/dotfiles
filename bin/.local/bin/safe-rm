@@ -3,7 +3,14 @@
 DATE="`date  +"%F"`"
 DATETIME="`date  +"%F %T"`"
 TORM="$1"
-TORMPATH="`readlink -f $1`"
+
+if [ -h "$TORM" ]; then
+    TORMPATH="`pwd`/`basename \"$TORM\"`"
+else
+    TORMPATH="`readlink -f \"$1\"`"
+fi
+
+echo "mv \"$HOME/.Trash/$DATE/`basename \"$TORMPATH\"`"\"  \"$(readlink -f "`dirname \"$TORM\"`")\" > $HOME/.Trash/last
 
 mkdir -p "$HOME/.Trash/$DATE"
 

@@ -55,7 +55,7 @@ TERM xterm-termite
 
 NORMAL 37 # global default, although everything should be something.
 FILE 00 # normal file
-DIR 01;34 # directory
+DIR 00;34 # directory
 LINK 04;36 # symbolic link. (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
 FIFO 40;33 # pipe
 SOCK 01;35 # socket
@@ -68,7 +68,7 @@ OTHER_WRITABLE 08;30;44 # dir that is other-writable (o+w) and not sticky
 STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 DOOR 35;44 # Solaris 2.5 and later
 BLK  33;44
-EXEC 07;31
+EXEC 01;33
 
 
 

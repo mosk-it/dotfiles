@@ -7,26 +7,24 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
 
-
-
 URxvt*termName:                     rxvt-256color
 URxvt*utmpInhibit:                  false
 URxvt*scrollstyle:                      plain
 URxvt*jumpScroll:                     true
 URxvt*skipScroll:                     true
-URxvt*pastableTabs:                   false
+URxvt*pastableTabs:                   true
 URxvt*scrollBar:                      false
 URxvt*scrollTtyOutput:                true
 URxvt*scrollTtyKeypress:              true
 URxvt*scrollWithBuffer:               true
-URxvt*fading:                         1
+URxvt*fading:                         2
 URxvt*urgentOnBell:                   false
 URxvt*visualBell:                     false
 URxvt*mapAlert:                       true
 ! URxvt*meta8:                          boolean
 URxvt*mouseWheelScrollPage:           false
 URxvt*tripleclickwords:               true
-URxvt*insecure:                       false
+URxvt*insecure:                       true
 ! URxvt*cursorUnderline:                boolean
 ! URxvt*cursorBlink:                    boolean
 ! URxvt*pointerBlank:                   boolean
@@ -86,6 +84,7 @@ URxvt*borderLess:                     false
 URxvt*skipBuiltinGlyphs:              true
 
 URxvt*cutchars:           ""
+
 Rxvt*print-pipe:  cat > /dev/null
 URxvt*secondaryScreen:                true
 URxvt*secondaryScroll:                false
@@ -93,11 +92,18 @@ URxvt*iso14755:                       false
 URxvt*iso14755_52:                    false
 URxvt.url-launcher:       sensible-browser
 
-
 URxvt.perl-ext-common: default
-URxvt.keysym.Control-C: C-M-c
-URxvt.keysym.Control-V: C-M-v
 
+
+
+
+URxvt.keysym.Control-V: \033\007
+!URxvt.keysym.Control-M-V: builtin:
+!
+!URxvt.keysym.C-M-c: builtin:
+!URxvt.keysym.C-S-c: builtin-string:
+
+ 
 
 ! URxvt.selection.pattern-0: ([[:word:]]+)
 ! URxvt.resize-font.smaller: C-Down
@@ -145,3 +151,6 @@ URxvt.keysym.Control-Return: \033[25~
 *color13:  #BA8BAF
 *color14:  #86C1B9
 *color15:  #FEFEFE
+
+
+URxvt*dynamicColors: on

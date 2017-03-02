@@ -30,7 +30,7 @@ maxln=200    # Stop after $maxln lines.  Can be used like ls | head -n $maxln
 
 # Find out something about the file:
 mimetype=$(file --mime-type -Lb "$path")
-extension=$(/bin/echo "${path##*.}" | tr "[:upper:]" "[:lower:]")
+extension=$(/bin/echo "${path##*.}" | awk '{print tolower($0)}')
 
 # Functions:
 # runs a command and saves its output into $output.  Useful if you need
@@ -44,7 +44,7 @@ dump() { /bin/echo "$output"; }
 trim() { head -n "$maxln"; }
 
 # wraps highlight to treat exit code 141 (killed by SIGPIPE) as success
-highlight() { command highlight "$@"; test $? = 0 -o $? = 141; }
+safepipe() { "$@"; test $? = 0 -o $? = 141; }
 
 # Image previews, if enabled in ranger.
 if [ "$preview_images" = "True" ]; then
@@ -82,21 +82,18 @@ case "$extension" in
         try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
     # HTML Pages:
     htm|html|xhtml)
-        try elinks -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         try lynx   -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
-        exit 1;;
-    # Mobi Epub
-    mobi|epub)
-        try rm -f /tmp/book.txt; ebook-convert "$path" /tmp/book.txt --pretty-print > /dev/null; cat /tmp/book.txt &&  dump | trim; exit 3
+        try elinks -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         ;; # fall back to highlight/cat if the text browsers fail
 esac
 
 case "$mimetype" in
     # Syntax highlight for text files:
     text/* | */xml)
-       try highlight -V --out-format=ansi "$path" && { dump | trim; exit 5; } || exit 2
-        ;;
+        try safepipe highlight --out-format=ansi "$path" && { dump | trim; exit 5; }
+        try safepipe pygmentize "$path" && { dump | trim; exit 5; }
+        exit 2;;
     # Ascii-previews of images:
     image/*)
         img2txt --gamma=0.6 --width="$width" "$path" && exit 4 || exit 1;;

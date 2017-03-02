@@ -1,27 +1,55 @@
 #!/bin/sh
 
+#notify if X or just print if not, 
+#($status $message)
+notify() {
+    echo notif;
+    if [ "$#" -ne 2 ]; then
+        return;
+    fi
 
-echo "Usage: mprm"
+    STATUS="$1";
+    MSG="$2";
+
+     if [ "$DISPLAY" ]; then
+         notify-send -t 10 -u "$STATUS" "$MSG"
+     else
+         echo $MSG;
+     fi
+}
+
+ask() {
+    MSG="$1";
+     if [ "$DISPLAY" ]; then
+        ANSWER="$(echo -e 'no\nyes' | dmenu -i -fn "Dejavu Sans Mono:medium:size=7.5" -sb "#8C3939" -sf "#e0e0e0" -p "$MSG")"
+        if [ $ANSWER = 'yes' ]; then return 0; fi
+    else
+        read -n1 -p "$MSG [y,n]" doit 
+        case $doit in  
+          y|Y) return 0;;
+        esac
+    fi
+    return 1
+
+}
 
 
 IS_MPD_RUNNING=`ps -e | grep mpd`
 
 if [ "x$IS_MPD_RUNNING" = "x" ]; then
-    notify-send -t 5 -u critical "mpd is not running"
+    notify critical "mpd is not running" 
     exit;
 fi
-
-
 MUSIC_PATH="$HOME/music"
-DMENU_ARGS="-sb #8C3939 -sf #e0e0e0";
-
 SONG="`mpc current -f '%artist% - %title%'`";
-CONFIRM="$(echo -e "no\nyes" | dmenu $DMENU_ARGS -p "remove $SONG?")"
+
+
+CONFIRM=$();
 
 BEET=`which beet 2>/dev/null`
 MPC=`which mpc 2>/dev/null`
 
-if [ "$CONFIRM" = "yes" ]; then
+if ask "remove $SONG?"; then
 
     SONG_PATH="$MUSIC_PATH/`mpc current -f %file%`"
     SONG_POS="`mpc current -f %position%`"
@@ -36,12 +64,12 @@ if [ "$CONFIRM" = "yes" ]; then
 
     if [ "x$MPC" != "x" ]; then
         $MPC del $SONG_POS;
-        notify-send -t 5 -u normal "$SONG removed";
+        notify normal "$SONG removed";
     else
-        notify-send -t 5 -u critical "mpc not installed";
+        notify critical "mpc not installed";
     fi
 
-    echo "[`date +"Y-m-d"`] $SONG " >> ~/.mpcrm.log
+    echo "[`date +"%Y-%m-%d"`] $SONG " >> ~/.mpcrm.log
     $MPC update;
 
 

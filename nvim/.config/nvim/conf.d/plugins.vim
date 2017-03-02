@@ -34,6 +34,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'amerlyq/nou.vim'
 Plug 'ervandew/supertab'
 
+Plug 'tpope/vim-fugitive'
 
 "php
 

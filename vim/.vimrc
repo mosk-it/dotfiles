@@ -25,7 +25,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-repeat'
 Plug 'ap/vim-buftabline'
 Plug 'nathanaelkane/vim-indent-guides'
-
+Plug 'dahu/vimple'
 
 call plug#end()
 
