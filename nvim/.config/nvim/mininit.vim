@@ -2,7 +2,7 @@ set nocompatible
 syntax enable
 filetype plugin indent on
 
-source ~/.config/nvim/conf.d/plugins.vim
+source /home/awen/.config/nvim/conf.d/plugins.vim
 
 source ~/.config/nvim/conf.d/general.vim
 

@@ -60,3 +60,7 @@ endfunction
 " now set it up to change the status line based on mode
 au InsertEnter * hi StatusLine term=reverse ctermbg=6 ctermfg=0
 au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=238 gui=bold,reverse
+
+
+autocmd FileType netrw setl bufhidden=wipe
+autocmd FileType php setlocal omnifunc=phpcd#CompletePHP

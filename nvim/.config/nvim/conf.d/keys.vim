@@ -1,19 +1,16 @@
 "space as leader
 let mapleader=" "
 
-"scroll screen 3 lines above search occurrence from top 
-nnoremap n nzt3<C-y> 
-
 "new tab
 nmap <leader>n :$tabnew<CR>
 
 "next tab
 nmap <TAB> :tabnext<CR>
-nmap <C-TAB> :tabprevious<CR>
+nmap <S-TAB> :tabprevious<CR>
 
 
 "<C-/> escape embedded terminal 
-tnoremap  <C-\><C-n>
+"tnoremap  <C-\><C-n>
 
 "execute macro saved under q
 nnoremap Q @q
@@ -39,8 +36,8 @@ vmap gy "*y
 
 nnoremap <leader>w :w<CR>
 
-nmap <S-k> :bprev<CR>
-nmap <S-j> :bnext<CR>
+"nmap <S-k> :bprev<CR>
+"nmap <S-j> :bnext<CR>
 
 
 
@@ -72,10 +69,10 @@ nmap '' viwS
 nmap <leader>'' viWS
 
 
-map <C-J> <C-W>j<C-W>_
-map <C-k> <C-W>k<C-W>_
-map <C-h> <C-W>h<C-W>_
-map <C-l> <C-W>l<C-W>_
+noremap <C-w>J <C-W>j<C-W>_
+noremap <C-w>K <C-W>k<C-W>_
+noremap <C-w>H <C-W>h<C-W>_
+noremap <C-w>L <C-W>l<C-W>_
 
 
 map <C-B> 15<C-Y>
@@ -104,8 +101,8 @@ imap <C-b> <C-O>h
 
 nnoremap <leader>w :w<CR>
 
-nmap <S-k> :bprev<CR>
-nmap <S-j> :bnext<CR>
+"nmap <S-k> :bprev<CR>
+"nmap <S-j> :bnext<CR>
 
 
 
@@ -153,8 +150,16 @@ nmap q: <Nop>
 
 
 "wildmenu selection - accept ctrl-k
-cnoremap <C-k> <Space><BS>
+cnoremap <C-o> <Space><C-h>
 cnoremap q qa
 
 
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+
+inoremap <F5> "=strftime("%a, %Y-%m-%d")<CR>P
+inoremap <F6> "=strftime("%a, %Y-%m-%d %H:%M")<CR>P
+
+noremap <BS> :Lex<CR>
+
+map <c-q> :FZF <CR>

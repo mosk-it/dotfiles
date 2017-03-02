@@ -27,5 +27,19 @@ Plug 'airblade/vim-gitgutter'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'CursorLineCurrentWindow'
 
+Plug 'CursorLineCurrentWindow'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator'
+"@TODO
+Plug 'amerlyq/nou.vim'
+Plug 'ervandew/supertab'
+
+
+"php
+
+Plug 'lvht/phpcd.vim' , { 'for': 'php' }
+Plug 'docteurklein/php-getter-setter.vim', { 'for': 'php' }
+Plug 'evidens/vim-twig', { 'for': 'twig' }
+
 
 call plug#end()

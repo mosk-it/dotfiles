@@ -1,11 +1,13 @@
 "file browser
 let g:netrw_banner=0
-let g:netrw_browse_split=4
+let g:netrw_browse_split=4 " use the previous window to open file
 let g:netrw_altv=1
 let g:netrw_liststyle=3
+let g:netrw_preview=1           " open previews vertically
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\_'
-
+let g:netrw_winsize = 30
+let g:netrw_sort_sequence = '[\/]$,*' " sort is affecting only: directories on the top, files below
 
 
 
@@ -22,10 +24,10 @@ let g:startify_custom_header = []
 let g:startify_list_order = ['sessions', 'files', 'bookmarks' ]
 
 
-nnoremap <leader>tg :GitGutterToggle<cr>
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
-let g:gitgutter_signs = 0
+" nnoremap <leader><C-g> :GitGutterToggle<cr>
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 0
+" let g:gitgutter_signs = 0
 
 
 
@@ -89,4 +91,15 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
 
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-p>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+  \ endif
+
+
+
+"###### --- super master dev on the ende---- #####
