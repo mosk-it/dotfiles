@@ -21,8 +21,6 @@ alias pacman='sudo pacman --color=always'
 
 alias calc='python -i -c "from math import *"'
 
-alias sh="PS1='\u@\h:`pwd`# ' sh"
-
 alias sortnr='sort -nr'
 
 alias p='|most'

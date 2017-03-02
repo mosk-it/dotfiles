@@ -1,21 +1,21 @@
 
-_useful_enter () {
-    if [[ -z $BUFFER ]]; then
-        echo ""
-        if [[ -d .git ]]; then
-            git status
-        else
-            ls -N -lrt -F --color=always 
-        fi
-        print
-        zle redisplay
-    else
-        zle accept-line
-    fi
-}
+# _useful_enter () {
+#     if [[ -z $BUFFER ]]; then
+#         echo ""
+#         if [[ -d .git ]]; then
+#             git status
+#         else
+#             ls -N -lrt -F --color=always 
+#         fi
+#         print
+#         zle redisplay
+#     else
+#         zle accept-line -w
+#     fi
+# }
 
-zle -N _useful_enter
-bindkey "^M" _useful_enter
+# zle -N _useful_enter
+# bindkey "^M" _useful_enter
 
 
 _git_prompt() {
@@ -93,3 +93,8 @@ bindkey -M visual S add-surround
 zle -N delete-surround surround
 zle -N add-surround surround
 zle -N change-surround surround
+
+
+
+#precmd_functions+=(omz_termsupport_precmd)
+#preexec_functions+=(count_jobs_in_background)

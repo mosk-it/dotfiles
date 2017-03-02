@@ -13,3 +13,6 @@ source $ZSH_CONF_PATH/z.sh
 
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH=$PATH:$HOME/dev/go/bin
+
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -24,23 +24,19 @@ zle-keymap-select () {
 
 zle-line-finish() {
     set_prompt_color $INSERT_PROMPT
-
     zle -K viins
     set_prompt_color $INSERT_PROMPT
 }
 
 zle-line-init () {
-
+    set_prompt_color $INSERT_PROMPT
+    zle -K viins
+    set_prompt_color $INSERT_PROMPT
 }
 
 zle -N zle-keymap-select
 zle -N zle-line-init
 zle -N zle-line-finish
-
-
-
-
-
 
 
 
@@ -60,3 +56,4 @@ setab ${i}
 }
 
 [[ -r ~/.dircolors ]] && eval `dircolors  ~/.dircolors`
+

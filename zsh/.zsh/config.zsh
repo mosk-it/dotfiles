@@ -9,30 +9,18 @@ setopt appendhistory hist_ignore_space  hist_ignore_dups
 setopt inc_append_history share_history hist_reduce_blanks
 setopt hash_list_all extended_history
 
-
 # Kill the lag
 export KEYTIMEOUT=1
 
 autoload -Uz colors && colors
 
-bindkey -r "^[/"
-bindkey -M vicmd -r "/"
+#bindkey -r "^[/"
+#bindkey -M vicmd -r "/"
 bindkey -r "^H" backward-delete-char
 
 
 WORDCHARS='*?_~&!#$%^)}]>'
 
-
-
-
-export PS1="%{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[red]%}%m%{$reset_color%}% :%{$fg_no_bold[yellow]%}%d %{$reset_color%}
-→ %"
-
-#ugly fix for right line alignment
-# _lineup=$'\e[1A'
-# _linedown=$'\e[1B'
-
-export RPS1='$(_git_prompt)' #_git_prompt declared in zle.zsh
 
 
 
@@ -100,3 +88,25 @@ bindkey -M visual 'u' down-case-word
 }
 
 
+
+TMUX_COLR='white';
+[ `echo $TMUX | tr $'\n' ' ' | wc -c` -gt 1 ] && TMUX_COLR='green';
+
+
+
+update-status-suspended-jobs() {
+    local jb="${(Mw)#jobstates#suspended:}"
+    PR_JOBS="$(printf '%*s' "$jb" | tr ' ' '!')";
+}
+
+autoload -Uz update-status-suspended-jobs
+PR_SEP="%b%{$fg[{$TMUX_COLR}]:%}%B";
+
+
+PR_DATA_1="%B%{$fg[red]%}%n@%m%b";
+PR_DATA_2="%{$fg[yellow]%}%d";
+PR_DATA_TAIL=$'\n'"%{$reset_color%}→ ";
+
+export PROMPT="`printf "%s" ${PR_JOBS} ${PR_DATA_1} ${PR_SEP} ${PR_DATA_2} ${PR_DATA_TAIL}`";
+
+export RPROMPT="$(_git_prompt)" #_git_prompt declared in zle.zsh
