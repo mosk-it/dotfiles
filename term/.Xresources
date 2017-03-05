@@ -92,7 +92,7 @@ URxvt*iso14755:                       false
 URxvt*iso14755_52:                    false
 URxvt.url-launcher:       sensible-browser
 
-URxvt.perl-ext-common: default
+URxvt.perl-ext-common: default,clipboard
 
 
 
@@ -127,30 +127,49 @@ URxvt.keysym.Control-Return: \033[25~
 *cursorColor: #93a1a1
 *cursorColor2: #E0E0E0
 
-!! green dark/light
-*color2: #2FBA60
-*color10: #7EDD9F
 !! blue dark/light
 !*color4: #4C5481
 !*color12: #6D78B9
 
 
+!black
 *color0:  #101010
-*color1:  #8C3939
-! *color2:  #4ECE7B
-*color3:  #E8AB51
-*color4:  #4C5481
-*color5:  #8D437C
-*color6:  #64A49C
-*color7:  #D0D0D0
 *color8:  #161616
+
+!red
+*color1:  #8C3939
 *color9:  #C46C6C
-! *color10:  #7EDD9F
+
+!! green dark/light
+*color2: #2FBA60
+*color10: #7EDD9F
+
+
+!yellow
+*color3:  #E8AB51
 *color11:  #FFBC59
+
+!blue
+*color4:  #4C5481
 *color12:  #6D78B9
+
+!magenta
+*color5:  #8D437C
 *color13:  #BA8BAF
+
+!cyan
+*color6:  #64A49C
 *color14:  #86C1B9
+
+!white
+*color7:  #D0D0D0
 *color15:  #FEFEFE
 
 
 URxvt*dynamicColors: on
+
+
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-S-v: perl:clipboard:paste_escaped
+URxvt.keysym.C-V: perl:clipboard:paste
+!URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
