@@ -63,4 +63,4 @@ au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=238 gui=bold,rever
 
 
 autocmd FileType netrw setl bufhidden=wipe
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP

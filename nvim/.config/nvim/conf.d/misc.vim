@@ -44,9 +44,7 @@ augroup vimrcEx
     \   execute "normal! g`\"" |
     \ endif
 
-
-
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 nmap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
 
@@ -54,12 +52,12 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
  "SuperTab like snippets behavior.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" imap <expr><TAB>
+"  \ pumvisible() ? "\<C-n>" :
+"  \ neosnippet#expandable_or_jumpable() ?
+"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 
 
@@ -102,4 +100,20 @@ autocmd FileType *
 
 
 
+let g:notes_directories = ['~/docs/repo']
+let g:notes_suffix = '.txt'
+
+noremap <F5> "=strftime("%a %Y-%m-%d %H:%M:%S")<CR>P
+
 "###### --- super master dev on the ende---- #####
+"
+"
+
+
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
+
+let g:deoplete#enable_at_startup = 1
+let g:echodoc_enable_at_startup = 1
+
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")

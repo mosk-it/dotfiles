@@ -3,8 +3,6 @@ set background=dark
 colorscheme notthatbusy
 
 
-
-
 set statusline+=%F\ %=%l/%L\ %p%%
 set numberwidth=1
 set lazyredraw
