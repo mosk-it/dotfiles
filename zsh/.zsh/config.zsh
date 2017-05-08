@@ -3,11 +3,12 @@ HISTSIZE=50000
 SAVEHIST=50000
 
 setopt auto_cd extended_glob nomatch notify chaselinks cdablevars
-setopt prompt_subst no_beep no_flowcontrol interactive_comments
+setopt prompt_subst no_beep interactive_comments
 setopt complete_in_word completealiases always_to_end list_types
 setopt appendhistory hist_ignore_space  hist_ignore_dups
 setopt inc_append_history share_history hist_reduce_blanks
 setopt hash_list_all extended_history
+setopt no_flowcontrol
 
 # Kill the lag
 export KEYTIMEOUT=1
@@ -30,6 +31,10 @@ bindkey '^E' end-of-line
 
 bindkey '^F' forward-char
 bindkey '^B' backward-char
+
+
+
+
 
 
 
@@ -90,16 +95,13 @@ bindkey -M visual 'u' down-case-word
 
 
 TMUX_COLR='white';
-[ `echo $TMUX | tr $'\n' ' ' | wc -c` -gt 1 ] && TMUX_COLR='green';
+
+[ `echo $TMUX | wc -l` -gt 1 ] && TMUX_COLR='green';
 
 
-
-update-status-suspended-jobs() {
-    local jb="${(Mw)#jobstates#suspended:}"
-    PR_JOBS="$(printf '%*s' "$jb" | tr ' ' '!')";
-}
 
 autoload -Uz update-status-suspended-jobs
+
 PR_SEP="%b%{$fg[{$TMUX_COLR}]:%}%B";
 
 
@@ -109,4 +111,6 @@ PR_DATA_TAIL=$'\n'"%{$reset_color%}→ ";
 
 export PROMPT="`printf "%s" ${PR_JOBS} ${PR_DATA_1} ${PR_SEP} ${PR_DATA_2} ${PR_DATA_TAIL}`";
 
-export RPROMPT="$(_git_prompt)" #_git_prompt declared in zle.zsh
+
+zle -N _complete_debug_generic _complete_help_generic
+bindkey '^x:' _complete_debug_generic

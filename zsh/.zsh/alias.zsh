@@ -45,9 +45,7 @@ jj () { echo `date +"$fmr"` }
 
 
 
- 
-
-
+alias daysfrom='echo "(`date "+%s"`-`date -d "2016-12-12" "+%s"`)/(60*60*24)"|bc'
 
 #ipptool -tv -f example-abstract.pdf http://raspberry.local:631/printers/x3 printfile.ipp
 #printfile.ipp: { OPERATION Print-Job \n GROUP operation-attributes-tag \n ATTR charset attributes-charset utf-8 \n ATTR language attributes-natural-language en \n ATTR uri printer-uri $uri \n FILE $filename }
