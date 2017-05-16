@@ -9,7 +9,7 @@ tmux bind -Tcopy-mode-vi 'f' switch-client -Tcopy-mode-jumps-forward ;
 tmux bind -Tcopy-mode-vi 'F' switch-client -Tcopy-mode-jumps-backward ;
 tmux bind -Troot "^_" copy-mode \; switch-client -Tcopy-mode-vi ;
 
-for KEY in `echo $KEY_BINDINGS | sed -e 's/\(.\)/\1\n/g'`; do
+for KEY in `echo $KEY_BINDINGS | fold -w1`; do
     tmux bind -Tcopy-mode-jumps-forward "$KEY" send -X jump-forward "$KEY";
     tmux bind -Tcopy-mode-jumps-backward "$KEY" send -X jump-backward "$KEY";
 done
