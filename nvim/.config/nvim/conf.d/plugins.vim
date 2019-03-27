@@ -13,8 +13,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Konfekt/FastFold'
 Plug 'troydm/zoomwintab.vim'
 
-Plug 'mhinz/vim-startify'
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -24,7 +22,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'CursorLineCurrentWindow'
 
 Plug 'CursorLineCurrentWindow'
 Plug 'tmux-plugins/vim-tmux'
@@ -45,11 +42,10 @@ Plug 'docteurklein/php-getter-setter.vim', { 'for': 'php' }
 Plug 'evidens/vim-twig', { 'for': 'twig' }
 
 "dev
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
-Plug 'autozimu/LanguageClient-neovim'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'itchyny/lightline.vim'
+Plug 'ncm2/ncm2'
+Plug 'phpactor/phpactor'
+Plug 'phpactor/ncm2-phpactor'
 
 "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 
