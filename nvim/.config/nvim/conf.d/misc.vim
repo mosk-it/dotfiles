@@ -10,20 +10,6 @@ let g:netrw_winsize = 30
 let g:netrw_sort_sequence = '[\/]$,*' " sort is affecting only: directories on the top, files below
 
 
-
-let g:startify_enable_special         = 1
-let g:startify_relative_path          = 1
-let g:startify_change_to_dir          = 1
-let g:startify_update_oldfiles        = 0
-let g:startify_files_number           = 4
-let g:startify_session_persistence    = 1
-let g:startify_session_dir = $HOME . "/.local/nvim/sessions"
-let g:startify_session_autoload = 1
-let g:startify_custom_indices = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'u', 'i', 'o', 'w', 'e', 'r']
-let g:startify_custom_header = []
-let g:startify_list_order = ['sessions', 'files', 'bookmarks' ]
-
-
 " nnoremap <leader><C-g> :GitGutterToggle<cr>
 " let g:gitgutter_realtime = 0
 " let g:gitgutter_eager = 0
@@ -117,3 +103,6 @@ let g:deoplete#enable_at_startup = 1
 let g:echodoc_enable_at_startup = 1
 
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+
+" on save remove trailing spaces
+autocmd BufWritePre *.php :%s/\s\+$//e

@@ -151,10 +151,9 @@ nmap q: <Nop>
 
 "wildmenu selection - accept ctrl-k
 cnoremap <C-o> <Space><C-h>
-cnoremap q qa
 
-
-command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':w suda://%'
+" command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
 inoremap <F5> "=strftime("%a, %Y-%m-%d")<CR>P

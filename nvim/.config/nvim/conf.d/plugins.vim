@@ -47,6 +47,8 @@ Plug 'ncm2/ncm2'
 Plug 'phpactor/phpactor'
 Plug 'phpactor/ncm2-phpactor'
 
+Plug 'lambdalisue/suda.vim'
+
 "Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 
 call plug#end()
