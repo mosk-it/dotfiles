@@ -35,6 +35,7 @@ Plug 'ervandew/supertab'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'hecal3/vim-leader-guide'
 "php
 
 Plug 'Shougo/echodoc.vim'
