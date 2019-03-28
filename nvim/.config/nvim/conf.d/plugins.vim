@@ -36,13 +36,13 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'Shougo/echodoc.vim'
 
-
 Plug 'lvht/phpcd.vim' , { 'for': 'php' }
 Plug 'docteurklein/php-getter-setter.vim', { 'for': 'php' }
 Plug 'evidens/vim-twig', { 'for': 'twig' }
 
 "dev
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ncm2/ncm2'
 Plug 'phpactor/phpactor'
 Plug 'phpactor/ncm2-phpactor'
