@@ -163,3 +163,30 @@ inoremap <F6> "=strftime("%a, %Y-%m-%d %H:%M")<CR>P
 noremap <BS> :Lex<CR>
 
 map <c-q> :FZF <CR>
+"" Tab and Shift-Tab will cycle thorough parameters.
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Leader guide configuration.
+let g:lmap =  {}
+call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+
+let g:lmap.k = {
+      \'name': 'PhpActor',
+      \'b': ['call phpactor#ClassExpand()', 'ExpandClass'],
+      \'c': ['call phpactor#CopyFile()', 'Copy file'],
+      \'d': ['call phpactor#GotoDefinition()', 'Go to definition'],
+      \'e': ['call phpactor#mxtractMethod()', 'Extract method'],
+      \'f': ['call phpactor#FindReferences()', 'Find references'],
+      \'k': ['call phpactor#ContextMenu()', 'Menu'],
+      \'h': ['call phpactor#Hover()', 'Hover'],
+      \'i': ['call phpactor#ClassInflect()', 'Inflect'],
+      \'l': ['call phpactor#ClassNew()', 'New class'],
+      \'m': ['call phpactor#MoveFile()', 'Move file'],
+      \'n': ['call phpactor#Navigate()', 'Navigate'],
+      \'t': ['call phpactor#Transform()', 'Transform/Complete'],
+      \'u': ['call phpactor#UseAdd()', 'UseAdd'],
+      \}
+
