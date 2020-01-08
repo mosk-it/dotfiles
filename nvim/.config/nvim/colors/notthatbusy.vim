@@ -10,8 +10,8 @@ set t_Co=256
 let g:colors_name = "notthatbusy"
 
 
-hi Normal ctermfg=7 ctermbg=8 cterm=NONE
-hi NonText ctermfg=7 ctermbg=8 cterm=NONE
+hi Normal ctermfg=7 ctermbg=NONE cterm=NONE
+hi NonText ctermfg=7 ctermbg=NONE cterm=NONE
 
 
 "hi IncSearch -- no settings --
