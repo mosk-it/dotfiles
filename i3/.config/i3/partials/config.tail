@@ -1,7 +1,7 @@
 
 # window's border
-new_window pixel 4
-new_float pixel 6
+new_window pixel 2
+new_float pixel 3
 
 
 ##MOUSE
@@ -179,7 +179,7 @@ bindsym $mod+Shift+m mode "$mode_mpc"
 # gaps
 smart_borders on
 smart_gaps on
-gaps inner 10
+gaps inner 2
 gaps outer 0
 
 
