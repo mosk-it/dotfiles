@@ -76,7 +76,7 @@ URxvt*italicFont: xft:liberation mono:style=italic:size=8:antialias=true:hinting
 ! URxvt*cutchars:                       string
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
-urxvt*saveLines:                      false
+!-- urxvt*saveLines:                      false
 URxvt*buffered:                       true
 URxvt*depth:                          24
 URxvt*override-redirect:              false
@@ -90,7 +90,7 @@ URxvt*cutchars:           ""
 
 Rxvt*print-pipe:  cat > /dev/null
 URxvt*secondaryScreen:                true
-URxvt*secondaryScroll:                false
+URxvt*secondaryScroll:                true
 URxvt*iso14755:                       false
 URxvt*iso14755_52:                    false
 URxvt.url-launcher:       sensible-browser
