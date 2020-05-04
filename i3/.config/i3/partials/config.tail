@@ -1,9 +1,4 @@
 
-# window's border
-new_window pixel 4
-new_float pixel 6
-
-
 ##MOUSE
 focus_follows_mouse no
 #mouse_warping output
@@ -175,12 +170,15 @@ mode "$mode_mpc" {
 bindsym $mod+Shift+m mode "$mode_mpc"
 
 
+# window's border
+new_window pixel 1
+new_float pixel 1
 
 # gaps
 smart_borders on
 smart_gaps on
-gaps inner 10
-gaps outer 0
+gaps inner 1
+gaps outer 1
 
 
 # AUTOSTART

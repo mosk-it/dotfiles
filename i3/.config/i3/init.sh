@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -f "./partials/config.$HOSTNAME" ]
 then
