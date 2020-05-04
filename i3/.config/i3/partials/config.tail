@@ -34,7 +34,7 @@ bindsym $mod+x exec --no-startup-id ydpd_run
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu-frecency
+bindsym $mod+d exec i3-dmenu-desktop
 
 
 # change focus
