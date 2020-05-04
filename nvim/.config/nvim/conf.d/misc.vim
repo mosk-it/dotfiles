@@ -1,4 +1,3 @@
-"file browser
 let g:netrw_banner=0
 let g:netrw_browse_split=4 " use the previous window to open file
 let g:netrw_altv=1
@@ -10,18 +9,6 @@ let g:netrw_winsize = 30
 let g:netrw_sort_sequence = '[\/]$,*' " sort is affecting only: directories on the top, files below
 
 
-
-let g:startify_enable_special         = 1
-let g:startify_relative_path          = 1
-let g:startify_change_to_dir          = 1
-let g:startify_update_oldfiles        = 0
-let g:startify_files_number           = 4
-let g:startify_session_persistence    = 1
-let g:startify_session_dir = $HOME . "/.local/nvim/sessions"
-let g:startify_session_autoload = 1
-let g:startify_custom_indices = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'u', 'i', 'o', 'w', 'e', 'r']
-let g:startify_custom_header = []
-let g:startify_list_order = ['sessions', 'files', 'bookmarks' ]
 
 
 " nnoremap <leader><C-g> :GitGutterToggle<cr>
@@ -75,10 +62,6 @@ endfunction
 " --- type ° to search the word in all files in the current dir
 nmap <leader>? :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <leader>/ :Ag 
-
-
-
-
 "replace spaces to _ and lowercase, to md's urls
 vnoremap <leader>u u:s/\%V\ /_/g<CR>
 
@@ -92,23 +75,8 @@ set guioptions-=L  "remove left-hand scroll bar
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
 
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-p>") |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-  \ endif
-
-
-
-let g:notes_directories = ['~/docs/repo']
-let g:notes_suffix = '.txt'
 
 noremap <F5> "=strftime("%a %Y-%m-%d %H:%M:%S")<CR>P
-
-"###### --- super master dev on the ende---- #####
-"
-"
-
 
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
@@ -117,3 +85,6 @@ let g:deoplete#enable_at_startup = 1
 let g:echodoc_enable_at_startup = 1
 
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+
+" on save remove trailing spaces
+autocmd BufWritePre *.php :%s/\s\+$//e
