@@ -1,16 +1,10 @@
-alias l='ls -N --color=always'
-alias ll='ls -N -lrt -F --color=always '
-alias la='ls -N -la --color=always'
+alias l='ls -rt --color=always'
+alias ll='ls -lrt -F --color=always '
+alias la='ls -la --color=always'
 
 
 [[ -x `which ranger` ]] && alias r=ranger
 [[ -x `which nvim` ]] && alias vim=nvim
-
-alias orm=/usr/bin/rm
-alias frm=/usr/bin/rm
-alias rm="safe-rm"
-
-
 
 alias ...='cd ../../..'
 alias ....='cd ../../../..'
@@ -43,7 +37,7 @@ ww () {
 
 jj () { echo `date +"$fmr"` }
 
-
+alias sharehttp='python2 -m SimpleHTTPServer 28088'
 
 alias daysfrom='echo "(`date "+%s"`-`date -d "2016-12-12" "+%s"`)/(60*60*24)"|bc'
 
