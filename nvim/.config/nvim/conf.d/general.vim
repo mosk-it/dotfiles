@@ -60,9 +60,11 @@ autocmd InsertLeave * :set rnu nu | hi CursorLine cterm=none ctermbg=235 | hi Cu
 
 set sessionoptions=blank,curdir,folds,help,resize,slash,tabpages,unix,winpos,winsize 
 set noequalalways 
+
 " the minimal height of a window, when it's not the current window.
 set winminheight=0 
 " the minimal width of a window, when it's not the current window. 
+
 set winminwidth=0 
 
 
@@ -84,4 +86,12 @@ endif
 
 
 set shortmess+=A
+
+" Backup {{{
+set backup
+set backupdir=~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+" }}}
 
