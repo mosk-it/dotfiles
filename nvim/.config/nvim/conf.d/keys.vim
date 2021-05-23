@@ -2,11 +2,11 @@
 let mapleader=" "
 
 "new tab
-nmap <leader>n :$tabnew<CR>
+" nmap <leader>n :$tabnew<CR>
 
 "next tab
-nmap <TAB> :tabnext<CR>
-nmap <S-TAB> :tabprevious<CR>
+" nmap <TAB> :tabnext<CR>
+" nmap <S-TAB> :tabprevious<CR>
 
 
 "<C-/> escape embedded terminal 
@@ -151,10 +151,9 @@ nmap q: <Nop>
 
 "wildmenu selection - accept ctrl-k
 cnoremap <C-o> <Space><C-h>
-cnoremap q qa
 
-
-command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':w suda://%'
+" command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
 inoremap <F5> "=strftime("%a, %Y-%m-%d")<CR>P
@@ -163,3 +162,29 @@ inoremap <F6> "=strftime("%a, %Y-%m-%d %H:%M")<CR>P
 noremap <BS> :Lex<CR>
 
 map <c-q> :FZF <CR>
+
+
+nmap <c-n> :bn<CR>
+nmap <c-p> :bp<CR>
+
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = 'g<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+let g:vim_markdown_auto_extension_ext = 'txt'
+
+
+
+
+
+let g:vim_markdown_edit_url_in = '<leader>gl'
+let g:vim_markdown_toc_autofit = 0
+
+
+
+map <Plug> <Plug>Markdown_MoveToParentHeader

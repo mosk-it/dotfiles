@@ -10,8 +10,8 @@ set t_Co=256
 let g:colors_name = "notthatbusy"
 
 
-hi Normal ctermfg=7 ctermbg=8 cterm=NONE
-hi NonText ctermfg=7 ctermbg=8 cterm=NONE
+hi Normal ctermfg=7 ctermbg=NONE cterm=NONE
+hi NonText ctermfg=7 ctermbg=NONE cterm=NONE
 
 
 "hi IncSearch -- no settings --
@@ -89,7 +89,9 @@ hi Float guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE c
 hi Number guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi Boolean guifg=#b1d631 guibg=NONE guisp=NONE gui=NONE ctermfg=149 ctermbg=NONE cterm=NONE
 hi Operator guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
-hi CursorLine ctermfg=NONE ctermbg=235 cterm=NONE
+""""""""""""""""""""""""""""""""""'
+"hi CursorLine ctermfg=NONE ctermbg=37 cterm=NONE
+hi CursorLine ctermfg=NONE ctermbg=236 cterm=NONE
 hi CursorColumn guifg=NONE guibg=#202020 guisp=#202020 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
 hi Define guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi Function guifg=#ffff00 guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=bold

@@ -25,7 +25,6 @@ take () {
   cd "$1"
 }
 
-fmr='%d-%m-%Y'
 
 tt () {
     date +$fmr;

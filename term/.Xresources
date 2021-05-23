@@ -7,11 +7,11 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
 
-URxvt*termName:                     rxvt-256color
+! URxvt*termName:                     rxvt-256color
 URxvt*utmpInhibit:                  false
 URxvt*scrollstyle:                      plain
-URxvt*jumpScroll:                     true
-URxvt*skipScroll:                     true
+! URxvt*jumpScroll:                     true
+! URxvt*skipScroll:                     true
 URxvt*pastableTabs:                   true
 URxvt*scrollBar:                      false
 URxvt*scrollTtyOutput:                true
@@ -21,6 +21,9 @@ URxvt*fading:                         2
 URxvt*urgentOnBell:                   false
 URxvt*visualBell:                     false
 URxvt*mapAlert:                       true
+
+
+
 ! URxvt*meta8:                          boolean
 URxvt*mouseWheelScrollPage:           false
 URxvt*tripleclickwords:               true
@@ -46,8 +49,8 @@ URxvt*troughColor:                    red
 ! URxvt*pointerBlankDelay:              num
 
 
-URxvt*letterSpace: -1
-URxvt*lineSpace: 1
+!--- URxvt*letterSpace: -1
+!-- URxvt*lineSpace: 1
 URxvt*xftAntialias: false
 
 URxvt*font: xft:liberation mono:size=8:antialias=true:hinting=true
@@ -73,7 +76,7 @@ URxvt*italicFont: xft:liberation mono:style=italic:size=8:antialias=true:hinting
 ! URxvt*cutchars:                       string
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
-urxvt*saveLines:                      false
+!-- urxvt*saveLines:                      false
 URxvt*buffered:                       true
 URxvt*depth:                          24
 URxvt*override-redirect:              false
@@ -87,7 +90,7 @@ URxvt*cutchars:           ""
 
 Rxvt*print-pipe:  cat > /dev/null
 URxvt*secondaryScreen:                true
-URxvt*secondaryScroll:                false
+URxvt*secondaryScroll:                true
 URxvt*iso14755:                       false
 URxvt*iso14755_52:                    false
 URxvt.url-launcher: xdg-open
@@ -114,7 +117,7 @@ URxvt.keysym.Control-V: \033\007
 
 
 ! remap C-enter to F13
-URxvt.keysym.Control-Return: \033[25~
+! URxvt.keysym.Control-Return: \033[25~
 
 ! map C-S-F/B to C-Right/Left
 URxvt.keysym.Control-Shift-F: \033[1;5C
@@ -169,13 +172,5 @@ URxvt.keysym.Control-Shift-B: \033[1;5D
 URxvt*dynamicColors: on
 
 
-/* URxvt.keysym.C-C: perl:clipboard:copy */
-/* URxvt.keysym.C-S-v: perl:clipboard:paste_escaped */
-/* URxvt.keysym.C-V: perl:clipboard:paste */
-
-/* ctrl-C copy ctrl-V paste */
-URxvt.keysym.Shift-Control-V:     eval:paste_clipboard
-URxvt.keysym.Shift-Control-C:     eval:selection_to_clipboard
-
-
-!URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard

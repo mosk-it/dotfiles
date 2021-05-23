@@ -70,6 +70,7 @@ set winminwidth=0
 
 autocmd! BufReadPost,BufWritePost *.py Neomake
 autocmd! BufReadPost,BufWritePost *.c Neomake
+autocmd! BufReadPost,BufWritePost *.cpp Neomake
 autocmd! BufReadPost,BufWritePost *.php Neomake
 autocmd! BufReadPost,BufWritePost *.go Neomake
 
@@ -95,3 +96,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 " }}}
 
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='minimalist'

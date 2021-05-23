@@ -1,0 +1,46 @@
+
+
+# autostart
+
+exec --no-startup-id /usr/bin/lxpolkit
+
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id udiskie -ans &
+exec --no-startup-id start-pulseaudio-x11
+
+bar {
+    position top
+    workspace_buttons yes 
+    status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks
+
+    separator_symbol "|"
+    tray_output primary
+
+
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+}
+
+
+bindsym $mod+F1 exec xvkbd -xsendevent -text "\[XF86Back]"
+bindsym $mod+F2 exec xvkbd -xsendevent -text "\[XF86Forward]"
+
+
+bindsym XF86AudioRaiseVolume exec pavolume volup
+bindsym XF86AudioLowerVolume exec pavolume voldown
+bindsym XF86AudioMute exec pavolume mutetoggle
+
+exec --no-startup-id xsetroot -solid "#333333"
