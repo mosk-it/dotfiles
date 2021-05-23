@@ -139,9 +139,9 @@ hi phpType ctermfg=7 ctermbg=NONE cterm=NONE
 " hi phpVarSelector ctermfg=3 ctermbg=NONE cterm=bold
 
 
-hi TabLine        ctermfg=15 ctermbg=1 cterm=NONE 
+hi TabLine        ctermfg=15 ctermbg=15 cterm=NONE 
 hi TabLineSel     ctermfg=0 ctermbg=7 cterm=NONE 
-hi TabLineFill    ctermfg=NONE ctermbg=1 cterm=NONE 
+hi TabLineFill    ctermfg=NONE ctermbg=14 cterm=NONE 
 
 "hi PMenuSbar guifg=NONE guibg=#202020 guisp=#202020 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
 hi PMenuSel ctermfg=0 ctermbg=1 cterm=NONE
