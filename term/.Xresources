@@ -49,8 +49,8 @@ URxvt*troughColor:                    red
 ! URxvt*pointerBlankDelay:              num
 
 
-!--- URxvt*letterSpace: -1
-!-- URxvt*lineSpace: 1
+URxvt*letterSpace: -1
+URxvt*lineSpace: 1
 URxvt*xftAntialias: false
 
 URxvt*font: xft:liberation mono:size=8:antialias=true:hinting=true
@@ -125,48 +125,49 @@ URxvt.keysym.Control-Shift-B: \033[1;5D
 
 
 
-*background: #131313
-*foreground: #CECECE
+
+*.foreground:   #c1c1c1
+*.background:   #232323
 *cursorColor: #93a1a1
 *cursorColor2: #E0E0E0
 
-!! blue dark/light
-!*color4: #4C5481
-!*color12: #6D78B9
+! black
+*.color0:       #101010
+*.color8:       #8e8e8e
 
+! red
+*.color1:       #93240f
+*.color9:       #ff6262
 
-!black
-*color0:  #101010
-*color8:  #161616
+! green
+*.color2:       #1f7e41
+*.color10:      #42d675
 
-!red
-*color1:  #8C3939
-*color9:  #C46C6C
+! yellow
 
-!! green dark/light
-*color2: #2FBA60
-*color10: #7EDD9F
+*color3:  #d9a700
+*color11:  #ffd52b
+!*.color3:       #ffd200
+!*.color11:      #ffff9d
 
+! blue
+!
+*.color4:       #6495d4
+*.color12:      #c0cfff
 
-!yellow
-*color3:  #E8AB51
-*color11:  #FFBC59
+! magenta
+*.color5:       #8d437c
+!*.color13:      #ba8baf
+*.color13:      #FF0000
 
-!blue
-*color4:  #4C5481
-*color12:  #6D78B9
+! cyan
+*.color6:       #19776b
+*.color14:      #86c1b9
 
-!magenta
-*color5:  #8D437C
-*color13:  #BA8BAF
+! white
+*.color7:       #d0d0d0
+*.color15:      #fefefe
 
-!cyan
-*color6:  #64A49C
-*color14:  #86C1B9
-
-!white
-*color7:  #D0D0D0
-*color15:  #FEFEFE
 
 
 URxvt*dynamicColors: on
