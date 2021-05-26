@@ -1,25 +1,32 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
-#[title]
-#command=i3title -o DVI-0
-#interval=persist
-#color=#ddddbb
+[title]
+command=mpc status | head -n1
+interval=persist
+interval=10
+color=#ddddbb
+
+
+[cpu_usage]
+label=CPU:
+interval=2
+color=#cfd9Cf
 
 
 [bandwidth]
-label=
+label=NET:
 interval=2
 color=#cfd9Cf
 
 [temp]
-label= 
+label=TEMP
 command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
 interval=10
 
 
 [volume]
-label=
+label=VOL:
 instance=Master
 interval=once
 signal=1
