@@ -58,9 +58,10 @@ bar {
 }
 
 
-bindsym $mod+F1 exec amixer -q set Master 1dB- unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F2 exec amixer -q set Master 1dB+ unmute && pkill -RTMIN+1 i3blocks
-bindsym $mod+F3 exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
+bindsym $mod+F1 exec pamixer -d  10&& pkill -RTMIN+1 i3blocks
+bindsym $mod+F2 exec pamixer -i 10 && pkill -RTMIN+1 i3blocks
+bindsym $mod+F3 exec pamixer -t && pkill -RTMIN+1 i3blocks
+
 
 
 bindsym $mod+Shift+period move workspace to output left
