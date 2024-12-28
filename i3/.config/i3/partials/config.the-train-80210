@@ -1,0 +1,61 @@
+set $output1 eDP1
+set $output2 DPI
+
+workspace 0 output $output1
+workspace 1 output $output1
+workspace 2 output $output2
+workspace 3 output $output2
+workspace 4 output $output2
+
+
+# right first
+bar {
+    position top
+    workspace_buttons yes 
+    status_command i3blocks -c ~/.config/i3/i3blocks/li3blocks
+
+    output $output1
+    separator_symbol "|"
+
+
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+}
+
+# left
+bar {
+    #i3bar position
+    position top
+    workspace_buttons yes
+    status_command i3blocks -c ~/.config/i3/i3blocks/ri3blocks
+
+    output $output2
+
+    colors {
+        statusline         $white
+        background         $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $red
+        inactive_workspace $transparent $transparent $white
+        active_workspace   $transparent $transparent $white
+        urgent_workspace   $red         $red         $transparent
+    }
+
+
+
+}
+
+bindsym $mod+Shift+period move workspace to output left
+bindsym $mod+Shift+comma move workspace to output right
