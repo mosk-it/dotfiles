@@ -14,7 +14,7 @@ popup_during_fullscreen leave_fullscreen
 floating_modifier $mod
 
 # BIND KEYS
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec xfce4-terminal
 
 bindsym $mod+Shift+r restart
 
