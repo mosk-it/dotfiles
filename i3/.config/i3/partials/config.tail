@@ -139,24 +139,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $mode_system System [l]ock, [r]eboot, [s]shutdown
-
-
-mode "$mode_system" {
-
-    bindsym l exec --no-startup-id ~/.i3/autolock, mode "default"
-    bindsym r exec --no-startup-id sudo shutdown -r now, mode "default"
-    bindsym s exec --no-startup-id sudo shutdown -h now, mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym Ctrl+c mode "default"
-}
-
-bindsym $mod+Shift+e mode "$mode_system"
-
-
-
 set $mode_mpc MPC next (h), prev (l), [p]ause/play, [r]m
 
 bindsym $mod+Next exec --no-startup-id mpc next
