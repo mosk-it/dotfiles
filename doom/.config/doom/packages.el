@@ -25,6 +25,11 @@
 ;; with the `:disable' property:
 ;; (package! builtin-package :disable t)
 
+(package! evil-snipe :disable t)
+(package! evil-easymotion :disable t)
+(package! evil-dvorak :disable t)
+
+
 ;; You can override the recipe of a built in package without having to specify
 ;; all the properties for `:recipe'. These will inherit the rest of its recipe
 ;; from Doom or MELPA/ELPA/Emacsmirror:
