@@ -74,7 +74,18 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
 ;; CUSTOM
 
 ;; remove evil-snipe-mode
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+
+
+(map! :n "C-n" 'centaur-tabs-forward
+      :n "C-p" 'centaur-tabs-backward)
+
+
+
+;; do not treat _ as word delimiter
+(modify-syntax-entry ?_ "w")
