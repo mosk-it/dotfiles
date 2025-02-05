@@ -11,7 +11,6 @@ source $ZSH_CONF_PATH/alias.zsh
 
 source $ZSH_CONF_PATH/completion.zsh
 
-source $ZSH_CONF_PATH/z.sh
+source $ZSH_CONF_PATH/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export XDG_CONFIG_HOME=$HOME/.config
-export PATH=$PATH:$HOME/dev/go/bin
