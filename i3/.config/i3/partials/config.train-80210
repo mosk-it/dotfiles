@@ -1,5 +1,5 @@
 set $output1 eDP1
-set $output2 DPI
+set $output2 DP2
 
 workspace 0 output $output1
 workspace 1 output $output1
@@ -59,3 +59,8 @@ bar {
 
 bindsym $mod+Shift+period move workspace to output left
 bindsym $mod+Shift+comma move workspace to output right
+
+
+# autostart
+
+exec --no-startup-id volumeicon
