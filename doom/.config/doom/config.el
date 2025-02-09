@@ -32,11 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-1337)
+(setq doom-theme 'doom-badger)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -92,3 +92,14 @@
 
 ;; do not treat _ as word delimiter
 (modify-syntax-entry ?_ "w")
+
+
+;; multiedit
+
+(setq evil-multiedit-follow-matches t)
+
+(define-key evil-normal-state-map (kbd "C-S-n") 'evil-multiedit-match-and-next)
+(define-key evil-visual-state-map (kbd "C-S-n") 'evil-multiedit-match-and-next)
+(define-key evil-insert-state-map (kbd "C-x") 'evil-multiedit-toggle-marker-here)
+(define-key evil-normal-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
+(define-key evil-visual-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
