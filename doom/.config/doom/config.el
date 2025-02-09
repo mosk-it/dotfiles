@@ -85,6 +85,9 @@
 (map! :n "C-n" 'centaur-tabs-forward
       :n "C-p" 'centaur-tabs-backward)
 
+;; change focus to newly opened splits
+(map! :n "C-w v" '+evil/window-vsplit-and-follow
+      :n "C-w s" '+evil/window-split-and-follow)
 
 
 ;; do not treat _ as word delimiter
