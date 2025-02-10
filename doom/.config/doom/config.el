@@ -103,3 +103,47 @@
 (define-key evil-insert-state-map (kbd "C-x") 'evil-multiedit-toggle-marker-here)
 (define-key evil-normal-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
 (define-key evil-visual-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
+
+
+
+
+;; search for selected text
+
+(defun my/evil-search-visual-selection-forward ()
+  "Search forward for visually selected text, highlight all occurrences."
+  (interactive)
+  (when (region-active-p)
+    (let* ((selection (buffer-substring-no-properties (region-beginning) (region-end)))
+           (escaped-selection (regexp-quote selection)))
+      (evil-exit-visual-state)
+      ;; Enable search highlighting
+      (evil-ex-search-activate-highlight (list escaped-selection t t))
+      (setq evil-ex-search-pattern (list escaped-selection t t))
+      (setq evil-ex-search-direction 'forward)
+      ;; Turn on persistent highlights
+      (setq evil-ex-search-highlight-all t)
+      (evil-ex-search-next))))
+(defun my/evil-search-visual-selection-backward ()
+  "Search backward for visually selected text, highlight all occurrences."
+  (interactive)
+  (when (region-active-p)
+    (let* ((selection (buffer-substring-no-properties (region-beginning) (region-end)))
+           (escaped-selection (regexp-quote selection)))
+      (evil-exit-visual-state)
+      ;; Enable search highlighting
+      (evil-ex-search-activate-highlight (list escaped-selection t t))
+      (setq evil-ex-search-pattern (list escaped-selection t t))
+      (setq evil-ex-search-direction 'backward)
+      ;; Turn on persistent highlights
+      (setq evil-ex-search-highlight-all t)
+      (evil-ex-search-previous))))
+;; Function to clear highlights
+(defun my/evil-clear-search-highlights ()
+  "Clear search highlights."
+  (interactive)
+  (evil-ex-nohighlight))
+;; Keybindings
+(map! :v "*" #'my/evil-search-visual-selection-forward
+      :v "#" #'my/evil-search-visual-selection-backward
+      ;; Add a binding to clear highlights (similar to vim's :noh)
+      :n "<escape>" #'my/evil-clear-search-highlights)
