@@ -21,8 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
+
+
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -93,57 +94,71 @@
 ;; do not treat _ as word delimiter
 (modify-syntax-entry ?_ "w")
 
+(setq modus-themes-mode-line '(borderless))
+
 
 ;; multiedit
 
 (setq evil-multiedit-follow-matches t)
 
-(define-key evil-normal-state-map (kbd "C-S-n") 'evil-multiedit-match-and-next)
-(define-key evil-visual-state-map (kbd "C-S-n") 'evil-multiedit-match-and-next)
-(define-key evil-insert-state-map (kbd "C-x") 'evil-multiedit-toggle-marker-here)
-(define-key evil-normal-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
-(define-key evil-visual-state-map (kbd "C-S-p") 'evil-multiedit-match-and-prev)
+(map! :v "g C-n" #'evil-multiedit-match-and-next
+      :map evil-multiedit-mode-map :n "C-n" #'evil-multiedit-match-and-next
+      :map evil-multiedit-mode-map :n "C-p" #'evil-multiedit-match-and-prev
+      :map evil-multiedit-mode-map "C-x" #'evil-multiedit-toggle-or-restrict-region
+        )
+
+
+;; general bindings
+
+(map! :leader "w w" #'save-buffer)
+
+
+;; treemacs
+
+(map! :n "C-e" #'+treemacs/toggle
+      :map evil-treemacs-state-map "C-e" #'+treemacs/toggle
+      :map evil-treemacs-state-map "z x" 'treemacs-quit
+      :g "C-e" #'+treemacs/toggle
+      )
+
+
+;; c-p with follow history in cmd
+(map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
+
+
+;; c-qq kill-current-buffer
+(map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
+
+
+;; org
+
+;; (after! org
+;;   (setq org-todo-keywords
+;;         '((sequence "PROJ(p)" "INPR(i)" "TODO(t)" "[ ](T)" "|"
+;;            "DONE(d)" "CANC(c)" "[X](D)" "[c](C)"))
+;;         ))
+
+(after! org
+  (setq org-todo-keywords '(
+          (sequence "PROJ(p)" "ONIT(o)" "TODO(t)" "|" "DONE(d)" "CANC(c)" )
+          (sequence  "[ ](T)" "|" "[X](D)" "[c](C)" )
+          )
+        org-todo-state-tags-triggers '(
+            ("CANC" ("cancelled" . t))
+            ("[c]" ("cancelled" . t))
+            (done ("cancelled"))
+            ("TODO" ("cancelled"))
+;;("DONE" ("cancelled"))
+            )
+  ))
 
 
 
 
-;; search for selected text
 
-(defun my/evil-search-visual-selection-forward ()
-  "Search forward for visually selected text, highlight all occurrences."
-  (interactive)
-  (when (region-active-p)
-    (let* ((selection (buffer-substring-no-properties (region-beginning) (region-end)))
-           (escaped-selection (regexp-quote selection)))
-      (evil-exit-visual-state)
-      ;; Enable search highlighting
-      (evil-ex-search-activate-highlight (list escaped-selection t t))
-      (setq evil-ex-search-pattern (list escaped-selection t t))
-      (setq evil-ex-search-direction 'forward)
-      ;; Turn on persistent highlights
-      (setq evil-ex-search-highlight-all t)
-      (evil-ex-search-next))))
-(defun my/evil-search-visual-selection-backward ()
-  "Search backward for visually selected text, highlight all occurrences."
-  (interactive)
-  (when (region-active-p)
-    (let* ((selection (buffer-substring-no-properties (region-beginning) (region-end)))
-           (escaped-selection (regexp-quote selection)))
-      (evil-exit-visual-state)
-      ;; Enable search highlighting
-      (evil-ex-search-activate-highlight (list escaped-selection t t))
-      (setq evil-ex-search-pattern (list escaped-selection t t))
-      (setq evil-ex-search-direction 'backward)
-      ;; Turn on persistent highlights
-      (setq evil-ex-search-highlight-all t)
-      (evil-ex-search-previous))))
-;; Function to clear highlights
-(defun my/evil-clear-search-highlights ()
-  "Clear search highlights."
-  (interactive)
-  (evil-ex-nohighlight))
-;; Keybindings
-(map! :v "*" #'my/evil-search-visual-selection-forward
-      :v "#" #'my/evil-search-visual-selection-backward
-      ;; Add a binding to clear highlights (similar to vim's :noh)
-      :n "<escape>" #'my/evil-clear-search-highlights)
+(setq doom-font (font-spec :family "Iosevka Fixed" :foundry "UKWN" :slant 'normal :weight 'bold :height 98 :width 'normal))
+
+
+;; TODO - notes :testing:
+(setq denote-directory "~/org/denote")
+;; (setq org-roam-directory "~/org/roam")
