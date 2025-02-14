@@ -33,7 +33,7 @@ bindsym $mod+s scratchpad show
 
 
 
-bindsym $mod+x exec --no-startup-id ydpd_run
+bindsym $mod+Shift+x exec --no-startup-id ydpd_run
 
 # kill focused window
 bindsym $mod+q kill
