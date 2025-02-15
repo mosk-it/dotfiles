@@ -21,9 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-
-
-
+;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -119,24 +118,30 @@
       :map evil-treemacs-state-map "C-e" #'+treemacs/toggle
       :map evil-treemacs-state-map "z x" 'treemacs-quit
       :g "C-e" #'+treemacs/toggle
+)
+
+
+
+
+(map!
+     :leader :map evil-treemacs-state-map "C-S-k"  #'org-shiftup
+     :leader :map evil-treemacs-state-map "C-S-j"  #'org-shiftdown
+     :leader :map evil-treemacs-state-map "C-S-l"  #'org-shiftright
+     :leader :map evil-treemacs-state-map "C-S-h"  #'org-shiftleft
       )
 
+(map!
+     :g "C-S-l" #'evil-window-right
+     :g "C-S-h" #'evil-window-left
+     :g "C-S-j" #'evil-window-down
+     :g "C-S-k" #'evil-window-up
+     )
 
 ;; c-p with follow history in cmd
 (map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
 
 
-;; c-qq kill-current-buffer
-(map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
-
-
 ;; org
-
-;; (after! org
-;;   (setq org-todo-keywords
-;;         '((sequence "PROJ(p)" "INPR(i)" "TODO(t)" "[ ](T)" "|"
-;;            "DONE(d)" "CANC(c)" "[X](D)" "[c](C)"))
-;;         ))
 
 (after! org
   (setq org-todo-keywords '(
@@ -153,12 +158,14 @@
   ))
 
 
-
-
-
-(setq doom-font (font-spec :family "Iosevka Fixed" :foundry "UKWN" :slant 'normal :weight 'bold :height 98 :width 'normal))
-
+(setq doom-font (font-spec :family "SourceCodeVF" :foundry "ADBO" :slant normal :weight medium :height 98 :width normal))
 
 ;; TODO - notes :testing:
 (setq denote-directory "~/org/denote")
 ;; (setq org-roam-directory "~/org/roam")
+
+(defun truly-reload ()
+  (interactive)
+  (doom/reload)
+  (doom/restart-and-restore)
+  (doom/reload-font))
