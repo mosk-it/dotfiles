@@ -21,8 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
+
+
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -112,19 +113,52 @@
 (map! :leader "w w" #'save-buffer)
 
 
-(defun my-treemacs-toggle ()
-  "Toggle treemacs with specific behavior when focused."
-  (interactive)
-  (if (eq (current-buffer) (treemacs-get-local-buffer))
-      (delete-window (treemacs-get-local-window))
-    (treemacs)))
-
 ;; treemacs
 
 (map! :n "C-e" #'+treemacs/toggle
       :map evil-treemacs-state-map "C-e" #'+treemacs/toggle
-      :g "C-e" #'+treemacs/toggle)
+      :map evil-treemacs-state-map "z x" 'treemacs-quit
+      :g "C-e" #'+treemacs/toggle
+      )
 
 
-
+;; c-p with follow history in cmd
 (map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
+
+
+;; c-qq kill-current-buffer
+(map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
+
+
+;; org
+
+;; (after! org
+;;   (setq org-todo-keywords
+;;         '((sequence "PROJ(p)" "INPR(i)" "TODO(t)" "[ ](T)" "|"
+;;            "DONE(d)" "CANC(c)" "[X](D)" "[c](C)"))
+;;         ))
+
+(after! org
+  (setq org-todo-keywords '(
+          (sequence "PROJ(p)" "ONIT(o)" "TODO(t)" "|" "DONE(d)" "CANC(c)" )
+          (sequence  "[ ](T)" "|" "[X](D)" "[c](C)" )
+          )
+        org-todo-state-tags-triggers '(
+            ("CANC" ("cancelled" . t))
+            ("[c]" ("cancelled" . t))
+            (done ("cancelled"))
+            ("TODO" ("cancelled"))
+;;("DONE" ("cancelled"))
+            )
+  ))
+
+
+
+
+
+(setq doom-font (font-spec :family "Iosevka Fixed" :foundry "UKWN" :slant 'normal :weight 'bold :height 98 :width 'normal))
+
+
+;; TODO - notes :testing:
+(setq denote-directory "~/org/denote")
+;; (setq org-roam-directory "~/org/roam")

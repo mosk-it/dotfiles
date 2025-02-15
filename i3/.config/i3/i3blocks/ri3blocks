@@ -7,6 +7,11 @@ interval=persist
 interval=10
 color=#ddddbb
 
+[ram_usage]
+label=RAM:
+command=free -m | awk '(NR==2) { perc = $3/$2*100; printf "%.1fG/%.1fG (%.f%)\n\n", $3/1024, $2/1024, perc; if (perc > 90) print "#FF0000"; else if (perc > 75) print "#FFFF00"; }'
+interval=5
+color=#cfd9Cf
 
 [cpu_usage]
 label=CPU:
