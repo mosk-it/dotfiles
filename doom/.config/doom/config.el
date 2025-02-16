@@ -123,23 +123,8 @@
 
 
 
-(map!
-     :leader :map evil-treemacs-state-map "C-S-k"  #'org-shiftup
-     :leader :map evil-treemacs-state-map "C-S-j"  #'org-shiftdown
-     :leader :map evil-treemacs-state-map "C-S-l"  #'org-shiftright
-     :leader :map evil-treemacs-state-map "C-S-h"  #'org-shiftleft
-      )
-
-(map!
-     :g "C-S-l" #'evil-window-right
-     :g "C-S-h" #'evil-window-left
-     :g "C-S-j" #'evil-window-down
-     :g "C-S-k" #'evil-window-up
-     )
-
 ;; c-p with follow history in cmd
 (map! :map evil-command-line-map "C-p"   #'previous-complete-history-element)
-
 
 ;; org
 
@@ -158,7 +143,7 @@
   ))
 
 
-(setq doom-font (font-spec :family "SourceCodeVF" :foundry "ADBO" :slant normal :weight medium :height 98 :width normal))
+(setq doom-font (font-spec :family "SourceCodeVF" :foundry "ADBO" :slant 'normal :weight 'medium :height 98 :width 'normal))
 
 ;; TODO - notes :testing:
 (setq denote-directory "~/org/denote")
@@ -168,4 +153,46 @@
   (interactive)
   (doom/reload)
   (doom/restart-and-restore)
-  (doom/reload-font))
+  (doom/reload-font)
+
+)
+
+
+;; C-S-hjkl to move between splits
+(map!
+    :gnm "C-S-j" #'evil-window-down
+    :gnm "C-S-k" #'evil-window-up
+    :gnm "C-S-l" #'evil-window-right
+    :gnm "C-S-h" #'evil-window-left
+)
+
+(map! :map evil-org-mode-map
+    :after evil-org
+    :gnm "C-S-j" #'evil-window-down
+    :gnm "C-S-k" #'evil-window-up
+    :gnm "C-S-l" #'evil-window-right
+    :gnm "C-S-h" #'evil-window-left
+)
+
+
+
+(after! corfu
+  (setq corfu-auto nil)
+  (setq +corfu-want-ret-to-confirm 'both)
+)
+
+
+;; "alternate" "bar" "box" "chamfer" "rounded" "slant" "wave" "zigzag"
+(setq centaur-tabs-style "box")
+(setq centaur-tabs-height 26)
+(setq centaur-tabs-set-bar 'over)
+(setq centaur-tabs-set-close-button nil)
+(setq centaur-tabs-set-modified-marker t)
+(setq centaur-tabs-modified-marker "!")
+(setq centaur-tabs-set-icons nil)
+(setq centaur-tabs-show-new-tab-button nil)
+
+
+
+(setq doom-modeline-icon nil)
+
