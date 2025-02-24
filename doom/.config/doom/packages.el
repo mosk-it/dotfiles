@@ -55,4 +55,8 @@
 
 
 
-(package! denote :recipe (:host github :repo "protesilaos/denote"))
+;; (package! denote :recipe (:host github :repo "protesilaos/denote"))
+(package! org-ql :recipe (:host github :repo "alphapapa/org-ql"))
+
+
+(package! org-download :recipe (:host github :repo "abo-abo/org-download"))

@@ -33,6 +33,12 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-badger)
+(setq doom-theme 'doom-badger
+      doom-font (font-spec :family "SourceCodeVF" :foundry "ADBO" :slant 'normal :weight 'medium :height 98 :width 'normal)
+      fancy-splash-image nil  ; disable splash image
+      inhibit-splash-screen t ; disable splash screen
+      doom-dashboard-banner-padding '(0 . 0)
+)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -196,3 +202,35 @@
 
 (setq doom-modeline-icon nil)
 
+
+(after! org
+    (after! org-download
+    (setq org-download-method 'directory)
+    (setq org-download-image-dir (concat (file-name-sans-extension (buffer-file-name)) "-images"))
+    (setq org-download-image-org-width 600)
+    (setq org-download-link-format "[[file:%s]]\n"
+            org-download-abbreviate-filename-function #'file-relative-name)
+    (setq org-download-link-format-function #'org-download-link-format-function-default))
+)
+
+
+(after! org-download
+  (setq org-download-method 'directory))
+
+(after! org
+  (setq org-startup-folded 'show2levels)
+  (setq org-tags-column -80)
+)
+
+
+;; paste clipboard in term with c-s-v
+(map! :map term-mode-map "C-S-v" 'term-paste)
+(map! :map vterm-mode-map "C-S-v" 'vterm-yank)
+(map! :map evil-command-line-map "C-S-v" 'clipboard-yank)
+
+
+;; paste primary clipboard with gp
+(map! :map evil-normal-state-map "gp" 'mouse-yank-primary)
+
+
+(setq vterm-shell "/bin/bash")
