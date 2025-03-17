@@ -1,5 +1,5 @@
-set $output1 VGA-0
-set $output2 HDMI-0
+set $output1 HDMI-0
+set $output2 VGA-0
 
 workspace 0 output $output1
 workspace 1 output $output1
