@@ -1,11 +1,11 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
-[title]
-command=mpc status | head -n1
-interval=persist
-interval=10
-color=#ddddbb
+[net_ping]
+label=PING:
+command=awk -v "P=$(ping -c1 -w3 -4 one.one.one.one 2>/dev/null |grep 'time=')" 'BEGIN { if (!P) print "TIMEOUT\n\n#ff0000"; else { split(P, tarr, "="); tm = tarr[4]; print tm; printf "%.1fms\n\n",tm; if (tm > 250.0)  print "#ff0000";  else if (tm > 100.0) print "#ffff00";  } }' 
+interval=3
+color=#cfd9Cf
 
 [ram_usage]
 label=RAM:
