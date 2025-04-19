@@ -1,9 +1,9 @@
 set t_Co=256  " Set terminal to display 256 colors.
 set background=dark
-colorscheme notthatbusy
+colorscheme Tomorrow-Night-Eighties
 
 
-set statusline+=%F\ %=%l/%L\ %p%%
+"set statusline+=%F\ %=%l/%L\ %p%%
 set numberwidth=1
 set lazyredraw
 set wildmenu
@@ -47,16 +47,16 @@ set shortmess=I
 
 
 "spell
-cnoreabbrev pl setlocal spell spelllang=pl
-cnoreabbrev en setlocal spell spelllang=en
-cnoreabbrev nos setlocal spell spelllang=
+cnoreabbrev setspellpl setlocal spell spelllang=pl
+cnoreabbrev setspellen setlocal spell spelllang=en
+cnoreabbrev setnospell setlocal spell spelllang=
 
 set showcmd ruler
 
 
 "change hilight on insert mode
-autocmd InsertEnter * :set nornu nu | hi CursorLine cterm=none ctermbg=236 | hi CursorLineNr ctermfg=7
-autocmd InsertLeave * :set rnu nu | hi CursorLine cterm=none ctermbg=235 | hi CursorLineNr ctermfg=11
+"autocmd InsertEnter * :set nornu nu | hi CursorLine cterm=none ctermbg=236 | hi CursorLineNr ctermfg=7
+"autocmd InsertLeave * :set rnu nu | hi CursorLine cterm=none ctermbg=235 | hi CursorLineNr ctermfg=11
 
 set sessionoptions=blank,curdir,folds,help,resize,slash,tabpages,unix,winpos,winsize 
 set noequalalways 
@@ -67,15 +67,6 @@ set winminheight=0
 
 set winminwidth=0 
 
-
-autocmd! BufReadPost,BufWritePost *.py Neomake
-autocmd! BufReadPost,BufWritePost *.c Neomake
-autocmd! BufReadPost,BufWritePost *.cpp Neomake
-autocmd! BufReadPost,BufWritePost *.php Neomake
-autocmd! BufReadPost,BufWritePost *.go Neomake
-
-let g:neomake_serialize = 1
-let g:neomake_serialize_abort_on_error = 1
 
 set packpath=/usr/local/share/nvim/runtime,~/.local/share/nvim/site
 
@@ -89,11 +80,9 @@ endif
 set shortmess+=A
 
 " Backup {{{
-set backup
-set backupdir=~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
+set nobackup
+set nowritebackup
+set noswapfile
 " }}}
 
 

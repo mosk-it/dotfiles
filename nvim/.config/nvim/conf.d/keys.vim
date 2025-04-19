@@ -60,7 +60,6 @@ nmap <leader>a :nohlsearch<CR>
 nmap <leader>q :bd<CR>
 vmap r "_dP
 
-set pastetoggle=<F2>
 nmap s <nop>
 nmap S viWS
 nmap s ysi
@@ -125,7 +124,6 @@ nmap <leader>a :nohlsearch<CR>
 nmap <leader>q :bd<CR>
 vmap r "_dP
 
-set pastetoggle=<F2>
 nmap s <nop>
 nmap S viWS
 nmap s ysi
@@ -158,8 +156,6 @@ command! W :execute ':w suda://%'
 
 inoremap <F5> "=strftime("%a, %Y-%m-%d")<CR>P
 inoremap <F6> "=strftime("%a, %Y-%m-%d %H:%M")<CR>P
-
-noremap <BS> :Lex<CR>
 
 map <c-q> :FZF <CR>
 

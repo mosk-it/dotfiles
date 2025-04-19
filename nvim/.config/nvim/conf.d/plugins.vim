@@ -2,10 +2,9 @@ call plug#begin('~/.config/nvim/plug')
 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-Plug 'commentary.vim'
+"Plug 'tpope/commentary.vim'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-repeat'
-Plug 'neomake/neomake'
 
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
@@ -23,23 +22,16 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'jeetsukumaran/vim-buffergator'
 
-Plug 'CursorLineCurrentWindow'
-Plug 'tmux-plugins/vim-tmux'
+Plug 'vim-scripts/CursorLineCurrentWindow'
+"Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 "@TODO
 
 Plug 'tpope/vim-fugitive'
 
-"php
-
-"Plug 'Shougo/echodoc.vim'
-
-Plug 'lvht/phpcd.vim' , { 'for': 'php' }
-Plug 'docteurklein/php-getter-setter.vim', { 'for': 'php' }
-
 "dev
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 " Plug 'ncm2/ncm2'
 " Plug 'phpactor/phpactor'
 " Plug 'phpactor/ncm2-phpactor'
