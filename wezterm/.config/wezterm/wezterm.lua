@@ -16,7 +16,11 @@ config.window_padding = {
 config.scrollback_lines = 1000000
 
 config.font =  wezterm.font('SauceCodePro Nerd Font Mono', { weight = 'Medium' })
-config.font_size = 10
+config.font_size = 11
 
+config.color_scheme = 'Tomorrow Night Eighties'
+config.colors = {
+  background = '#14161B',
+}
 
 return config
