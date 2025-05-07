@@ -1,6 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
+local act = wezterm.action
 local config = wezterm.config_builder()
 
 config.window_padding = {
@@ -26,9 +27,6 @@ config.leader = { key = "Space", mods = "CTRL", timeout_millisections = 1000 }
 
 config.hide_tab_bar_if_only_one_tab = true
 
-local wezterm = require("wezterm")
-local act = wezterm.action
-local config = wezterm.config_builder()
 
 -- config.debug_key_events = true
 
@@ -123,6 +121,11 @@ config.key_tables = {
 }
 
 config.keys = {
+
+	-- {
+	-- 	{ key = "k", mods = "CTRL", action = "ToggleDropdown" },
+	-- },
+
 	{
 		key = "v",
 		mods = "LEADER",
@@ -168,7 +171,7 @@ config.keys = {
 		key = "/",
 		mods = "CTRL",
 		action = wezterm.action.ActivateCopyMode,
-	},
+	}
 }
 
 return config
