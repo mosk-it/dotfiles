@@ -12,7 +12,7 @@ zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:incremental:*' completer _complete 
 zstyle ':completion:predict:*' completer _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion::complete:cd:' tag-order local-directories path-directories
+zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 zstyle ':completion:*:hosts' hosts $_ssh_config
 zstyle ':completion:*' max-errors 0
 zstyle -s ':completion:*:hosts' hosts _ssh_config

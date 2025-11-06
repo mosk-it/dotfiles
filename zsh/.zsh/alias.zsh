@@ -19,6 +19,7 @@ alias sortnr='sort -nr'
 
 alias p='|most'
 
+alias feh='feh --draw-filename'
 
 take () {
   mkdir "$1"
