@@ -1,26 +1,21 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
-#[title]
-#command=i3title -o VGA-0
-#interval=persist
-#color=#ddddbb
-#min_width="echo 1"
-#align="right"
+[window_title]
+command=bash -c "$HOME/.config/i3/scripts/window_title left"
+interval=once
+signal=10
 
 
-
-[volume]
-label=
+[pvolume]
+label=VOL
 instance=Master
 interval=once
 signal=1
 color=#CADDFF
 
 
-
-
 [time]
-command=date +"%Y-%m-%d %a, %R"
+command=LC_TIME=pl_PL.UTF-8 date +"%Y-%m-%d %a, %R"
 color=#FFFFFF
 interval=60

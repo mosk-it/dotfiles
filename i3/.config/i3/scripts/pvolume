@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+mapfile -t SINKS < <(pactl list sinks short | awk '{print $1}')
+if [ ${#SINKS[@]} -eq 0 ]; then
+    echo "No sinks"
+    exit 1
+fi
+DEFAULT_SINK=$(pactl info | grep 'Default Sink' | cut -f2 -d: | xargs)
+
+case $BLOCK_BUTTON in
+    2)
+        pactl set-default-sink "$(sinks=($(pactl list sinks | awk '/Name: / {print $2}')) && current=$(pactl info | awk '/Default Sink: / {print $3}') && for i in "${!sinks[@]}"; do [[ "${sinks[i]}" == "$current" ]] && next=$(( (i + 1) % ${#sinks[@]} )) && echo "${sinks[next]}" && break; done)"
+        ;;
+    3) # Right click: Toggle mute on default sink
+        pactl set-sink-mute "$DEFAULT_SINK" toggle
+        ;;
+    4) # Scroll up: Increase volume
+        pactl set-sink-volume "$DEFAULT_SINK" +5%
+        ;;
+    5) # Scroll down: Decrease volume
+        pactl set-sink-volume "$DEFAULT_SINK" -5%
+        ;;
+esac
+
+VOLUME=$(pactl list sinks | grep -A 15 "Name: $DEFAULT_SINK$" | grep 'Volume:' | head -n1 | awk '{print $5}' | tr -d '%')
+MUTE=$(pactl list sinks | grep -A 15 "Name: $DEFAULT_SINK$" | grep 'Mute:' | awk '{print $2}')
+
+# Extract description for the default sink
+DESCRIPTION=$(pactl list sinks | grep -A 20 "Name: $DEFAULT_SINK$" | grep 'Description:' | cut -d: -f2 | xargs)
+
+if [ "$MUTE" = "yes" ]; then
+    echo "MUTE • $DESCRIPTION"
+else
+    echo "${VOLUME}% • $DESCRIPTION"
+fi

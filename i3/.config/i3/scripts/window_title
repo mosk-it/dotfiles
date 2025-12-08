@@ -1,0 +1,70 @@
+#!/bin/bash
+
+SIDE="$1" # "left" or "right"
+
+LEFT_OUTPUT=""
+RIGHT_OUTPUT=""
+while IFS= read -r line; do
+    NAME=$(echo "$line" | jq -r '.name')
+    X=$(echo "$line" | jq '.rect.x')
+    if [ "$X" -eq 0 ]; then
+        LEFT_OUTPUT="$NAME"
+    else
+        RIGHT_OUTPUT="$NAME"
+    fi
+done < <(i3-msg -t get_outputs | jq -c '.[] | select(.active == true)')
+
+# Get workspaces and map them to outputs
+declare -A WORKSPACE_TO_OUTPUT
+while IFS= read -r line; do
+    WS=$(echo "$line" | jq -r '.name')
+    OUTPUT=$(echo "$line" | jq -r '.output')
+    WORKSPACE_TO_OUTPUT["$WS"]="$OUTPUT"
+done < <(i3-msg -t get_workspaces | jq -c '.[]')
+
+FOCUSED_WS=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused == true) | .name')
+FOCUSED_OUTPUT="${WORKSPACE_TO_OUTPUT[$FOCUSED_WS]}"
+
+ACTIVE_WIN_ID_HEX=$(xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}')
+ACTIVE_WIN_ID_DEC=$(printf "%d" "$ACTIVE_WIN_ID_HEX" 2>/dev/null)
+
+get_window_title() {
+    local win_id="$1"
+    [ -z "$win_id" ] && return 1
+    xprop -id "$win_id" _NET_WM_NAME | cut -d '"' -f 2
+}
+
+CURRENT_TITLE=$(get_window_title "$ACTIVE_WIN_ID_HEX")
+
+if [ -z "$SIDE" ]; then
+    TITLE="${CURRENT_TITLE:-Desktop}"
+    MAX_LEN=50
+    [ ${#TITLE} -gt $MAX_LEN ] && TITLE="${TITLE:0:$((MAX_LEN - 3))}..."
+    echo "$TITLE"
+    exit 0
+fi
+if [ "$SIDE" = "right" ]; then
+    if [ "$FOCUSED_OUTPUT" = "$RIGHT_OUTPUT" ]; then
+        TITLE="$CURRENT_TITLE"
+    else
+        TITLE=$(cat "/tmp/i3_last_right_title" 2>/dev/null || echo "")
+    fi
+elif [ "$SIDE" = "left" ]; then
+    if [ "$FOCUSED_OUTPUT" = "$LEFT_OUTPUT" ]; then
+        TITLE="$CURRENT_TITLE"
+    else
+        TITLE=$(cat "/tmp/i3_last_left_title" 2>/dev/null || echo "")
+    fi
+fi
+
+[ -z "$TITLE" ] && TITLE="Desktop"
+
+MAX_LEN=50
+if [ ${#TITLE} -gt $MAX_LEN ]; then
+    TITLE="${TITLE:0:$((MAX_LEN - 3))}..."
+fi
+
+[ "$SIDE" = "right" ] && [ "$FOCUSED_OUTPUT" = "$RIGHT_OUTPUT" ] && echo "$CURRENT_TITLE" > "/tmp/i3_last_right_title"
+[ "$SIDE" = "left" ] && [ "$FOCUSED_OUTPUT" = "$LEFT_OUTPUT" ] && echo "$CURRENT_TITLE" > "/tmp/i3_last_left_title"
+
+echo $TITLE

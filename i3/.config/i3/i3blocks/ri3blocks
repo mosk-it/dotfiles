@@ -1,6 +1,12 @@
 command=$HOME/.config/i3/scripts/$BLOCK_NAME
 separator_block_width=15
 
+
+[window_title]
+command=bash -c "$HOME/.config/i3/scripts/window_title right"
+interval=once
+signal=10
+
 [net_ping]
 label=PING:
 command=awk -v "P=$(ping -c1 -w3 -4 one.one.one.one 2>/dev/null |grep 'time=')" 'BEGIN { if (!P) print "TIMEOUT\n\n#ff0000"; else { split(P, tarr, "="); tm = tarr[4]; print tm; printf "%.1fms\n\n",tm; if (tm > 250.0)  print "#ff0000";  else if (tm > 100.0) print "#ffff00";  } }' 
@@ -30,16 +36,14 @@ command=sensors coretemp-isa-0000 | awk '/Physical/ { print $4  }'
 interval=10
 
 
-[volume]
+[pvolume]
 label=VOL:
 instance=Master
 interval=once
 signal=1
 color=#CADDFF
 
-
-
-
 [time]
-command=date +"%Y-%m-%d %a, %R"
+command=LC_TIME=pl_PL.UTF-8 date +"%Y-%m-%d %a, %R"
+color=#FFFFFF
 interval=60
