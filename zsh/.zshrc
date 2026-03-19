@@ -1,5 +1,10 @@
-export ZSH_CONF_PATH=$HOME/.zsh
+export PROFILING_MODE=0
 
+if [ $PROFILING_MODE -ne 0 ]; then
+    zmodload zsh/zprof
+fi
+
+export ZSH_CONF_PATH=$HOME/.zsh
 bindkey -v
 
 
@@ -10,7 +15,9 @@ source $ZSH_CONF_PATH/misc.zsh
 source $ZSH_CONF_PATH/alias.zsh
 
 source $ZSH_CONF_PATH/completion.zsh
+source $ZSH_CONF_PATH/plugins.zsh
 
-source $ZSH_CONF_PATH/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export XDG_CONFIG_HOME=$HOME/.config
+if [ $PROFILING_MODE -ne 0 ]; then
+    zprof
+fi

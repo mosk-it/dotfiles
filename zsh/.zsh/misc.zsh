@@ -4,13 +4,13 @@ COMMAND_PROMPT=1
 
 # helper for setting color including all kinds of terminals
 set_prompt_color() {
-    if [[ $TERM = "linux" ]]; then
-       # nothing
-    elif [[ $TMUX != '' ]]; then
-        printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
-    else
-        echo -ne "\033]12;$1\007"
-    fi
+    # if [[ $TERM = "linux" ]]; then
+    #    # nothing
+    # elif [[ $TMUX != '' ]]; then
+    #     printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
+    # else
+    #     echo -ne "\033]12;$1\007"
+    # fi
 }
 
 # change cursor color basing on vi mode

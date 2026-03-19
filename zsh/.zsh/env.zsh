@@ -16,4 +16,5 @@ export RANGER_LOAD_DEFAULT_RC=FALSE;
 export EDITOR=nvim
 export PAGER=less
 export MANPAGER=less
-export BROWSER="/usr/bin/qutebrowser --target=auto"
+export BROWSER="firefox"
+export PATH="$HOME/.local/bin:$PATH"

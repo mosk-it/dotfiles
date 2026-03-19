@@ -41,5 +41,13 @@ alias sharehttp='python2 -m SimpleHTTPServer 28088'
 
 alias daysfrom='echo "(`date "+%s"`-`date -d "2016-12-12" "+%s"`)/(60*60*24)"|bc'
 
+
+# ZMX
+if command -v zmx >/dev/null 2>&1; then
+  alias zl='zmx list'
+  alias zls='zmx list --short'
+fi
+
+
 #ipptool -tv -f example-abstract.pdf http://raspberry.local:631/printers/x3 printfile.ipp
 #printfile.ipp: { OPERATION Print-Job \n GROUP operation-attributes-tag \n ATTR charset attributes-charset utf-8 \n ATTR language attributes-natural-language en \n ATTR uri printer-uri $uri \n FILE $filename }

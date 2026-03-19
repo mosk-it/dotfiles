@@ -100,16 +100,45 @@ TMUX_COLR='white';
 
 
 
+setopt prompt_subst
 autoload -Uz update-status-suspended-jobs
+
+
+
+# Color definitions
+ZVM_MODE_COLORi="%{$fg[white]%}"   # insert (default)
+ZVM_MODE_COLORn="%{$fg[red]%}"   # normal
+ZVM_MODE_COLORv="%{$fg[green]%}"  # visual
+ZVM_MODE_COLORvl="%{$fg[green]%}"    # visual-line
+ZVM_MODE_COLOR=i
+
+zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)       ZVM_MODE_COLOR=n ;;
+    $ZVM_MODE_INSERT)       ZVM_MODE_COLOR=i ;;
+    $ZVM_MODE_VISUAL)       ZVM_MODE_COLOR=v ;;
+    $ZVM_MODE_VISUAL_LINE)  ZVM_MODE_COLOR=vl ;;
+  esac
+  zle reset-prompt
+}
+
+
 
 PR_SEP="%b%{$fg[{$TMUX_COLR}]:%}%B";
 
+precmd() {
+  local git_info=$(git symbolic-ref --short HEAD 2>/dev/null)
+  GIT_BRANCH=""
+  [[ -n $git_info ]] && GIT_BRANCH="%{$fg[cyan]%}ψ[$git_info]%{$reset_color%} "
 
-PR_DATA_1="%B%{$fg[red]%}%n@%m%b";
-PR_DATA_2="%{$fg[yellow]%}%d";
-PR_DATA_TAIL=$'\n'"%{$reset_color%}→ ";
+  local jobs=$(jobs -l 2>/dev/null | wc -l | tr -d ' ')
+  JOBS_LIGHTNING=""
+  (( jobs > 0 )) && JOBS_LIGHTNING="%{$fg[yellow]%}$(printf '⚡%.0s' {1..$jobs})%{$reset_color%} "
+}
 
-export PROMPT="`printf "%s" ${PR_JOBS} ${PR_DATA_1} ${PR_SEP} ${PR_DATA_2} ${PR_DATA_TAIL}`";
+PS1=$'%{$fg[red]%}%n@%m%{$reset_color%} %{$fg[white]%}%~%{$reset_color%} %{$fg[green]%}[>_${ZMX_SESSION}]%{$reset_color%} ${GIT_BRANCH}${JOBS_LIGHTNING}'$'\n${(P)${:-ZVM_MODE_COLOR$ZVM_MODE_COLOR}}$%{$reset_color%} '
+
+
 
 
 zle -N _complete_debug_generic _complete_help_generic
