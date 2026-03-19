@@ -14,12 +14,12 @@ popup_during_fullscreen leave_fullscreen
 floating_modifier $mod
 
 # BIND KEYS
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec /usr/local/bin/st
 
 bindsym $mod+Shift+r restart
 
 #make shift+insert work even in X windows
-bindsym --release Shift+Insert exec --no-startup-id xdotool type --delay 1 --clearmodifiers "`xclip -o`" && xdotool key shift
+bindsym --release Shift+Insert exec --no-startup-id "sh -c 'xclip -o -selection clipboard > /tmp/.clipboard_bak 2>/dev/null; xclip -o -selection primary | xclip -selection clipboard; xdotool key ctrl+v; cat /tmp/.clipboard_bak 2>/dev/null | xclip -selection clipboard; rm -f /tmp/.clipboard_bak'"
 
 for_window [instance="ydpdict"] floating enable
 #for_window [instance="ydpdict"] resize set 750 800
@@ -216,5 +216,4 @@ bindsym $mod+Pause mode "$mode_system"
 
 exec --no-startup-id $HOME/.autostart
 
-exec_always --no-startup-id "xprop -spy -root _NET_ACTIVE_WINDOW | while read -r; do pkill -RTMIN+10 i3blocks; done"
-
+exec_always --no-startup-id "killall xev 2>/dev/null; xev -root -event property | grep --line-buffered -E '(_NET_ACTIVE_WINDOW|_NET_CURRENT_DESKTOP)' | while read -r; do pkill -RTMIN+10 i3blocks; done"

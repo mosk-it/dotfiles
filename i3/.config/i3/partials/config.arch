@@ -1,5 +1,5 @@
 set $output1 DVI-D-0
-set $output2 DP-4
+set $output2 DP-2
 
 workspace 0 output $output1
 workspace 1 output $output1
