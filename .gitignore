@@ -17,3 +17,4 @@ quitebrowser/.config/qutebrowser/qsettings
 !. add .*.
 !*/.*
 !*/*/*/.*
+*.zwc
