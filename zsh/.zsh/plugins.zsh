@@ -14,4 +14,11 @@ function zvm_config() {
     ZVM_CURSOR_STYLE_ENABLED=false
 }
 
+function zvm_after_init() {
+    # ctrl-p always history up
+    bindkey -M viins '^P' up-history
+}
+
 source $ZSH_CONF_PATH/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+eval "$(zoxide init zsh)"

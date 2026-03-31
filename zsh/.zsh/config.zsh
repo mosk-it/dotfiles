@@ -6,9 +6,41 @@ setopt auto_cd extended_glob nomatch notify chaselinks cdablevars
 setopt prompt_subst no_beep interactive_comments
 setopt complete_in_word completealiases always_to_end list_types
 setopt appendhistory hist_ignore_space  hist_expire_dups_first
-setopt inc_append_history share_history hist_reduce_blanks
+setopt share_history hist_reduce_blanks
+unsetopt inc_append_history
+# inc_append_history 
 setopt hash_list_all extended_history
 setopt no_flowcontrol
+setopt hist_ignore_all_dups
+
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
+DIRSTACKSIZE=20
+DIRSTACKFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_dirstack"
+[[ -f $DIRSTACKFILE ]] && dirstack=(${(f)"$(<$DIRSTACKFILE)"})
+
+
+[[ -f $DIRSTACKFILE ]] && dirstack=(${(f)"$(<$DIRSTACKFILE)"})
+
+function zshaddhistory() {
+  (( _HIST_COUNT++ ))
+
+  # write every 5 cmds
+  if (( _HIST_COUNT % 5 == 0 )); then
+    fc -AI
+  fi
+
+  return 0
+}
+
+function zshexit() {
+  print -l $dirstack > $DIRSTACKFILE
+  fc -AI
+}
+
+
+
+
+
 
 # Kill the lag
 export KEYTIMEOUT=1
@@ -127,6 +159,8 @@ zvm_after_select_vi_mode() {
 PR_SEP="%b%{$fg[{$TMUX_COLR}]:%}%B";
 
 precmd() {
+  set_prompt_color $INSERT_PROMPT
+
   local git_info=$(git symbolic-ref --short HEAD 2>/dev/null)
   GIT_BRANCH=""
   [[ -n $git_info ]] && GIT_BRANCH="%{$fg[cyan]%}ψ[$git_info]%{$reset_color%} "
