@@ -64,9 +64,8 @@ bindkey '^E' end-of-line
 bindkey '^F' forward-char
 bindkey '^B' backward-char
 
-
-
-
+bindkey '\ef' forward-word
+bindkey '\eb' backward-word
 
 
 
